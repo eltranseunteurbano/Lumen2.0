@@ -1,0 +1,80 @@
+@import '../../styles/colors.scss';
+
+.WelcomeInformation {
+    height: 100vh;
+    width: 40%;
+    padding-left: 10%;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: flex-start;
+
+    &__title {
+        font-weight: bolder;
+        font-size: 35px;
+        color: $black;
+        margin-bottom: 20px;
+    }
+
+    &__img {
+        width: 300px;
+        margin-bottom: 60px;
+    }
+
+    &__description {
+        font-weight: 600;
+        font-size: 20px;
+        color: $black;
+        opacity: .8;
+        margin-bottom: 40px;
+        width: 75%;
+    }
+
+    &__footer {
+        padding-top: 40px;
+        border-top: solid 1px #e0e0e0;
+
+        &__description {
+            color: $black;
+            font-weight: bolder;
+            font-size: 20px;
+        }
+
+        &__btns {
+            margin-top: 20px;
+
+            button {
+                height: 40px;
+                width: 150px;
+                color: $white;
+                
+                font-weight: bolder;
+                font-size: 20px;
+
+                border: none;
+                border-radius: 25px;
+                
+                cursor: pointer;
+                transition: all .4s;
+                
+                margin-right: 25px;
+            }
+
+            button:hover {
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            }
+
+            button:first-child {
+                background: $orange;
+            }
+
+            button:last-child {
+                background: $lightOrange;
+            }
+        }
+    }
+}
