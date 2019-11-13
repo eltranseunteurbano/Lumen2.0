@@ -8,7 +8,7 @@ const Home = () => {
     return(
         <section className="Home">
             <WelcomeInformation />
-            <IlustrationInformation appear={false} />
+            <IlustrationInformation /*appear={false}*/ />
         </section>
     )
 }

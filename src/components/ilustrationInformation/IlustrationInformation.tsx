@@ -7,7 +7,7 @@ import { faTimes, faQuestion } from '@fortawesome/free-solid-svg-icons';
 
 import * as Routes from '../../constants/Routes';
 
-const IlustrationInformation = (props) => {
+const IlustrationInformation = () => {
 
     const backgroundImage = {
         backgroundImage: 'url(' + process.env.PUBLIC_URL + '/img/Fondo Ilustración.svg)'

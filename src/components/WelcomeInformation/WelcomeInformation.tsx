@@ -2,7 +2,7 @@ import React from 'react';
 import './WelcomeInformation.scss';
 import IconLumen from '../../Icons/IconLumen/IconLumen';
 
-const WelcomeInformation = (props) => {
+const WelcomeInformation = () => {
     return (
         <section className="WelcomeInformation appear">
             <h1 className="WelcomeInformation__title">Bienvenido a</h1>
