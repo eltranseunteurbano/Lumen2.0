@@ -21,8 +21,9 @@ const WelcomeInformation = () => {
                     <button type="button">Cliente</button>
                     <button type="button">Asesor</button>
                 </div>
-
             </div>
+
+
 
         </section>
     )

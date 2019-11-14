@@ -5,6 +5,7 @@
     justify-content: center;
     align-items: center;
 
+
     &__background {
         background: rgba(0, 0, 0, 0.39);
         z-index: 0;
@@ -16,17 +17,14 @@
 
 }
 
-%display-share {
+
+%allDisplayWidth {
     top: 0;
     left: 0;
     max-width: 100%;
     height: 100%;
-}
-
-%allDisplayWidth {
     position: fixed;
     min-width: 100vw;
-
 }
 
 %absoluteDisplayWidth {
@@ -38,11 +36,9 @@
 
 .PopUp {
     @extend %allDisplayWidth;
-    @extend %display-share;
 
     &__background {
         @extend %allDisplayWidth;
-        @extend %display-share;
     }
 }
 
