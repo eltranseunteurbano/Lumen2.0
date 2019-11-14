@@ -1,0 +1,57 @@
+.PopUp {
+    z-index: 10000;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__background {
+        background: rgba(0, 0, 0, 0.39);
+        z-index: 0;
+    }
+
+    &__container {
+        z-index: 1;
+    }
+
+}
+
+%display-share {
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    height: 100%;
+}
+
+%allDisplayWidth {
+    position: fixed;
+    min-width: 100vw;
+
+}
+
+%absoluteDisplayWidth {
+    position: relative;
+    position: absolute;
+    min-width: 100%;
+}
+
+
+.PopUp {
+    @extend %allDisplayWidth;
+    @extend %display-share;
+
+    &__background {
+        @extend %allDisplayWidth;
+        @extend %display-share;
+    }
+}
+
+.PopUp__display {
+    @extend %absoluteDisplayWidth;
+
+    .PopUp {
+        &__background {
+            @extend %absoluteDisplayWidth;
+        }
+    }
+}

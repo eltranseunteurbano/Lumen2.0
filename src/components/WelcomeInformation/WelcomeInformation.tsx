@@ -1,6 +1,7 @@
 import React from 'react';
 import './WelcomeInformation.scss';
 import IconLumen from '../../Icons/IconLumen/IconLumen';
+import PopUp from '../PopUp/PopUp';
 
 const WelcomeInformation = () => {
     return (
@@ -22,6 +23,7 @@ const WelcomeInformation = () => {
                 </div>
 
             </div>
+
         </section>
     )
 }
