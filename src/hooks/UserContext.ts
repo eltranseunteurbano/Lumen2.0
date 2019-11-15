@@ -1,5 +1,6 @@
 import React from "react";
 import { IObjectDatabase } from './DatabaseContext';
+import IHookUpdate from '../objects/IHookUpdate';
 
 export class UserFirebase implements IObjectDatabase {
     UID: string;
@@ -7,6 +8,7 @@ export class UserFirebase implements IObjectDatabase {
     name: string;
     email: string;
     user?: firebase.User;
+    updates:IHookUpdate[] = [];
 
     constructor() {
         this.UID = "";
@@ -21,6 +23,36 @@ export class UserFirebase implements IObjectDatabase {
 
     setUser(user: firebase.User) {
         this.user = user;
+    }
+
+
+    addUpdate(type: string, update: Function) {
+        let find = false;
+        let index = 0;
+        for (let i = 0; i < this.updates.length; i++) {
+            let update = this.updates[i];
+            if (type === update.id) {
+                find = true;
+                i = this.updates.length;
+                index = i;
+            }
+        }
+
+        if (find) {
+            this.updates.splice(index, 1);
+            this.updates.push({ id: type, update: update })
+        } else {
+            this.updates.push({ id: type, update: update })
+        }
+    }
+
+    update(type: string, object: any) {
+        this.updates.forEach((update) => {
+            if (update.id === type) {
+                update.update(object);
+                return;
+            }
+        });
     }
 }
 

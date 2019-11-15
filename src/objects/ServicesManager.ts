@@ -1,7 +1,7 @@
-import { DataBase } from '../hooks/DatabaseContext';
 import BRANCHES from '../constants/Branches';
 import Servicio, { Service } from './Service';
 import IHookUpdate from './IHookUpdate';
+import { DataBase } from '../hooks/DatabaseContext';
 
 
 
@@ -57,20 +57,6 @@ export class ServicesManager {
     setCurrentService(service: Servicio) {
         this.currentService = service;
     }
-    /*
-        updateComponent() {
-            this.render = Object.assign({}, this)
-            if (this.update) {
-                this.update(this.render);
-            }
-        }
-    */
-    /*
-     getContext() {
-         this.render = Object.assign({}, this);
-         return this;
-     }
-     */
 }
 
 export default ServicesManager;
