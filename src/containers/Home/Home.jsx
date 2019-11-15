@@ -5,10 +5,11 @@ import WelcomeInformation from '../../components/WelcomeInformation/WelcomeInfor
 import IlustrationInformation from '../../components/ilustrationInformation/IlustrationInformation';
 
 const Home = () => {
+
     return(
         <section className="Home">
             <WelcomeInformation />
-            <IlustrationInformation appear={false} />
+            <IlustrationInformation/>
         </section>
     )
 }
