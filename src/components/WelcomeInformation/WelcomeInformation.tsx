@@ -8,7 +8,8 @@ import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 import * as Routes from '../../constants/Routes';
 import UserContext from '../../hooks/UserContext';
-import IconLumen from '../../icons/IconLumen/IconLumen';
+import IconLumen from '../../Icons/IconLumen/IconLumen';
+
 
 
 
