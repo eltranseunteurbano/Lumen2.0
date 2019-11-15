@@ -1,14 +1,15 @@
 import React from 'react';
 import './Home.scss';
 
-import WelcomeInformation from '../../components/WelcomeInformation/WelcomeInformation';
 import IlustrationInformation from '../../components/ilustrationInformation/IlustrationInformation';
+import WelcomeInformation from '../../components/WelcomeInformation/WelcomeInformation';
 
 const Home = () => {
+
     return(
         <section className="Home">
             <WelcomeInformation />
-            <IlustrationInformation /*appear={false}*/ />
+            <IlustrationInformation/>
         </section>
     )
 }
