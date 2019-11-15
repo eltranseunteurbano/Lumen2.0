@@ -11,7 +11,7 @@ const LoginComponent = () => {
     return(
         <section className="LoginComponent">
             <div className="LoginComponent__icons">
-                <button type="button" className="LoginComponent__icons__item" onClick={ () => console.log('atras')}> <FontAwesomeIcon icon={faAngleLeft} /> </button>
+                <Link to={Routes.INDEX} className="LoginComponent__icons__item" > <FontAwesomeIcon icon={faAngleLeft} /> </Link>
             </div>
             <h1 className="LoginComponent__title">Iniciar Sesión</h1>
             <p className="LoginComponent__subtitle">Antes de empezar, digita tus datos</p>
