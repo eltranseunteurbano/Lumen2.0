@@ -17,7 +17,6 @@ export class HookUpdate {
     }
 
     setUpdate(object: Object) {
-        console.log("Paso")
         this.valueObject = object;
         this.update(object);
     }
