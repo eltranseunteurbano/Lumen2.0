@@ -10,8 +10,9 @@ class StorageFirebase {
 
     }
 
-    create() {
-        this.storege.ref("archivo").put(new Blob());
+    almacenar(route: string, file: File) {
+        let refStorage = Storage.storege.ref(route).child(file.name);
+        refStorage.put(file);
     }
 
 }
