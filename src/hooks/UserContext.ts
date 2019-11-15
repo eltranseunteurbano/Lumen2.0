@@ -32,7 +32,6 @@ export class UserFirebase implements IObjectDatabase {
 
 
 export var UserFirebaseData = new UserFirebase();
-console.log(UserFirebase)
 const UserContext = React.createContext(UserFirebaseData);
 
 export default UserContext;

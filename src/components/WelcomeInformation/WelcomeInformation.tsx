@@ -13,11 +13,11 @@ import IconLumen from '../../icons/IconLumen/IconLumen';
 const WelcomeInformation = () => {
 
     var useUser = React.useContext(UserContext);
-    const [update, setUpdate] = useUser.updates.useState("update");
+    var [update, setUpdate] = useUser.updates.useState("update");
 
     const setType = (type: string) => {
         useUser.type = type;
-        setUpdate(!update);
+        setUpdate(!update());
     }
 
     const renderFromuser = (user: string) => {

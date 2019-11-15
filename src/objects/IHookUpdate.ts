@@ -17,13 +17,13 @@ export class HookUpdate {
     }
 
     setUpdate(object: Object) {
+        console.log("Paso")
         this.valueObject = object;
         this.update(object);
     }
 
     useState() {
-       
-        return [this.valueObject, this.update];
+        return [this.value.bind(this), this.setUpdate.bind(this)];
     }
 
     value() {
@@ -75,4 +75,5 @@ export class HookUpdateManager {
         return value;
     }
 }
+
 export default HookUpdateManager;
