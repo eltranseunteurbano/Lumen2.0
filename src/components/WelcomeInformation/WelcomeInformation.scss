@@ -13,6 +13,47 @@
     align-content: center;
     align-items: flex-start;
 
+    &__icons{
+        position: absolute;
+        top: 50px;
+        left: 50px;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+        
+        &__item{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+
+            background: $orange;
+            margin: 0 10px;
+            text-decoration: none;
+            border-radius: 50px;
+            width: 30px;
+            height: 30px;
+            border: none;
+            cursor: pointer;
+
+            transition: all .4s;
+            color: $white;
+            font-size: 25px;
+        }
+
+        &__item:hover{
+            background: $orangeBlack;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+        }
+    }
+
     &__title {
         font-weight: bolder;
         font-size: 35px;
@@ -32,6 +73,11 @@
         opacity: .8;
         margin-bottom: 40px;
         width: 75%;
+
+        strong{
+            font-weight: bolder;
+            color: $orange;
+        }
     }
 
     &__footer {
@@ -77,4 +123,74 @@
             }
         }
     }
+
+    &__login {
+        
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+            
+        &__description {
+            color: $black;
+            font-weight: bolder;
+            font-size: 20px;
+        }
+
+        &__btns:first-child{
+            margin-right: 30px;
+        }
+
+        &__btns {
+            margin-top: 20px;
+
+            &__text{
+                text-align: center;
+                margin-bottom: 10px;
+            }
+
+            &__btn {
+                height: 40px;
+                width: 150px;
+                color: $white;
+                
+                font-weight: bolder;
+                font-size: 20px;
+
+                border: none;
+                border-radius: 25px;
+                
+                cursor: pointer;
+                transition: all .4s;
+                
+                text-decoration: none;
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+                justify-content: center;
+                align-content: center;
+                align-items: center;
+            }
+
+            &__btn:hover{
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            }
+        }
+
+        &__btns:first-child{
+            .WelcomeInformation__login__btns__btn{
+                background: $orange;
+            }
+        }
+
+        &__btns:last-child{
+            .WelcomeInformation__login__btns__btn{
+                background: $lightOrange;
+            }
+        }
+        
+    }
+    
 }
