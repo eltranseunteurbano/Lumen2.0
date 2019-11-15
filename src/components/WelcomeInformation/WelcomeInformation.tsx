@@ -4,10 +4,11 @@ import './WelcomeInformation.scss';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
-import IconLumen from "../../icons/IconLumen/IconLumen";
+
 
 import * as Routes from '../../constants/Routes';
 import UserContext from '../../hooks/UserContext';
+import IconLumen from '../../Icons/IconLumen/IconLumen';
 
 
 const WelcomeInformation = () => {
@@ -20,7 +21,7 @@ const WelcomeInformation = () => {
         useUser.type = type;
         setUpdate(!update);
     }
-
+ 
     const renderFromuser = (user: string) => {
         switch (user) {
             case '':
