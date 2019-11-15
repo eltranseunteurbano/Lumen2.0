@@ -12,15 +12,16 @@ import IconLumen from '../../icons/IconLumen/IconLumen';
 
 const WelcomeInformation = () => {
 
-    const useUser = React.useContext(UserContext);
+    var useUser = React.useContext(UserContext);
 
     const [update, setUpdate] = useState(false);
 
     const setType = (type: string) => {
         useUser.type = type;
+        useUser.update("update", !update);
         setUpdate(!update);
     }
- 
+
     const renderFromuser = (user: string) => {
         switch (user) {
             case '':
@@ -50,7 +51,7 @@ const WelcomeInformation = () => {
                 return (
                     <section className="WelcomeInformation appear">
                         <div className="WelcomeInformation__icons">
-                            <button type="button" className="WelcomeInformation__icons__item" onClick={() => setType("") }> <FontAwesomeIcon icon={faAngleLeft} /> </button>
+                            <button type="button" className="WelcomeInformation__icons__item" onClick={() => setType("")}> <FontAwesomeIcon icon={faAngleLeft} /> </button>
                         </div>
                         <h1 className="WelcomeInformation__title">¡Bienvenido!</h1>
 

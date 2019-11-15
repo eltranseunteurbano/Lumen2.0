@@ -8,7 +8,7 @@ export class UserFirebase implements IObjectDatabase {
     name: string;
     email: string;
     user?: firebase.User;
-    updates:IHookUpdate[] = [];
+    updates: IHookUpdate[] = [];
 
     constructor() {
         this.UID = "";
@@ -26,7 +26,7 @@ export class UserFirebase implements IObjectDatabase {
     }
 
 
-    addUpdate(type: string, update: Function) {
+    addUpdate(type: string, update: Function, value: Object) {
         let find = false;
         let index = 0;
         for (let i = 0; i < this.updates.length; i++) {
@@ -40,9 +40,9 @@ export class UserFirebase implements IObjectDatabase {
 
         if (find) {
             this.updates.splice(index, 1);
-            this.updates.push({ id: type, update: update })
+            this.updates.push({ id: type, update: update, value: value })
         } else {
-            this.updates.push({ id: type, update: update })
+            this.updates.push({ id: type, update: update, value: value })
         }
     }
 
@@ -54,9 +54,20 @@ export class UserFirebase implements IObjectDatabase {
             }
         });
     }
+
+    updateValue(type: string) {
+        let val: any = 0;
+        this.updates.forEach((update) => {
+            if (update.id === type) {
+                val = update.value;
+            }
+        });
+        return val;
+    }
 }
 
 export var UserFirebaseData = new UserFirebase();
+console.log(UserFirebase)
 const UserContext = React.createContext(UserFirebaseData);
 
 export default UserContext;
