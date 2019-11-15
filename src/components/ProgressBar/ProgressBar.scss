@@ -1,0 +1,36 @@
+@import "../../constants/_colors";
+
+$ProgressHeight : 20px;
+
+.ProgressBar {
+
+    width: 100%;
+
+    &__progress {
+        border: 0;
+        height: $ProgressHeight;
+        border-radius: 20px;
+        width: 100%;
+
+    }
+
+    &__progress::-webkit-progress-bar {
+        border: 0;
+        height: $ProgressHeight;
+        border-radius: 20px;
+        background: $darkGray;
+    }
+
+    &__progress::-webkit-progress-value {
+        border: 0;
+        height: $ProgressHeight;
+        border-radius: 20px;
+        background: $green;
+    }
+
+    &__progress::-moz-progress-bar {
+        border: 0;
+        height: $ProgressHeight;
+        border-radius: 20px;
+    }
+}

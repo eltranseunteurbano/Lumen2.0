@@ -1,0 +1,145 @@
+@import "../../constants/_colors";
+
+.task {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-image: url('/img/background/inicio.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        grid-column-gap: 0px;
+        grid-row-gap: 0px;
+        align-items: center;
+    }
+
+    .horizontal {
+        display: flex;
+    }
+
+    .space-around {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    &__width {
+        &__complete {
+            .task {
+                background: red;
+
+
+                &__header,
+                &__question {
+                    background-color: inherit !important;
+
+                    &__container {
+                        width: 100%;
+                        margin-right: 0;
+                    }
+                }
+
+            }
+        }
+    }
+
+    &__information {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        height: 100%;
+    }
+
+    &__header {
+        height: 20%;
+        background-color: white;
+
+        display: flex;
+        justify-content: flex-end;
+
+        &__container {
+            width: 70%;
+        }
+    }
+
+    &__question {
+        height: 80%;
+        background-color: $lightGray;
+
+        display: flex;
+        justify-content: flex-end;
+
+        &__container {
+            width: 60%;
+            margin-right: 10%;
+
+            &__information {
+                height: 80%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+            }
+
+            &__navigation {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                height: 20%;
+            }
+        }
+
+        &__button {
+            &__next {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: $orange;
+                border-radius: 50px;
+                width: 90px;
+                height: 90px;
+                transition: all .5s ease;
+
+                & svg {
+                    fill: white;
+                    transition: all .5s ease;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                    width: 110px;
+                    height: 110px;
+
+                    & svg {
+                        padding-left: 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    &__navbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 30%;
+        height: 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+
+.task {
+    &__title {
+        font-size: 2em;
+        color: $orange;
+        text-align: center;
+    }
+}

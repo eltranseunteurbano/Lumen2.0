@@ -1,0 +1,13 @@
+.ViewReview{
+
+    display: flex;
+    height: 100%;
+
+    &__navbar{
+        width: 30%;
+    }
+
+    &__information{
+        width: 70%;
+    }
+}

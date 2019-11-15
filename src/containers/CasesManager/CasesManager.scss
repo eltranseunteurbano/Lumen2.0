@@ -1,0 +1,15 @@
+.CasesManager{
+
+    display: flex;
+
+    height: 100%;
+
+    &__menu{
+        width: 20%;
+    }
+
+    &__information{
+        width: 80%;
+    }
+    
+}
