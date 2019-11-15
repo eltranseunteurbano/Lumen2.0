@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from "react";
-import Cases from "../../components/Cases/Cases/Cases";
-import { ViewCase } from "../../components/ViewCase/ViewCase";
-import Servicio from '../../objects/Service';
-
-import { useContext } from 'react';
+import React, { useState, useEffect, useContext } from "react";
 import ServicesContext from "../../hooks/ServicesContext";
-
-import "./CasesManager.scss";
+import Servicio from '../../objects/Service';
+import Cases from '../../components/Cases/Cases/Cases';
+import { ViewCase } from "../../components/ViewCase/ViewCase";
 import ViewReview from "../../components/ViewReview/ViewReview";
 import MenuCase from '../../components/MenuCase/MenuCase';
+
+import "./CasesManager.scss";
+
 
 interface IPropsCasesManager { }
 
@@ -30,6 +29,7 @@ export function CasesManager(props: IPropsCasesManager) {
     return <div className="CasesManager">
         <div className="CasesManager__menu">
             <MenuCase setPage={setPage} />
+
         </div>
         <div className="CasesManager__information">
             {page === 0 ?
