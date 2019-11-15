@@ -3,7 +3,7 @@ import "./ProgressBar.scss";
 
 interface IProgressBar {
     value: number;
-    className: string;
+    className?: string;
 }
 
 export function ProgressBar(props: IProgressBar) {
