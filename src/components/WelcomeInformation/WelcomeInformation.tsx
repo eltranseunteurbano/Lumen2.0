@@ -10,10 +10,6 @@ import * as Routes from '../../constants/Routes';
 import UserContext from '../../hooks/UserContext';
 import IconLumen from '../../icons/IconLumen/IconLumen';
 
-
-
-
-
 const WelcomeInformation = () => {
 
     const useUser = React.useContext(UserContext);

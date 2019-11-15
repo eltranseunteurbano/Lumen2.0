@@ -16,6 +16,8 @@ const IlustrationInformation = () => {
         backgroundImage: 'url(' + process.env.PUBLIC_URL + '/img/Fondo Ilustración.svg)'
     }
 
+    console.log(useUser)
+
     return (
         <section className="IlustrationInformation appear" style={backgroundImage}>
             <div className="IlustrationInformation__icons">
