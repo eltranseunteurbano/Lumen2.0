@@ -10,7 +10,6 @@ const Home = () => {
     const useUser = useContext(UserContext);
     const [update, setUpdate] = useState(false);
 
-    console.log(useUser.updates.updates)
     useUser.updates.addUpdate("update", update, setUpdate );
 
     return(
