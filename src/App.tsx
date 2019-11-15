@@ -10,6 +10,7 @@ import UserContext from './hooks/UserContext';
 
 import Home from './containers/Home/Home';
 import Login from './containers/Login/Login';
+import CasesManager from './containers/CasesManager/CasesManager';
 
 const App = () => {
 
@@ -22,6 +23,7 @@ const App = () => {
           <Switch>
             <Route exact path={Routes.INDEX}> <Home /> </Route>
             <Route exact path={Routes.LOGIN}> <Login /> </Route>
+            <Route exact path={Routes.Cases}> <CasesManager /> </Route>
           </Switch>
         </HashRouter>
       </div>
