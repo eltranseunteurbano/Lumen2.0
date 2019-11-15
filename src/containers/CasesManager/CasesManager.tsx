@@ -21,8 +21,8 @@ export function CasesManager(props: IPropsCasesManager) {
 
     useEffect(() => {
 
-        servicesManager.addUpdate("page", setPage);
-        servicesManager.addUpdate("service", setCurrentCase);
+        servicesManager.updates.addUpdate("page", page, setPage);
+        servicesManager.updates.addUpdate("service", currentCase, setCurrentCase);
 
     }, []);
 

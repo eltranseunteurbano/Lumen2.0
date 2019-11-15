@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Case from '../../Cases/Case/Case';
-import ControlHeader from '../../ControlHeader/ControlHeader';
 import ServicesContext from '../../../hooks/ServicesContext';
 
 import './Cases.scss';
@@ -18,7 +17,7 @@ export const Cases = (props: IPropsCases) => {
 
 
     useEffect(() => {
-        servicesManager.addUpdate("services", setServices);
+        servicesManager.updates.addUpdate("services", services, setServices);
 
         servicesManager.getAllServices((servicesData: Service[]) => {
             setServices(servicesData);

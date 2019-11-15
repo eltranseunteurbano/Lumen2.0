@@ -15,6 +15,8 @@ export const Case = (props: IPropsCase) => {
     const servicesManger = useContext(ServicesContext)
 
     const [service, setService] = useState(props.service || new Service());
+    const [page, setPage] = servicesManger.updates.useState("page");
+    const [serviceG, setServiceG] = servicesManger.updates.useState("service");
 
     return (
         <section className="Casetask__card">
@@ -27,9 +29,9 @@ export const Case = (props: IPropsCase) => {
                         <h1 className="name">Nombre del proyecto</h1>
                         <p className="place">Unidad San Joaquin</p>
                         <button onClick={() => {
-                            servicesManger.update("page", 1);
+                            setPage(1);
                             servicesManger.setCurrentService(props.service);
-                            servicesManger.update("service", props.service);  
+                            setServiceG(props.service);
                         }}>Ver orden completa</button>
                     </section>
                     <section className="Casetask__card__container__information__information">

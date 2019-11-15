@@ -1,8 +1,8 @@
 import UserHistory, { ODate } from './UserHistory';
 import { DataBase, IObjectDatabase } from '../hooks/DatabaseContext';
 import BRANCHES from '../constants/Branches';
-import IHookUpdate from './IHookUpdate';
 import StepManager from './StepManager';
+import HookUpdateManager from './IHookUpdate';
 
 export class Service implements IObjectDatabase {
 
@@ -22,7 +22,7 @@ export class Service implements IObjectDatabase {
     date: ODate;
     steps: StepManager;
 
-    updates: IHookUpdate[];
+    updates: HookUpdateManager[];
 
 
     constructor(service?: Service) {
@@ -73,34 +73,6 @@ export class Service implements IObjectDatabase {
         return render;
     }
 
-    addUpdate(type: string, update: Function) {
-        let find = false;
-        let index = 0;
-        for (let i = 0; i < this.updates.length; i++) {
-            let update = this.updates[i];
-            if (type === update.id) {
-                find = true;
-                i = this.updates.length;
-                index = i;
-            }
-        }
-
-        if (find) {
-            this.updates.splice(index, 1);
-            this.updates.push({ id: type, update: update })
-        } else {
-            this.updates.push({ id: type, update: update })
-        }
-    }
-
-    update(type: string, object: any) {
-        this.updates.forEach((update) => {
-            if (update.id === type) {
-                update.update(object);
-                return;
-            }
-        });
-    }
 }
 
 

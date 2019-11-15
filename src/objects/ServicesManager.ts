@@ -1,33 +1,20 @@
 import BRANCHES from '../constants/Branches';
 import Servicio, { Service } from './Service';
-import IHookUpdate from './IHookUpdate';
 import { DataBase } from '../hooks/DatabaseContext';
+import HookUpdateManager from './IHookUpdate';
 
 
 
 export class ServicesManager {
 
     services: Servicio[];
-    updates: IHookUpdate[];
+    updates: HookUpdateManager;
     currentService?: Servicio;
     // render: ServicesManager | undefined;
 
     constructor() {
         this.services = [];
-        this.updates = [];
-    }
-
-    addUpdate(type: string, update: Function) {
-        this.updates.push({ id: type, update: update })
-    }
-
-    update(type: string, object: any) {
-        this.updates.forEach((update) => {
-            if (update.id === type) {
-                update.update(object);
-                return;
-            }
-        });
+        this.updates = new HookUpdateManager();
     }
 
     getAllServices(load?: Function) {

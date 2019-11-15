@@ -10,11 +10,8 @@ const Home = () => {
     const useUser = useContext(UserContext);
     const [update, setUpdate] = useState(false);
 
-    
-
-    useEffect(()=>{
-        useUser.addUpdate("update", setUpdate, update);
-    }, []);
+    console.log(useUser.updates.updates)
+    useUser.updates.addUpdate("update", update, setUpdate );
 
     return(
         <section className="Home">

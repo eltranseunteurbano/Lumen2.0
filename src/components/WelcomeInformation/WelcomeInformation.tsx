@@ -14,11 +14,11 @@ const WelcomeInformation = () => {
 
     var useUser = React.useContext(UserContext);
 
-    const [update, setUpdate] = useState(false);
+  
+    const [update, setUpdate] = useUser.updates.useState("update");
 
     const setType = (type: string) => {
         useUser.type = type;
-        useUser.update("update", !update);
         setUpdate(!update);
     }
 
