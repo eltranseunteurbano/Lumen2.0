@@ -2,10 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import Case from '../../Cases/Case/Case';
 import ServicesContext from '../../../hooks/ServicesContext';
 
-import './Cases.scss';
 import Service from '../../../objects/Service';
-import ControlHeader from '../../ControlHeader/ControlHeader';
-import { Storage } from '../../../hooks/StorageContenxt';
+import './Cases.scss';
 
 interface IPropsCases {
     update: Function;

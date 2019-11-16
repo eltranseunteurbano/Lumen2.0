@@ -7,91 +7,196 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 25%;
-        height: 30%;
+        width: 40%;
+        height: 50%;
 
+        background: $white;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 5px;
 
         margin: 10px;
 
         &__container {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             width: 90%;
             height: 90%;
-            background: $lightGray;
 
-            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-            border-radius: 5px;
 
             transition: all .5s ease;
 
 
             &:hover {
                 cursor: pointer;
-                width: 100%;
-                height: 100%;
+                width: 95%;
+                height: 95%;
+            }
+
+            &__header {
+
+                display: flex;
+                height: 20%;
+                border-bottom: 1px solid $black;
+
+                &__information {
+                    width: 70%;
+                    font-weight: bold;
+                    padding: 0 10px;
+
+                    .order {
+                        font-size: .9em;
+                        color: $orange;
+                    }
+
+                    .register {
+
+                        font-size: 1em;
+
+                    }
+
+
+                }
+
+                &__icon {
+                    width: 30%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    color: $white;
+                    align-items: center;
+
+                    svg {
+                        width: 50%;
+                        height: 50%;
+                        fill: $orange;
+                    }
+
+                    h2 {
+                        margin-top: 5px;
+                        font-size: .7em;
+                    }
+                }
             }
 
 
 
             &__information {
-                width: 60%;
-                padding: 10px;
+                width: 100%;
+                height: 80%;
+                padding: 5px;
 
                 &__title {
-                    .register {
-                        font-size: .7em;
-                        font-weight: bold;
-                    }
+                    height: 10%;
+                    color: grey;
 
-                    .order {
-                        font-size: .5em;
-                    }
-
-                    .name {
+                    h2 {
                         font-size: .6em;
-                    }
-
-                    .place {
-                        font-size: .5em;
-                    }
-
-                    button{
-                        font-size: .5em;
                     }
                 }
 
                 &__information {
+                    height: 90%;
+
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    align-items: stretch;
                     margin-top: 5px;
 
-                    &__p {
-                        font-size: .7em;
+                    .step {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: flex-start;
+                        flex-grow: 1;
+                        color: grey;
+
+
+                        &:last-child {
+
+                            .step__status::after {
+                                background: none;
+                            }
+                        }
+
+
+                        &__status {
+
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: flex-start;
+                            align-items: center;
+                            position: relative;
+                            width: 10%;
+                            height: 100%;
+
+
+
+
+                            &::after {
+                                content: "";
+                                display: block;
+                                background: $gray;
+                                width: .8px;
+                                flex-grow: 1;
+                                z-index: 0;
+                            }
+
+
+
+                            &__icon {
+                                position: relative;
+                                display: flex;
+                                flex-direction: column;
+                                justify-content: center;
+                                align-items: center;
+
+                                border: .5px solid $gray;
+                                border-radius: 50px;
+
+                                width: 15px;
+                                height: 15px;
+
+
+                                svg {
+                                    width: 70%;
+                                    height: 70%;
+                                    fill: none;
+
+                                }
+                            }
+                        }
+
+                        &__information {
+                            padding-top: 3px;
+                            width: 80%;
+                            font-size: .7em;
+                        }
+
+                    }
+                }
+
+                .complete {
+                    color: black;
+
+                    .step {
+
+
+                        &__status__icon {
+
+                            background: $orange;
+
+
+                            svg {
+                                fill: $white;
+                            }
+
+                        }
                     }
                 }
             }
 
-            &__view {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                color: $white;
-                align-items: center;
-                background: $orange;
-                border-radius: 0px 5px 5px 0px;
-                width: 40%;
-                height: 100%;
-
-                svg {
-                    width: 50%;
-                    height: 50%;
-                }
-
-                h2 {
-                    margin-top: 5px;
-                    font-size: .7em;
-                }
-            }
 
         }
 

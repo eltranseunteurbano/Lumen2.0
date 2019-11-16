@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Desktop, { DesktopStep } from '../Desktop/Desktop';
 import Service from "../../objects/Service";
 import ReviewManager from '../../objects/ReviewManger';
-import StepManager, { ServiceStep } from '../../objects/StepManager';
+import { ServiceStep } from '../../objects/StepManager';
 
 import "./ViewReview.scss";
 

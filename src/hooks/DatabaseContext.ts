@@ -1,7 +1,6 @@
 import React from 'react';
 import Firebase from '../constants/firebase/firebaseSetup';
 import { UserFirebase } from './UserContext';
-import { IPropsCase } from '../components/Cases/Case/Case';
 
 import BRANCHES from '../constants/Branches';
 

@@ -1,6 +1,3 @@
-import { useState, ReactChild } from "react";
-import { FunctionExpression } from "@babel/types";
-
 export class HookUpdateManager {
 
     updates: HookUpdate[] = [];

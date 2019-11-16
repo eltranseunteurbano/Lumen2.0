@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Service from '../../../objects/Service';
 import Step from "../Step/Step";
 
@@ -11,7 +11,7 @@ interface IPropsSteps {
 
 export function Steps(props: IPropsSteps) {
 
-    const [service, setService] = useState(props.service);
+    var service =props.service;
 
     return <section className="Steps">
         <section className="Steps__container">

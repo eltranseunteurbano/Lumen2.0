@@ -1,7 +1,6 @@
 import React from "react";
 import "./Desktop.scss";
 import { Review } from '../../objects/ReviewManger';
-import { DataBase } from '../../hooks/DatabaseContext';
 
 
 export const Desktop = (props: any) => {
