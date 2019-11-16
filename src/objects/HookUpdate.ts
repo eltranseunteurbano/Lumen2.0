@@ -1,8 +1,10 @@
+import { useState, ReactChild } from "react";
+
 export class HookUpdateManager {
 
     updates: HookUpdate[] = [];
 
-    addUpdate(type: string, value: Object, update: Function, ) {
+    addUpdate(type: string, value: Object, update: Function) {
         let find = false;
         //let index = 0;
 
@@ -11,13 +13,13 @@ export class HookUpdateManager {
             if (type === update.id) {
                 find = true;
                 i = this.updates.length;
-               // index = i;
+                // index = i;
             }
         }
 
         if (!find) {
             this.updates.push(new HookUpdate(type, value, update));
-        } 
+        }
     }
 
     updateValue(type: string) {
@@ -31,14 +33,24 @@ export class HookUpdateManager {
     }
 
 
-    useState(type: string) {
-        let value: any;
-        this.updates.forEach((update) => {
+    useState(type: string, propiedades?: any[]) {
+
+        let value: any = [];
+        let find = false;
+        for (let i = 0; i < this.updates.length; i++) {
+            let update = this.updates[i];
             if (update.id === type) {
                 value = update.useState();
+                i = this.updates.length;
+                find = true;
             }
-        });
-      
+        }
+
+        if (!find) {
+            value = propiedades;
+            this.addUpdate(type, value[0], value[1]);
+        }
+
         return value;
     }
 }
@@ -55,7 +67,7 @@ export class HookUpdate {
         this.id = id;
         this.valueObject = value;
         this.update = update;
-       
+
     }
 
     setUpdate(object: Object) {

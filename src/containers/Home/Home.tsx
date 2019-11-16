@@ -6,16 +6,14 @@ import WelcomeInformation from '../../components/WelcomeInformation/WelcomeInfor
 import UserContext from '../../hooks/UserContext';
 
 const Home = () => {
-
+    
     const useUser = useContext(UserContext);
-    const [update, setUpdate] = useState(false);
+    useUser.useState("update", useState(false));
 
-    useUser.updates.addUpdate("update", update, setUpdate );
-
-    return(
+    return (
         <section className="Home">
             <WelcomeInformation />
-            <IlustrationInformation/>
+            <IlustrationInformation />
         </section>
     )
 }

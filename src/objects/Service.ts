@@ -2,7 +2,7 @@ import UserHistory, { ODate } from './UserHistory';
 import { DataBase, IObjectDatabase } from '../hooks/DatabaseContext';
 import BRANCHES from '../constants/Branches';
 import StepManager from './StepManager';
-import HookUpdateManager from './IHookUpdate';
+import HookUpdateManager from './HookUpdate';
 
 export class Service implements IObjectDatabase {
 

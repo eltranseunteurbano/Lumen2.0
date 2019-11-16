@@ -1,22 +1,21 @@
 import React from "react";
 import { IObjectDatabase } from './DatabaseContext';
-import HookUpdateManager from '../objects/IHookUpdate';
+import HookUpdateManager from '../objects/HookUpdate';
 
 
-export class UserFirebase implements IObjectDatabase {
+export class UserFirebase extends HookUpdateManager implements IObjectDatabase {
     UID: string;
     type: string;
     name: string;
     email: string;
     user?: firebase.User;
-    updates: HookUpdateManager;
 
     constructor() {
+        super();
         this.UID = "";
         this.type = "";
         this.name = "";
         this.email = "";
-        this.updates = new HookUpdateManager();
     }
 
     setType(type: string) {
@@ -31,7 +30,7 @@ export class UserFirebase implements IObjectDatabase {
 
 
 
-export var UserFirebaseData = new UserFirebase();
-const UserContext = React.createContext(UserFirebaseData);
+export var User = new UserFirebase();
+const UserContext = React.createContext(User);
 
 export default UserContext;

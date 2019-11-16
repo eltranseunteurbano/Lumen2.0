@@ -15,8 +15,8 @@ export const Case = (props: IPropsCase) => {
     const servicesManger = useContext(ServicesContext)
 
     const [service, setService] = useState(props.service || new Service());
-    const [page, setPage] = servicesManger.updates.useState("page");
-    const [serviceG, setServiceG] = servicesManger.updates.useState("service");
+    const [page, setPage] = servicesManger.useState("page");
+    const [serviceG, setServiceG] = servicesManger.useState("service");
 
     return (
         <section className="Casetask__card">

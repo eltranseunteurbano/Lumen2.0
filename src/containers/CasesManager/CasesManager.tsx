@@ -19,8 +19,8 @@ export function CasesManager(props: IPropsCasesManager) {
     const [page, setPage] = useState(0);
     const [currentCase, setCurrentCase] = useState<Servicio>(new Servicio());
 
-    servicesManager.updates.addUpdate("page", page, setPage);
-    servicesManager.updates.addUpdate("service", currentCase, setCurrentCase);
+    servicesManager.addUpdate("page", page, setPage);
+    servicesManager.addUpdate("service", currentCase, setCurrentCase);
 
     return <div className="CasesManager">
         <div className="CasesManager__menu">

@@ -1,27 +1,17 @@
 import React from 'react';
 import Firebase from '../constants/firebase/firebaseSetup';
-import { UserFirebaseData, UserFirebase } from './UserContext';
+import { UserFirebase } from './UserContext';
 import { IPropsCase } from '../components/Cases/Case/Case';
 
 import BRANCHES from '../constants/Branches';
-
-interface IUserData {
-    nombre: string;
-    correo: string;
-    type: string;
-    cases: IPropsCase[];
-}
 
 export interface IObjectDatabase {
     UID?: string;
 }
 
+class DataBaseFirebase {
 
-var useUser = UserFirebaseData;
-
-class dataBase {
-
-    usuario?: IUserData;
+    usuario?: UserFirebase;
     user?: firebase.User;
     database: firebase.database.Database;
 
@@ -129,7 +119,7 @@ class dataBase {
 
 }
 
-export var DataBase = new dataBase();
+export var DataBase = new DataBaseFirebase();
 
 export const DatabaseContext = React.createContext(DataBase);
 

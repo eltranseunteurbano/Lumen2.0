@@ -19,7 +19,7 @@ export function Step(props: IPropsStep) {
     const servicesManager = useContext(ServicesContext);
 
     const [step, setStep] = useState(props.step);
-    const [page, setPage] = servicesManager.updates.useState("page");
+    const [page, setPage] = servicesManager.useState("page");
 
     const progress: any = useRef<any>();
 

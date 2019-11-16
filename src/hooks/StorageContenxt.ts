@@ -7,7 +7,6 @@ class StorageFirebase {
 
     constructor() {
         this.storege = Firebase.storage();
-
     }
 
     almacenar(route: string, file: File) {

@@ -1,20 +1,17 @@
 import BRANCHES from '../constants/Branches';
 import Servicio, { Service } from './Service';
 import { DataBase } from '../hooks/DatabaseContext';
-import HookUpdateManager from './IHookUpdate';
+import HookUpdateManager from './HookUpdate';
 
-
-
-export class ServicesManager {
+export class ServicesManager extends HookUpdateManager{
 
     services: Servicio[];
-    updates: HookUpdateManager;
     currentService?: Servicio;
     // render: ServicesManager | undefined;
 
     constructor() {
+        super();
         this.services = [];
-        this.updates = new HookUpdateManager();
     }
 
     getAllServices(load?: Function) {

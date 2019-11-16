@@ -13,8 +13,8 @@ interface IPropsViewReview {
 
 function ViewReview(props: IPropsViewReview) {
 
-    var [service, setService] = useState<Service>(props.service);
-    var [steps, setSteps] = useState<StepManager>(service.steps);
+    var service = (props.service);
+    var steps = (service.steps);
     var [step, setStep] = useState<ServiceStep>();
     var [review, setReview] = useState<ReviewManager>();
     const [update, setUpdate] = useState(false);

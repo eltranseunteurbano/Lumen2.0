@@ -17,7 +17,7 @@ export const Cases = (props: IPropsCases) => {
     const servicesManager = useContext(ServicesContext);
     const [services, setServices] = useState<Service[]>([]);
 
-    servicesManager.updates.addUpdate("services", services, setServices);
+    servicesManager.addUpdate("services", services, setServices);
 
     useEffect(() => {
 
