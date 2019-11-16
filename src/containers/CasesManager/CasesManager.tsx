@@ -7,6 +7,7 @@ import ViewReview from "../../components/ViewReview/ViewReview";
 import MenuCase from '../../components/MenuCase/MenuCase';
 
 import "./CasesManager.scss";
+import BarTitle from '../../components/BarTitle/BarTitle';
 
 
 interface IPropsCasesManager { }
@@ -23,6 +24,9 @@ export function CasesManager(props: IPropsCasesManager) {
     servicesManager.addUpdate("service", currentCase, setCurrentCase);
 
     return <div className="CasesManager">
+        
+        <BarTitle />
+
         <div className="CasesManager__menu">
             <MenuCase setPage={setPage} />
         </div>

@@ -15,9 +15,7 @@ interface IPropsCases {
 export const Cases = (props: IPropsCases) => {
 
     const servicesManager = useContext(ServicesContext);
-    const [services, setServices] = useState<Service[]>([]);
-
-    servicesManager.addUpdate("services", services, setServices);
+    const [services, setServices] = servicesManager.useState<Service[]>("services", useState([]));
 
     useEffect(() => {
 
@@ -27,14 +25,16 @@ export const Cases = (props: IPropsCases) => {
 
     }, []);
 
-
     return (
         <section className="Cases">
-         
+
             <article className="Cases__header">
                 <div className="Cases__header__title">
                     <h1 className="Cases__header__title__h1">Mis proyectos</h1>
                     <h2 className="Cases__header__title__description">Estos son los proyectos de servicio de energía que has creado a través de LUMEN.</h2>
+                </div>
+                <div className="Cases__header__space">
+                    <div className="Cases__header__space__line"></div>
                 </div>
                 <div className="Cases__header__filters">
                     <select className="Cases__header__filters__select" name="" id="">
