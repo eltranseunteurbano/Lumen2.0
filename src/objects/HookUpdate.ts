@@ -1,4 +1,5 @@
 import { useState, ReactChild } from "react";
+import { FunctionExpression } from "@babel/types";
 
 export class HookUpdateManager {
 
@@ -18,7 +19,9 @@ export class HookUpdateManager {
         }
 
         if (!find) {
-            this.updates.push(new HookUpdate(type, value, update));
+            let newHook = new HookUpdate(type, value, update);
+            this.updates.push(newHook);
+            return newHook;
         }
     }
 
@@ -32,15 +35,15 @@ export class HookUpdateManager {
         return val;
     }
 
-
-    useState<T>(type: string, propiedades?: any[]): [T, Function] {
+    useState<T>(type: string, propiedades?: [T, React.Dispatch<React.SetStateAction<any>>]):[T, Function] {
 
         let value: any = [];
         let find = false;
         for (let i = 0; i < this.updates.length; i++) {
             let update = this.updates[i];
+
             if (update.id === type) {
-                value = update.useState<T>();
+                value = update.useState.bind(update)();
                 i = this.updates.length;
                 find = true;
             }
@@ -48,8 +51,11 @@ export class HookUpdateManager {
 
         if (!find) {
             value = propiedades;
-            let propiedad: T = value[0];
-            this.addUpdate(type, propiedad, value[1]);
+
+            let hook = this.addUpdate(type, value[0], value[1]);
+            if (hook) {
+                value = hook.useState<T>();
+            }
         }
 
         return value;
@@ -63,12 +69,12 @@ export class HookUpdate {
     id: string;
     valueObject: Object;
     update: Function;
+    hook?: any;
 
     constructor(id: string, value: Object, update: Function) {
         this.id = id;
         this.valueObject = value;
         this.update = update;
-
     }
 
     setUpdate(object: Object) {
@@ -76,8 +82,8 @@ export class HookUpdate {
         this.update(object);
     }
 
-    useState<T>() {
-        let propiedad: T = (this.value.bind(this)) as unknown as T;
+    useState<T>(): [T, Function] {
+        let propiedad: T = <any>this.valueObject;
         return [propiedad, this.setUpdate.bind(this)];
     }
 
@@ -85,9 +91,3 @@ export class HookUpdate {
         return this.valueObject;
     }
 }
-
-/*interface IHookUpdate {
-    id: string;
-    value?: Object;
-    update: Function;
-}*/

@@ -8,7 +8,7 @@ import UserContext from '../../hooks/UserContext';
 const Home = () => {
     
     const useUser = useContext(UserContext);
-    useUser.useState("update", useState(false));
+    useUser.useState<boolean>("update", useState(false));
 
     return (
         <section className="Home">

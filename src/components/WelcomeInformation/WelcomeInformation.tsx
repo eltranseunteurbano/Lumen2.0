@@ -17,7 +17,7 @@ const WelcomeInformation = () => {
 
     const setType = (type: string) => {
         useUser.type = type;
-        setUpdate(!update());
+        setUpdate(!update);
     }
 
     const renderFromuser = (user: string) => {
