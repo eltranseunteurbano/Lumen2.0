@@ -33,14 +33,14 @@ export class HookUpdateManager {
     }
 
 
-    useState(type: string, propiedades?: any[]) {
+    useState<T>(type: string, propiedades?: any[]): [T, Function] {
 
         let value: any = [];
         let find = false;
         for (let i = 0; i < this.updates.length; i++) {
             let update = this.updates[i];
             if (update.id === type) {
-                value = update.useState();
+                value = update.useState<T>();
                 i = this.updates.length;
                 find = true;
             }
@@ -48,7 +48,8 @@ export class HookUpdateManager {
 
         if (!find) {
             value = propiedades;
-            this.addUpdate(type, value[0], value[1]);
+            let propiedad: T = value[0];
+            this.addUpdate(type, propiedad, value[1]);
         }
 
         return value;
@@ -75,8 +76,9 @@ export class HookUpdate {
         this.update(object);
     }
 
-    useState() {
-        return [this.value.bind(this), this.setUpdate.bind(this)];
+    useState<T>() {
+        let propiedad: T = (this.value.bind(this)) as unknown as T;
+        return [propiedad, this.setUpdate.bind(this)];
     }
 
     value() {
