@@ -28,25 +28,9 @@ export const Cases = (props: IPropsCases) => {
     }, []);
 
 
-    const subir = (event: React.ChangeEvent<HTMLInputElement>) => {
-        console.log(event);
-        var archivos = event.target.files;
-        if (archivos) {
-            let archivo = archivos[0];
-
-
-            
-        }
-    }
-
     return (
         <section className="Cases">
-            {/** <article className="Cases__header">
-                <ControlHeader />
-            </article> */}
-
-            <input onChange={subir} type="file" />
-
+         
             <article className="Cases__header">
                 <div className="Cases__header__title">
                     <h1 className="Cases__header__title__h1">Mis proyectos</h1>
