@@ -20,6 +20,7 @@ export function Step(props: IPropsStep) {
     const servicesManager = useContext(ServicesContext);
 
     var step = props.step;
+ 
 
     const [page, setPage] = servicesManager.useState("page");
 
