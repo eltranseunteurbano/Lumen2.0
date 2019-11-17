@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './WelcomeInformation.scss';
 
 import { Link } from 'react-router-dom';
@@ -13,12 +13,10 @@ import IconLumen from '../../icons/IconLumen/IconLumen';
 const WelcomeInformation = () => {
 
     var useUser = React.useContext(UserContext);
-
-    const [update, setUpdate] = useState(false);
+    var [update, setUpdate] = useUser.useState("update");
 
     const setType = (type: string) => {
         useUser.type = type;
-        useUser.update("update", !update);
         setUpdate(!update);
     }
 

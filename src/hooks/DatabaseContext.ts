@@ -1,39 +1,29 @@
 import React from 'react';
 import Firebase from '../constants/firebase/firebaseSetup';
-import { UserFirebaseData, UserFirebase } from './UserContext';
-import { IPropsCase } from '../components/Cases/Case/Case';
+import { UserFirebase } from './UserContext';
 
 import BRANCHES from '../constants/Branches';
-
-interface IUserData {
-    nombre: string;
-    correo: string;
-    type: string;
-    cases: IPropsCase[];
-}
 
 export interface IObjectDatabase {
     UID?: string;
 }
 
+class DataBaseFirebase {
 
-var useUser = UserFirebaseData;
-
-class dataBase {
-
-    usuario?: IUserData;
+    usuario?: UserFirebase;
     user?: firebase.User;
+    database: firebase.database.Database;
 
     constructor() {
         console.log("Inicializando")
         this.getUserChangeDataBase();
+        this.database = Firebase.database();
     }
 
     writeUserData(userData: UserFirebase) {
-        console.log(this.user);
         if (this.user) {
             let ruta = `${BRANCHES.USERS}/${this.user.uid}`;
-        
+
             let dataUser = JSON.parse(JSON.stringify(userData));
             this.writeDatabase(ruta, dataUser);
         }
@@ -47,7 +37,7 @@ class dataBase {
     }
 
     readBrachOnlyDatabase(ruta: string, load: Function) {
-        var refDataBase = Firebase.database().ref(ruta);
+        var refDataBase = this.database.ref(ruta);
 
         refDataBase.once('value', (snapshots: firebase.database.DataSnapshot) => {
             let objetos: { result: any, url: string }[] | any = [];
@@ -90,9 +80,9 @@ class dataBase {
         }
     }
 
-    getCurrentUserUID(load:Function) {
-        this.getUserChangeDataBase(()=>{
-            if(this.user){
+    getCurrentUserUID(load: Function) {
+        this.getUserChangeDataBase(() => {
+            if (this.user) {
                 load(this.user.uid);
             }
         });
@@ -128,7 +118,7 @@ class dataBase {
 
 }
 
-export var DataBase = new dataBase();
+export var DataBase = new DataBaseFirebase();
 
 export const DatabaseContext = React.createContext(DataBase);
 

@@ -21,7 +21,7 @@ export class ReviewManager {
     }
 
     startReview() {
-        if (this.currentReview == -1) {
+        if (this.currentReview === -1) {
             this.currentReview = 0;
             this.setCurrentReview(0);
             let review = this.getCurrentReview();

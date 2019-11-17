@@ -24,7 +24,7 @@ export class StepManager {
     }
 
     startStep() {
-        if (this.currentStep == -1) {
+        if (this.currentStep === -1) {
             this.setCurrentStep(0);
 
             let step = this.getCurrentStep();

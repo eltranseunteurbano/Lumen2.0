@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Case from '../../Cases/Case/Case';
-import ControlHeader from '../../ControlHeader/ControlHeader';
 import ServicesContext from '../../../hooks/ServicesContext';
 
-import './Cases.scss';
 import Service from '../../../objects/Service';
+import './Cases.scss';
 
 interface IPropsCases {
     update: Function;
@@ -14,11 +13,9 @@ interface IPropsCases {
 export const Cases = (props: IPropsCases) => {
 
     const servicesManager = useContext(ServicesContext);
-    const [services, setServices] = useState<Service[]>([]);
-
+    const [services, setServices] = servicesManager.useState<Service[]>("services", useState([]));
 
     useEffect(() => {
-        servicesManager.addUpdate("services", setServices);
 
         servicesManager.getAllServices((servicesData: Service[]) => {
             setServices(servicesData);
@@ -26,21 +23,20 @@ export const Cases = (props: IPropsCases) => {
 
     }, []);
 
-
-
     return (
         <section className="Cases">
-            {/** <article className="Cases__header">
-                <ControlHeader />
-            </article> */}
-            <article className="Cases__title">
-                <div>
-                    <h1 className="Cases__title__h1">Órdenes</h1>
-                    <h2 className="Cases__title__description">Estos son los proyectos de servicio en ejecución</h2>
+
+            <article className="Cases__header">
+                <div className="Cases__header__title">
+                    <h1 className="Cases__header__title__h1">Mis proyectos</h1>
+                    <h2 className="Cases__header__title__description">Estos son los proyectos de servicio de energía que has creado a través de LUMEN.</h2>
                 </div>
-                <div>
-                    <select name="" id="">
-                        <option>Mas recientes</option>
+                <div className="Cases__header__space">
+                    <div className="Cases__header__space__line"></div>
+                </div>
+                <div className="Cases__header__filters">
+                    <select className="Cases__header__filters__select" name="" id="">
+                        <option className="Cases__header__filters__select__option">Mas recientes</option>
                         <option>Menos recientes</option>
                     </select>
                 </div>

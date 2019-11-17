@@ -1,17 +1,19 @@
+<<<<<<< HEAD
 @import "../../styles/colors.scss";
+=======
+@import "../../styles/colors";
+>>>>>>> ede700705ff32e435c72f9f9d0868b9045d0c7ce
 
 $ProgressHeight : 20px;
 
 .ProgressBar {
-
-    width: 100%;
 
     &__progress {
         border: 0;
         height: $ProgressHeight;
         border-radius: 20px;
         width: 100%;
-
+        height: 100%;
     }
 
     &__progress::-webkit-progress-bar {

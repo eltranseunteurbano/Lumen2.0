@@ -1,4 +1,4 @@
-@import "../../../constants/_colors";
+@import "../../../styles/colors";
 
 
 .Step {
@@ -7,7 +7,7 @@
     height: 100%;
     color: white;
 
-    &:hover{
+    &:hover {
         cursor: pointer;
     }
 
@@ -90,59 +90,56 @@
 
 /*----------------------------------Estados----------------------------------*/
 
-.Step {
+.progress {
 
-    &__progress {
+    .Step {
 
-        .Step {
+        &__container {
+            background: $lightOrange;
+            color: $white;
 
-            &__container {
-                background: $lightOrange;
+            &__title {
                 color: $white;
-
-                &__title {
-                    color: $white;
-                }
-
-                &__line {
-                    border: 1px solid $white;
-                }
-
-                &__info {
-                    &__icon {
-                        filter: saturate(50%);
-
-                    }
-                }
-
             }
+
+            &__line {
+                border: 1px solid $white;
+            }
+
+            &__info {
+                &__icon {
+                    filter: saturate(50%);
+
+                }
+            }
+
         }
     }
+}
 
-    &__disabled {
+.disabled {
 
-        .Step {
+    .Step {
 
-            &__container {
-                background: $white;
-                color: $black;
+        &__container {
+            background: $white;
+            color: $black;
 
-                &__title {
-                    color: $darkGray;
-                }
-
-                &__line {
-                    border: 1px solid $gray;
-                }
-
-                &__info {
-                    &__icon {
-                        filter: saturate(0%);
-
-                    }
-                }
-
+            &__title {
+                color: $darkGray;
             }
+
+            &__line {
+                border: 1px solid $gray;
+            }
+
+            &__info {
+                &__icon {
+                    filter: saturate(0%);
+
+                }
+            }
+
         }
     }
 }

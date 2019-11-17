@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import './Home.scss';
 
 import IlustrationInformation from '../../components/ilustrationInformation/IlustrationInformation';
@@ -6,20 +6,14 @@ import WelcomeInformation from '../../components/WelcomeInformation/WelcomeInfor
 import UserContext from '../../hooks/UserContext';
 
 const Home = () => {
-
-    const useUser = useContext(UserContext);
-    const [update, setUpdate] = useState(false);
-
     
+    const useUser = useContext(UserContext);
+    useUser.useState<boolean>("update", useState(false));
 
-    useEffect(()=>{
-        useUser.addUpdate("update", setUpdate, update);
-    }, []);
-
-    return(
+    return (
         <section className="Home">
             <WelcomeInformation />
-            <IlustrationInformation/>
+            <IlustrationInformation />
         </section>
     )
 }
