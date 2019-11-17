@@ -1,0 +1,101 @@
+@import '../../styles/colors.scss';
+
+
+.MenuUsuario{
+    width: 100%;
+    max-width: 255px;
+    height: 100%;
+
+    padding-top: 20px;
+    
+    background-color: $white;
+    background-image: url("/img/FondoMenu.svg");
+    background-size: contain;
+    background-position-x: center;
+    background-position-y: top;
+    background-repeat: no-repeat;
+
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-content: stretch;
+    align-items: center;
+
+    &__menu{
+        width: 100%;
+        height: calc( 100vh - 90px);
+        margin-top: 30px;
+
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-content: stretch;
+        align-items: flex-end;
+
+        &__item{
+            width: 80%;
+            height: 200px;
+            background: $white;
+
+            margin-bottom: 50px;
+            transition: all .4s;
+            cursor: pointer;
+
+            border-top-left-radius: 25px;
+            border-bottom-left-radius: 25px;
+
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-content: stretch;
+            align-items: center;
+
+            &__text{
+                margin-top: 20px;
+                color: $black;
+                font-weight: bold;
+            }
+
+            &__proyectos{
+                transition: all .4s;
+
+                &__circle{
+                    fill: $orange;
+                }
+
+                &__rayo{
+                    fill: $white;
+                }
+            }
+        }
+
+        &__item:hover{
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        &__item-active{
+            background: $orange;
+
+            .MenuUsuario__menu__item__text{
+                color: $white;
+            }
+
+            .MenuUsuario__menu__item__proyectos{
+                transition: all .4s;
+
+                &__circle{
+                    fill: $white;
+                }
+
+                &__rayo{
+                    fill: $orange;
+                }
+            }
+        }
+    }
+}
