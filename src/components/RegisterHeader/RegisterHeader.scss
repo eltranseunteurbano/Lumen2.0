@@ -1,0 +1,37 @@
+@import '../../styles/colors.scss';
+
+.RegisterHeader{
+    border-bottom: solid 2px $darkGray;
+    padding-bottom: 50px;
+    
+    &__header{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-content: center;
+        align-items: center;
+
+        &__title{
+            font-weight: 800;
+            font-size: 40px;
+            color: $orange;
+            margin-bottom: 15px;
+            padding-top: 30px;
+
+        }
+        &__steps{
+            color: $green;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .ProgressBar{
+            width: 210px;
+            .ProgressBar__progress{
+                height: 10px;
+            }
+        }
+       
+    }
+}

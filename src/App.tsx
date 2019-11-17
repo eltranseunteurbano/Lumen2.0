@@ -10,6 +10,7 @@ import UserContext from './hooks/UserContext';
 
 import Home from './containers/Home/Home';
 import Login from './containers/Login/Login';
+import Register from './containers/Register/Register';
 
 const App = () => {
 
@@ -22,6 +23,7 @@ const App = () => {
           <Switch>
             <Route exact path={Routes.INDEX}> <Home /> </Route>
             <Route exact path={Routes.LOGIN}> <Login /> </Route>
+            <Route exact path={Routes.REGISTER}> <Register /> </Route>
           </Switch>
         </HashRouter>
       </div>
