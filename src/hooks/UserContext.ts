@@ -1,29 +1,35 @@
-import React from "react";
-import { IObjectDatabase } from './DatabaseContext';
+import { createContext } from "react";
 import HookUpdateManager from '../objects/HookUpdate';
+import Adviser from '../objects/Adviser';
+import Client from '../objects/Client';
 
+export class UserFirebase extends HookUpdateManager {
 
-export class UserFirebase extends HookUpdateManager implements IObjectDatabase {
-    UID: string;
+    user?: Client | Adviser;
+    userFirebase?: firebase.User;
     type: string;
-    name: string;
-    email: string;
-    user?: firebase.User;
 
     constructor() {
         super();
-        this.UID = "";
         this.type = "";
-        this.name = "";
-        this.email = "";
     }
 
-    setType(type: string) {
-        this.type = type;
+    getAsesor(): Adviser | undefined {
+        if (this.user && (this.user.type === NameUser.Adviser || this.type === NameUser.Adviser)) {
+            return this.user as Adviser;
+        }
+        return undefined;
     }
 
-    setUser(user: firebase.User) {
-        this.user = user;
+    getClient(): Client | undefined {
+        if (this.user && (this.user.type === NameUser.Client || this.type === NameUser.Client)) {
+            return this.user as Client;
+        }
+        return undefined;
+    }
+
+    setUserFirebase(user: firebase.User) {
+        this.userFirebase = user;
     }
 
 }
@@ -31,6 +37,35 @@ export class UserFirebase extends HookUpdateManager implements IObjectDatabase {
 
 
 export var User = new UserFirebase();
-const UserContext = React.createContext(User);
+const UserContext = createContext(User);
 
 export default UserContext;
+
+
+export var NameUser = {
+    Client: "cliente",
+    Adviser: "asesor"
+}
+
+
+export class Usuario {
+    UID: string;
+    type: string;
+    name: string;
+    lastName: string;
+    cedula: string;
+    email: string;
+
+    constructor(client?: Client) {
+        this.UID = client ? client.UID : "";
+        this.type = client ? client.type : "";
+        this.name = client ? client.name : "";
+        this.email = client ? client.email : "";
+        this.cedula = client ? client.cedula : "";
+        this.lastName = client ? client.lastName : "";
+    }
+
+    setType(type: string) {
+        this.type = type;
+    }
+}
