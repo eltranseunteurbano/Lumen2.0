@@ -5,9 +5,10 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-image: url('/img/background/inicio.png');
+    background: $lightGray;
+   /* background-image: url('/img/background/inicio.png');
     background-size: 100% 100%;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat;*/
 
     .grid {
         display: grid;
@@ -35,7 +36,7 @@
 
                 &__header,
                 &__question {
-                    background-color: inherit !important;
+                   
 
                     &__container {
                         width: 100%;
@@ -56,8 +57,7 @@
     }
 
     &__header {
-        height: 20%;
-        background-color: white;
+        height: 25%;
 
         display: flex;
         justify-content: flex-end;
@@ -68,8 +68,7 @@
     }
 
     &__question {
-        height: 80%;
-        background-color: $lightGray;
+        height: 75%;
 
         display: flex;
         justify-content: flex-end;
@@ -160,10 +159,10 @@
     height: 100vh;
 
     &__header {
+        height: 100%;
         width: 100%;
         border-bottom: solid 1px $darkGray;
-        padding-top: 50px;
-        margin-bottom: 100px;
+
 
         display: flex;
         flex-direction: column;
@@ -213,7 +212,6 @@
             align-items: center;
 
             width: 50%;
-            margin-bottom: 50px;
 
             &__txt {
                 font-size: 20px;
@@ -230,18 +228,19 @@
 
     &__pregunta {
         width: 100%;
-        height: 60%;
+        height: 80%;
         padding: 0 40px;
 
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-content: stretch;
         align-items: flex-start;
 
         &__texto {
             width: 100%;
+            padding-bottom: 50px;
 
             &__txt {
                 color: $black;

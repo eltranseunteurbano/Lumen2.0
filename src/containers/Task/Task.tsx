@@ -1,21 +1,41 @@
-import React, { useState, createRef, useEffect } from "react";
+import React, { useState, createRef, useEffect, useContext } from "react";
 import Desktop, { DesktopStep, Paso } from "../../components/Desktop/Desktop";
 import ViewItem from '../../components/ViewItem/ViewItem';
 
 import "./Task.scss"
 import Case from '../../components/Cases/Case/Case';
-import service, { Service } from '../../objects/Service';
+import Service from '../../objects/Service';
 import MenuCase from "../../components/MenuCase/MenuCase";
 import Firm from '../../objects/Firm';
+import HeaderSolicitud from "./HeaderSolicitud/HeaderSolicitud";
+import ServicesContext from '../../hooks/ServicesContext';
+import CasesManager from '../CasesManager/CasesManager';
+
 
 
 
 
 export const Task = () => {
 
+    const servicesManager = useContext(ServicesContext);
+    const [pageG, setPageG] = servicesManager.useState<number>("page");
+    const [currentCase, setCurrentCase] = servicesManager.useState<Service>("service");
+
     const [update, setUpdate] = useState(false);
     const [service, setservice] = useState(new Service());
     const [page, setPage] = useState(0);
+
+    var step = page === 0 ? 1 :
+        page === 1 ? 2 :
+            page === 2 ? 3 :
+                page === 3 ? 4 :
+                    page === 4 ? 5 :
+                        page === 5 ? 6 :
+                            page === 6 ? 6 :
+                                page === 7 ? 6 :
+                                    page === 8 ? 7 :
+                                        page === 9 ? 8 :
+                                            page === 10 ? 9 : 0;
 
     const [fileCadastral, setFileCadastra] = useState();
     const [filePropertyCedula, setFilePropertyCedula] = useState();
@@ -99,7 +119,7 @@ export const Task = () => {
                 }
                 break;
             case 10:
-
+                crearProyecto();
                 break;
 
             default:
@@ -113,8 +133,23 @@ export const Task = () => {
 
     }
 
+    const crearProyecto = () => {
+        if (fileCadastral && filePropertyCedula) {
+
+            firmaState.getImage((image: Blob) => {
+                service.addToDatabase(fileCadastral, filePropertyCedula, image, () => {
+                    setCurrentCase(service);
+                    setPageG(CasesManager.CASE);
+                });
+            })
+        }
+    }
+
     const back = () => {
-        setPage(page - 1);
+        let backPage = page - 1;
+        if (backPage >= 0) {
+            setPage(backPage);
+        }
     }
 
     const changeDataCase = (type: string, value: string, event?: React.ChangeEvent<HTMLInputElement>) => {
@@ -204,7 +239,7 @@ export const Task = () => {
                 view = <article className="CrearSolicitud__pregunta">
                     <div className="CrearSolicitud__pregunta__texto">
                         <p className="CrearSolicitud__pregunta__texto__txt">
-                            <strong>1. </strong> El service de energía es para:</p>
+                            <strong>{step}. </strong> El service de energía es para:</p>
                     </div>
 
                     <div className="CrearSolicitud__pregunta__opciones">
@@ -231,7 +266,7 @@ export const Task = () => {
                 view = <article className="CrearSolicitud__pregunta">
                     <div className="CrearSolicitud__pregunta__texto">
                         <p className="CrearSolicitud__pregunta__texto__txt">
-                            <strong>2. </strong> Elige un nombre para tu proyecto. Te recomendamos usar el nombre del barrio en donde se vaya a realizar
+                            <strong>{step}. </strong> Elige un nombre para tu proyecto. Te recomendamos usar el nombre del barrio en donde se vaya a realizar
                     </p>
                     </div>
 
@@ -249,7 +284,7 @@ export const Task = () => {
                 view = <article className="CrearSolicitud__pregunta">
                     <div className="CrearSolicitud__pregunta__texto">
                         <p className="CrearSolicitud__pregunta__texto__txt">
-                            <strong>3. </strong> ¿En qué zona se encuentra tu vivienda o proyecto?
+                            <strong>{step}. </strong> ¿En qué zona se encuentra tu vivienda o proyecto?
                         </p>
                     </div>
 
@@ -277,7 +312,7 @@ export const Task = () => {
                 view = <article className="CrearSolicitud__pregunta">
                     <div className="CrearSolicitud__pregunta__texto">
                         <p className="CrearSolicitud__pregunta__texto__txt">
-                            <strong>4. </strong> Por favor digita en los campos los datos del electricista que te ayudará en tu proyecto.
+                            <strong>{step}. </strong> Por favor digita en los campos los datos del electricista que te ayudará en tu proyecto.
                     </p>
                     </div>
 
@@ -316,7 +351,7 @@ export const Task = () => {
                 view = <article className="CrearSolicitud__pregunta">
                     <div className="CrearSolicitud__pregunta__texto">
                         <p className="CrearSolicitud__pregunta__texto__txt">
-                            <strong>5. </strong> ¿Qué tipo de electrodomésticos tienes en tu vivienda o propiedad?
+                            <strong>{step}. </strong> ¿Qué tipo de electrodomésticos tienes en tu vivienda o propiedad?
                 </p>
                     </div>
 
@@ -374,7 +409,7 @@ export const Task = () => {
                             </div>
 
                             <div className="CrearSolicitud__pregunta__input__label">
-                                <img src={process.env.PUBLIC_URL + '/img/tasks/documento-predial.png'} alt="Ejemplo predial" />
+                                <img style={{ width: "100%" }} src={process.env.PUBLIC_URL + '/img/tasks/documento-predial.png'} alt="Ejemplo predial" />
                                 <p className="CrearSolicitud__pregunta__input__label__text" style={{ fontSize: '14px', fontWeight: 'normal', color: '#F07500', marginTop: '20px' }}>Nota: Si tu propiedad no cuenta con número predial, entonces puedes adjuntar la documentación que confirme la veracidad del poseedor.</p>
                             </div>
                         </div>
@@ -530,7 +565,7 @@ export const Task = () => {
 
                         <div className="CrearSolicitud__pregunta__input">
                             <div className="CrearSolicitud__pregunta__input__label">
-                                <p className="CrearSolicitud__pregunta__input__label__text" style={{ textAlign: 'center', marginBottom: '120px', fontWeight: 'normal', fontSize: '20px' }}>Por favor <strong>firma</strong> en el siguiente recuadro blanco, para añadirla a tu solicitud</p>
+                                <p className="CrearSolicitud__pregunta__input__label__text" style={{ textAlign: 'center', fontWeight: 'normal', fontSize: '20px' }}>Por favor <strong>firma</strong> en el siguiente recuadro blanco, para añadirla a tu solicitud</p>
                             </div>
                         </div>
 
@@ -561,14 +596,13 @@ export const Task = () => {
 
         <article className="task__header">
             <section className="task__header__container">
+                <HeaderSolicitud step={step} />
             </section>
         </article>
         <article className={"task__question"}>
             <section className="task__question__container">
                 <section className="task__question__container__information">
                     {changePage(page)}
-
-
                 </section>
 
                 <section className="task__question__container__navigation">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './styles/reset.scss';
 import './styles/general.scss'
 
@@ -20,6 +20,10 @@ const App = () => {
 
   const user = React.useContext(UserContext);
 
+  useEffect(() => {
+    user.getUserLocal();
+  }, []);
+
   return (
     <UserContext.Provider value={user} >
       <div className="App">
@@ -31,7 +35,7 @@ const App = () => {
             <Route exact path={Routes.REGISTER}> <Register />  </Route>
             <Route exact path={Routes.CASES}> <CasesManager /> </Route>
             <Route exact path={Routes.TASK}> <Task /> </Route>
-           { <Route exact path="/pruebas"> <Pruebas /> </Route>}
+            {/* <Route exact path="/pruebas"> <Pruebas /> </Route>*/}
           </Switch>
         </HashRouter>
       </div>

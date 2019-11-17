@@ -66,14 +66,31 @@ class DataBaseFirebase {
         var refDataBase = this.database.ref(ruta);
 
         refDataBase.once('value', (snapshots: firebase.database.DataSnapshot) => {
-            let objetos: { result: any, url: string }[] | any = [];
+            let result: any[] = [];
             let nChilds: number = 0;
             snapshots.forEach(snapshot => {
-                objetos.push(snapshot.val());
+                result.push(snapshot.val());
                 nChilds++;
             });
 
-            load(objetos, nChilds);
+            load(result, nChilds);
+        });
+    }
+
+    readBrachOnlyDatabaseTwo(ruta: string, load: Function) {
+        var refDataBase = this.database.ref(ruta);
+
+        refDataBase.once('value', (snapshots: firebase.database.DataSnapshot) => {
+            let result: any[] = [];
+            let nChilds: number = 0;
+            snapshots.forEach(snapshot => {
+                snapshot.forEach(snapshot_two => {
+                    result.push(snapshot.val());
+                    nChilds++;
+                });
+            });
+
+            load(result, nChilds);
         });
     }
 
@@ -120,13 +137,17 @@ class DataBaseFirebase {
         Firebase.database().ref(url).set(objeto);
     }
 
-    writeDatabasePush(url: string, objeto: IObjectDatabase) {
+    writeDatabasePush(url: string, objeto: IObjectDatabase, load?: Function) {
         let UID: string = Firebase.database().ref(url).push().key || "";
         objeto.UID = UID;
+        var ruta = `${url}/${UID}`;
+        if (load) {
+            load(UID);
+        }
         var resultObject = JSON.parse(JSON.stringify(objeto));
 
         if (UID !== "") {
-            Firebase.database().ref(`${url}/${UID}`).set(resultObject);
+            Firebase.database().ref(ruta).set(resultObject);
         }
     }
 

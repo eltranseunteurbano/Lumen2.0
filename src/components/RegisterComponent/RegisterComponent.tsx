@@ -44,13 +44,11 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
 
     const finalizar = () => {
         if (password !== "" && password === repassword) {
-            console.log(showModal)
             if (showModal && useUser.user) {
                 useUser.user.email = `${useUser.user.cedula}@hotmail.com`;
                 useUser.singUp(useUser.user.email, password, ()=>{
                     setRedirect(true);
                 });
-          
             }
             setShowModal(true);
         }

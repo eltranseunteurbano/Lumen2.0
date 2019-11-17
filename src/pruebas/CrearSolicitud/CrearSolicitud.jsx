@@ -1,6 +1,6 @@
 import React from 'react';
 import './CrearSolicitud.scss';
-import HeaderSolicitud from './HeaderSolicitud/HeaderSolicitud';
+import HeaderSolicitud from '../../containers/Task/HeaderSolicitud/HeaderSolicitud';
 
 const CrearSolicitud = () => {
 

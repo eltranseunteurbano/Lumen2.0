@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import "./ViewCase.scss";
 import Case from '../Cases/Case/Case';
@@ -9,6 +9,8 @@ import IconEmpresa from "../../icons/Case/Empresa";
 import IconConstructora from '../../icons/Case/Constructora';
 import IconHouse from "../../icons/Case/House";
 import IconLupa from '../../icons/Case/Lupa';
+import UserContext from "../../hooks/UserContext";
+import { NameUser } from '../../hooks/UserContext';
 
 interface IPropsViewCase {
     service: Servicio;
@@ -16,14 +18,15 @@ interface IPropsViewCase {
 
 export function ViewCase(props: IPropsViewCase) {
 
-    const [service, setService] = useState(props.service);
-    const [status, setStatus] = useState(0);
+    const useUser = useContext(UserContext);
+    var service = props.service;
+    service.steps.startStep();
 
     useEffect(() => {
-        service.steps.startStep();
-        service.history.addHistroy();
-        setService(service);
-        setStatus(1);
+        console.log(useUser)
+        if (useUser.type === NameUser.Adviser) {
+            service.history.addHistroy();
+        }
     }, [])
 
     return <div className="ViewCase">
@@ -37,10 +40,10 @@ export function ViewCase(props: IPropsViewCase) {
                     <h2>Orden #{service.orden}</h2>
                 </section>
                 <section className="ViewCase__container__navegation__next">
-                   
+
                 </section>
                 <section className="ViewCase__container__navegation__exit">
-                   
+
                 </section>
             </article>
             <hr />
@@ -50,7 +53,7 @@ export function ViewCase(props: IPropsViewCase) {
                         <section className="ViewCase__container__title__place__icon__svg">
                             <article className="ViewCase__container__title__place__icon__svg__image">
                                 {service.information.TYPE === Case.empresa ?
-                                   <IconEmpresa />
+                                    <IconEmpresa />
 
                                     : service.information.TYPE === Case.constructora ?
                                         <IconConstructora />
@@ -87,7 +90,7 @@ export function ViewCase(props: IPropsViewCase) {
             </article>
             <hr />
 
-            <ProgressBar value={service.steps.currentStep +1} />
+            <ProgressBar value={service.steps.currentStep + 1} />
 
             <article className="ViewCase__container__steps">
                 <Steps service={service}></Steps>

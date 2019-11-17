@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import ServicesContext from "../../hooks/ServicesContext";
-import Servicio from '../../objects/Service';
+import Service from '../../objects/Service';
 import Cases from '../../components/Cases/Cases/Cases';
 import { ViewCase } from "../../components/ViewCase/ViewCase";
 import ViewReview from "../../components/ViewReview/ViewReview";
@@ -19,7 +19,7 @@ export function CasesManager(props: IPropsCasesManager) {
     const servicesManager = useContext(ServicesContext);
 
     const [page, setPage] = servicesManager.useState<number>("page", useState(3));
-    const [currentCase, setCurrentCase] = servicesManager.useState<Servicio>("service", useState(new Servicio()));
+    const [currentCase, setCurrentCase] = servicesManager.useState<Service>("service", useState(new Service()));
 
     const choosePage = (numero: number) => {
         let view = <></>;

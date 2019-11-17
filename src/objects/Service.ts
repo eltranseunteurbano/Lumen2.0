@@ -68,36 +68,77 @@ export class Service implements IObjectDatabase {
 
     }
 
-    uploadFileCadastral(file: File, load?: Function) {
+    uploadFileCadastral(ruta: string, file: File, load?: Function) {
         DataBase.getUserChangeDataBase(() => {
             if (User.user) {
                 this.userUID = User.user.UID;
-                let ruta = `${BRANCHES.DOC}/${this.userUID}/${BRANCHES.DOC_CADASTRAL}`;
-                this.information.CADASTRAL_NUMBER_DOC = ruta;
+                this.information.CADASTRAL_NUMBER_DOC = ruta + "/" + file.name;
                 Storage.almacenar(ruta, file);
                 if (load) {
                     load(ruta + "/" + file.name);
                 }
             }
         });
+    }
 
+    uploadFilePropertyCedula(ruta: string, file: File, load?: Function) {
+        DataBase.getUserChangeDataBase(() => {
+            if (User.user) {
+                this.userUID = User.user.UID;
 
+                this.information.PROPERTY.CEDULA_DOC = ruta + "/" + file.name;
+                Storage.almacenar(ruta, file);
+                if (load) {
+                    load(ruta + "/" + file.name);
+                }
+            }
+        });
+    }
+
+    uploadFileFirm(ruta: string, file: Blob, load?: Function) {
+        DataBase.getUserChangeDataBase(() => {
+            if (User.user) {
+                this.userUID = User.user.UID;
+
+                this.information.FIRM.FIRM = ruta + "/" + "firm.png";
+                Storage.saveBlob(ruta, file, "firm.png");
+                if (load) {
+                    load(ruta + "/" + "firm.png");
+                }
+            }
+        });
     }
 
 
-    addToDatabase() {
+
+
+    addToDatabase(fileCadastral: File, filePropertyCedula: File, firmaState: Blob, load: Function) {
         DataBase.getUserChangeDataBase(() => {
             if (DataBase.userFirebase) {
 
                 this.userUID = DataBase.userFirebase.uid;
                 let url = `${BRANCHES.CASES}`;
 
-
                 DataBase.readBrachOnlyDatabase(url, (casos: Service[]) => {
                     let indice = casos.length + 1;
                     this.orden = indice;
+                    DataBase.writeDatabasePush(url, this, (UID: string) => {
 
-                    DataBase.writeDatabasePush(url, this);
+                        let rutaFileCadastral = `${BRANCHES.DOC}/${UID}/${BRANCHES.DOC_CADASTRAL}`;
+                        this.uploadFileCadastral(rutaFileCadastral, fileCadastral, (ruta: string) => {
+                            this.information.CADASTRAL_NUMBER_DOC = ruta;
+
+                            let rutaFilePropertyCedula = `${BRANCHES.DOC}/${UID}/${BRANCHES.DOC_PROPERTY_CEDULA}`;
+                            this.uploadFilePropertyCedula(rutaFilePropertyCedula, filePropertyCedula, (ruta: string) => {
+                                this.information.PROPERTY.CEDULA_DOC = ruta;
+
+                                let rutaFileFirm = `${BRANCHES.DOC}/${UID}/${BRANCHES.DOC_FIRM}`;
+                                this.uploadFileFirm(rutaFileFirm, firmaState, () => {
+                                    load();
+                                })
+                            });
+                        });
+                    });
                 });
             }
         });

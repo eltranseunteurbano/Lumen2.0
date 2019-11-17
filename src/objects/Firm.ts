@@ -49,13 +49,15 @@ class Firm {
     }
 
     initStyleLine() {
+        this.firmaShape.graphics.beginFill("white").rect(0, 0, 500, 500).endFill();
         this.firmaShape.graphics.setStrokeStyle(3).beginStroke("gray");
+        this.update();
     }
 
     clearCanvas() {
         this.firmaShape.graphics.clear();
         this.initStyleLine();
-        this.state.update();
+  
     }
 
     update() {
@@ -64,10 +66,10 @@ class Firm {
 
     getImage(load: Function) {
         this.canvas.toBlob((data) => {
-            if(data){
+            if (data) {
                 load(data);
             }
-            
+
         });
     }
 }
