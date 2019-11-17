@@ -14,6 +14,11 @@ class StorageFirebase {
         refStorage.put(file);
     }
 
+    saveBlob(route: string, file: Blob, name: string) {
+        let refStorage = Storage.storege.ref(route).child(name);
+        refStorage.put(file);
+    }
+
 }
 
 export var Storage = new StorageFirebase();

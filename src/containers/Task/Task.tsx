@@ -1,4 +1,4 @@
-import React, { useState, createRef } from "react";
+import React, { useState, createRef, useEffect } from "react";
 import Desktop, { DesktopStep, Paso } from "../../components/Desktop/Desktop";
 import ViewItem from '../../components/ViewItem/ViewItem';
 
@@ -6,21 +6,44 @@ import "./Task.scss"
 import Case from '../../components/Cases/Case/Case';
 import service, { Service } from '../../objects/Service';
 import MenuCase from "../../components/MenuCase/MenuCase";
+import Firm from '../../objects/Firm';
+
+
+
 
 export const Task = () => {
 
     const [update, setUpdate] = useState(false);
     const [service, setservice] = useState(new Service());
-    const [page, setPage] = useState(9);
+    const [page, setPage] = useState(0);
+
     const [fileCadastral, setFileCadastra] = useState();
     const [filePropertyCedula, setFilePropertyCedula] = useState();
 
-    const refCanvas = createRef<HTMLCanvasElement>();
+    const [firmaState, setFirmaState] = useState<Firm>(new Firm());
+    const refCanvasContainer = createRef<HTMLDivElement>();
     const refCanvasImg = createRef<HTMLImageElement>();
 
     const erase = () => {
 
+        if (firmaState) {
+            firmaState.clearCanvas();
+        }
     }
+
+    useEffect(() => {
+
+        if (refCanvasContainer.current) {
+            firmaState.includeIn(refCanvasContainer.current);
+        }
+
+    }, []);
+
+    useEffect(() => {
+        if (refCanvasContainer.current) {
+            firmaState.includeIn(refCanvasContainer.current);
+        }
+    }, [page])
 
 
     const next = () => {
@@ -87,6 +110,7 @@ export const Task = () => {
         if (allowNext) {
             setPage(page + 1);
         }
+
     }
 
     const back = () => {
@@ -200,10 +224,7 @@ export const Task = () => {
                         </div>
                     </div>
 
-                    <div className="CrearSolicitud__pregunta__btns">
-                        <button onClick={back} className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
-                        <button onClick={next} className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
-                    </div>
+
                 </article>
                 break;
             case 1:
@@ -221,10 +242,7 @@ export const Task = () => {
                         </label>
                     </div>
 
-                    <div className="CrearSolicitud__pregunta__btns">
-                        <button onClick={back} className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
-                        <button onClick={next} className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
-                    </div>
+
                 </article>
                 break;
             case 2:
@@ -252,10 +270,7 @@ export const Task = () => {
                         </div>
                     </div>
 
-                    <div className="CrearSolicitud__pregunta__btns">
-                        <button onClick={back} className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
-                        <button onClick={next} className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
-                    </div>
+
                 </article>
                 break;
             case 3:
@@ -294,10 +309,7 @@ export const Task = () => {
 
                     </div>
 
-                    <div className="CrearSolicitud__pregunta__btns">
-                        <button onClick={back} className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
-                        <button onClick={next} className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
-                    </div>
+
                 </article>
                 break;
             case 4:
@@ -343,10 +355,7 @@ export const Task = () => {
                         </div>
                     </div>
 
-                    <div className="CrearSolicitud__pregunta__btns">
-                        <button onClick={back} className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
-                        <button onClick={next} className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
-                    </div>
+
                 </article>
                 break;
             case 5:
@@ -372,10 +381,7 @@ export const Task = () => {
 
                     </div>
 
-                    <div className="CrearSolicitud__pregunta__btns">
-                        <button onClick={back} className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
-                        <button onClick={next} className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
-                    </div>
+
                 </article>
                 break;
             case 6:
@@ -413,10 +419,6 @@ export const Task = () => {
 
                     </div>
 
-                    <div className="CrearSolicitud__pregunta__btns">
-                        <button onClick={back} className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
-                        <button onClick={next} className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
-                    </div>
                 </article>
                 break;
             case 7:
@@ -455,10 +457,7 @@ export const Task = () => {
 
                     </div>
 
-                    <div className="CrearSolicitud__pregunta__btns">
-                        <button onClick={back} className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
-                        <button onClick={next} className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
-                    </div>
+
                 </article>
                 break;
             case 8:
@@ -486,10 +485,6 @@ export const Task = () => {
 
                     </div>
 
-                    <div className="CrearSolicitud__pregunta__btns">
-                        <button onClick={back} className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
-                        <button onClick={next} className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
-                    </div>
                 </article>
                 break;
             case 9:
@@ -520,10 +515,7 @@ export const Task = () => {
 
                     </div>
 
-                    <div className="CrearSolicitud__pregunta__btns">
-                        <button onClick={back} className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
-                        <button onClick={next} className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
-                    </div>
+
                 </article>
                 break;
             case 10:
@@ -543,8 +535,7 @@ export const Task = () => {
                         </div>
 
                         <div className="CrearSolicitud__pregunta__input">
-                            <div className="CrearSolicitud__pregunta__input__canvas">
-                                <canvas ref={refCanvas} />
+                            <div ref={refCanvasContainer} className="CrearSolicitud__pregunta__input__canvas" >
                                 <img ref={refCanvasImg} style={{ position: 'absolute', top: '10%', left: '52%', display: 'none' }} />
                             </div>
 
@@ -559,10 +550,7 @@ export const Task = () => {
 
                     </div>
 
-                    <div className="CrearSolicitud__pregunta__btns">
-                        <button className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
-                        <button className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
-                    </div>
+
                 </article>
                 break;
         }
@@ -583,16 +571,9 @@ export const Task = () => {
 
                 </section>
 
-                {page > 0 ?
-                    <section className="task__question__container__navigation">
-                        <TaskContinue onClick={next} />
-                    </section>
-                    : ""
-                }
-
-
-
-
+                <section className="task__question__container__navigation">
+                    <TaskContinue next={next} back={back} />
+                </section>
 
             </section>
         </article>
@@ -605,14 +586,14 @@ export const Task = () => {
 export default Task;
 
 interface IPropsTaskContinue {
-    onClick: Function;
+    next: Function;
+    back: Function
 }
 
 export function TaskContinue(props: IPropsTaskContinue) {
-    return <div className="task__question__button__next" onClick={() => props.onClick()}>
-        <svg width="65" height="62" viewBox="0 0 65 62" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4.17135 35.083H50.7653L30.4091 55.0079C28.7823 56.6003 28.7823 59.2134 30.4091 60.8057C32.0359 62.3981 34.6639 62.3981 36.2907 60.8057L63.7799 33.8989C65.4067 32.3066 65.4067 29.7343 63.7799 28.1419L36.3324 1.19427C34.7056 -0.39809 32.0776 -0.39809 30.4508 1.19427C28.824 2.78663 28.824 5.35891 30.4508 6.95127L50.7653 26.917H4.17135C1.87711 26.917 0 28.7544 0 31C0 33.2456 1.87711 35.083 4.17135 35.083Z" />
-        </svg>
+    return <div className="CrearSolicitud__pregunta__btns">
+        <button onClick={() => { props.back() }} className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
+        <button onClick={() => { props.next() }} className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
     </div>;
 }
 

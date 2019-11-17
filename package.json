@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@createjs/easeljs": "^2.0.0-beta.4",
     "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@fortawesome/free-brands-svg-icons": "^5.11.2",
     "@fortawesome/free-regular-svg-icons": "^5.11.2",
@@ -11,6 +10,7 @@
     "@fortawesome/react-fontawesome": "^0.1.7",
     "@types/easeljs": "^1.0.0",
     "@types/react-modal": "^3.10.0",
+    "createjs-module": "^0.8.3",
     "firebase": "^7.3.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",

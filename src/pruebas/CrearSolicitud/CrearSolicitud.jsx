@@ -28,15 +28,7 @@ const CrearSolicitud = () => {
             canvas.addEventListener("mousemove", function (e) {
                 findxy('move', e)
             }, false);
-            canvas.addEventListener("mousedown", function (e) {
-                findxy('down', e)
-            }, false);
-            canvas.addEventListener("mouseup", function (e) {
-                findxy('up', e)
-            }, false);
-            canvas.addEventListener("mouseout", function (e) {
-                findxy('out', e)
-            }, false);
+            
         })
 
     function draw() {
