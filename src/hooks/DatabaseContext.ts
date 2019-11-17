@@ -3,6 +3,7 @@ import Firebase from '../constants/firebase/firebaseSetup';
 import { UserFirebase } from './UserContext';
 
 import BRANCHES from '../constants/Branches';
+import Usuario from '../objects/User/Usuario';
 
 export interface IObjectDatabase {
     UID?: string;
@@ -35,6 +36,15 @@ class DataBaseFirebase {
             action();
         }
     }
+
+    readBrachOnlyDatabaseObject(ruta: string, load: Function) {
+        var refDataBase = this.database.ref(ruta);
+
+        refDataBase.once('value', (snapshots: firebase.database.DataSnapshot) => {
+            load(snapshots);
+        });
+    }
+
 
     readBrachOnlyDatabase(ruta: string, load: Function) {
         var refDataBase = this.database.ref(ruta);
@@ -100,8 +110,22 @@ class DataBaseFirebase {
         if (UID !== "") {
             Firebase.database().ref(`${url}/${UID}`).set(resultObject);
         }
+    }
 
-        // this.updateBrach(`${url}/${UID}`, objeto); /**Algo pasa */
+    writeDatabaseUser(url: string, user: Usuario, load: Function) {
+        var resultObject = JSON.parse(JSON.stringify(user));
+        Firebase.database().ref(`${url}/${user.UID}`).set(resultObject);
+        load();
+    }
+
+    writeDatabasePushUID(url: string, load: Function) {
+        let UID: string = Firebase.database().ref(url).push().key || "";
+        let objeto = load(UID);
+        var resultObject = JSON.parse(JSON.stringify(objeto));
+
+        if (UID !== "") {
+            Firebase.database().ref(`${url}/${UID}`).set(resultObject);
+        }
     }
 
     updateBrach(url: string, object: IObjectDatabase) {

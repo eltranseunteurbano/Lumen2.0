@@ -9,6 +9,7 @@ import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import * as Routes from '../../constants/Routes';
 import UserContext from '../../hooks/UserContext';
 import IconLumen from '../../icons/IconLumen/IconLumen';
+import { NameUser } from '../../hooks/UserContext';
 
 const WelcomeInformation = () => {
 
@@ -37,15 +38,15 @@ const WelcomeInformation = () => {
                             <p className="WelcomeInformation__footer__description">Para empezar, dinos quién eres.</p>
 
                             <div className="WelcomeInformation__footer__btns">
-                                <button type="button" onClick={() => setType('Cliente')}>Cliente</button>
-                                <button type="button" onClick={() => setType('Asesor')}>Asesor</button>
+                                <button type="button" onClick={() => setType(NameUser.Client)}>Cliente</button>
+                                <button type="button" onClick={() => setType(NameUser.Adviser)}>Asesor</button>
                             </div>
 
                         </div>
                     </section>
                 )
 
-            case 'Cliente':
+            case NameUser.Client:
                 return (
                     <section className="WelcomeInformation appear">
                         <div className="WelcomeInformation__icons">
@@ -69,7 +70,7 @@ const WelcomeInformation = () => {
                     </section>
                 )
 
-            case 'Asesor':
+            case NameUser.Adviser:
                 return (
                     <section className="WelcomeInformation appear">
                         <div className="WelcomeInformation__icons">

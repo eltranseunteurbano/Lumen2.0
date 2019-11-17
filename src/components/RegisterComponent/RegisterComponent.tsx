@@ -2,9 +2,11 @@ import React, { useState, useContext, useEffect } from 'react';
 import './RegisterComponent.scss';
 import UserContext from '../../hooks/UserContext';
 import { NameUser } from '../../hooks/UserContext';
-import Client from '../../objects/Client';
-import Adviser from '../../objects/Adviser';
+import Client from '../../objects/User/Client';
+import Adviser from '../../objects/User/Adviser';
 import ReactModal from 'react-modal';
+import { Redirect } from 'react-router';
+import * as Routes from '../../constants/Routes';
 
 ReactModal.setAppElement('#root');
 
@@ -21,12 +23,12 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
     if (!user) {
         if (useUser.type === NameUser.Client) {
             user = useUser.user = new Client();
+            user.type = useUser.type;
         } else if (useUser.type === NameUser.Adviser) {
             user = useUser.user = new Adviser();
-        } else {
-            useUser.type = NameUser.Client;
-            user = useUser.user = new Client();
+            user.type = useUser.type;
         }
+    
     }
 
     var client: Client | undefined = useUser.getClient();
@@ -36,11 +38,20 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
     const [step, stepStep] = [props.step, props.setStep];
     var [password, setPassword] = useState("");
     var [repassword, setRepassword] = useState("");
+    const [redirect, setRedirect] = useState(false);
 
-    const [showModal, setShowModal] = React.useState(false);
+    const [showModal, setShowModal] = useState(false);
 
     const finalizar = () => {
         if (password !== "" && password === repassword) {
+            console.log(showModal)
+            if (showModal && useUser.user) {
+                useUser.user.email = `${useUser.user.cedula}@hotmail.com`;
+                useUser.singUp(useUser.user.email, password, ()=>{
+                    setRedirect(true);
+                });
+          
+            }
             setShowModal(true);
         }
     }
@@ -53,6 +64,7 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
     const next = () => {
 
         let allowNext = false;
+        console.log(client)
         if (user) {
             switch (step) {
                 case 1:
@@ -237,6 +249,7 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
                 break;
             case 3:
                 view = <article className="RegisterComponent_three appear">
+                    {redirect ? <Redirect to={Routes.CASES} /> : ""}
                     <p className="RegisterComponent_three__txt">
                         Crea una contraseña de al menos <strong>4 números</strong> para proteger tus datos personales.
                 </p>
@@ -272,7 +285,7 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
                         <p>Puedes devolverte y revisar que los datos sean los correctos antes de enviar el formulario de registro.</p>
                         <div className="RegisterComponent_two__btns">
                             <button type="button" className="RegisterComponent_three__btns__btn" onClick={closeFinalizar}>Revisar</button>
-                            <button type="button" className="RegisterComponent_three__btns__btn" >Finalizar</button>
+                            <button onClick={finalizar} type="button" className="RegisterComponent_three__btns__btn" >Finalizar</button>
                         </div>
                     </ReactModal>
                 </article>

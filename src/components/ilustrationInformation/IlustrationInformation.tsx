@@ -8,30 +8,33 @@ import { faTimes, faQuestion } from '@fortawesome/free-solid-svg-icons';
 import * as Routes from '../../constants/Routes';
 import UserContext from '../../hooks/UserContext';
 import BarTitle from '../BarTitle/BarTitle';
+import { NameUser } from '../../hooks/UserContext';
 
 const IlustrationInformation = () => {
 
     const useUser = React.useContext(UserContext);
 
-    console.log(useUser)
+    const chooseIcon = (type: string) => {
+        let view = <></>;
+        switch (type) {
+            case "":
+                view = <img src={process.env.PUBLIC_URL + '/img/Ilustración Home Uno.svg'} alt="Ilustración" className="appear" />
+                break;
 
+            case NameUser.Adviser:
+                view = <img src={process.env.PUBLIC_URL + '/img/Ilustración Home Dos.svg'} alt="Ilustración" className="appear" />
+                break;
+            case NameUser.Client:
+                view = <img src={process.env.PUBLIC_URL + '/img/Ilustración Home Tres.svg'} alt="Ilustración" className="appear" />
+                break;
+        }
+        return view;
+    }
 
     return (
         <section className="IlustrationInformation appear">
-            <BarTitle />
-         
-            {
-                useUser.type === '' ?
-                    <img src={process.env.PUBLIC_URL + '/img/Ilustración Home Uno.svg'} alt="Ilustración" className="appear" />
-                    :
-                    useUser.type === 'Asesor' ?
-                        <img src={process.env.PUBLIC_URL + '/img/Ilustración Home Dos.svg'} alt="Ilustración" className="appear" />
-                        :
-                        useUser.type === 'Cliente' ?
-                            <img src={process.env.PUBLIC_URL + '/img/Ilustración Home Tres.svg'} alt="Ilustración" className="appear" />
-                            :
-                            ''
-            }
+
+            {chooseIcon(useUser.type)}
 
             {useUser.type !== '' ?
 

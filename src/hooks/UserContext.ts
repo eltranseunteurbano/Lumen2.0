@@ -1,7 +1,10 @@
 import { createContext } from "react";
 import HookUpdateManager from '../objects/HookUpdate';
-import Adviser from '../objects/Adviser';
-import Client from '../objects/Client';
+import Adviser from '../objects/User/Adviser';
+import Client from '../objects/User/Client';
+import { DataBase } from './DatabaseContext';
+import BRANCHES from "../constants/Branches";
+import Firebase from '../constants/firebase/firebaseSetup';
 
 export class UserFirebase extends HookUpdateManager {
 
@@ -32,6 +35,74 @@ export class UserFirebase extends HookUpdateManager {
         this.userFirebase = user;
     }
 
+    async singIn(mail: string, pass: string, load?: Function) {
+
+        try {
+            let user = await Firebase.auth().signInWithEmailAndPassword(mail, pass);
+            if (user) {
+                if (user.user) {
+                    this.setUserFirebase(user.user);
+                    if (this.userFirebase) {
+                        let ruta = `${BRANCHES.USERS}/${this.userFirebase.uid}`;
+                        DataBase.readBrachOnlyDatabaseObject(ruta, (result: any) => {
+                            let usuario: Client | Adviser = result.val();
+                            if (usuario.type === NameUser.Client) {
+                                let userClient = usuario as Client;
+                                this.user = new Client(userClient);
+                            } else if (usuario.type == NameUser.Adviser) {
+                                let userAdviser = usuario as Adviser;
+                                this.user = new Adviser(userAdviser);
+                            }
+                            if (load) {
+                                load();
+                            }
+                        });
+                    }
+                }
+            }
+
+        } catch (error) {
+
+        }
+
+
+    }
+
+    async singUp(mail: string, pass: string, load?: Function) {
+
+        let user: firebase.auth.UserCredential = await Firebase.auth().createUserWithEmailAndPassword(mail, pass);
+        if (user) {
+            if (user.user) {
+                this.setUserFirebase(user.user);
+                if (this.userFirebase && this.user) {
+                    this.user.UID = this.userFirebase.uid;
+                }
+            }
+
+            if (this.user) {
+                DataBase.writeDatabaseUser(BRANCHES.USERS, this.user, (UID: string) => {
+                    console.log(user + ' Se ha registrado correctamente');
+                    if (load) {
+                        load();
+                    }
+                });
+
+            }
+
+        }
+    }
+
+    logOut(load?: Function) {
+        Firebase.auth().signOut().then(function () {
+            if (load) {
+                load();
+            }
+            // Sign-out successful.
+        }).catch(function (error) {
+            // An error happened.
+        });
+    }
+
 }
 
 
@@ -47,25 +118,3 @@ export var NameUser = {
     Adviser: "asesor"
 }
 
-
-export class Usuario {
-    UID: string;
-    type: string;
-    name: string;
-    lastName: string;
-    cedula: string;
-    email: string;
-
-    constructor(client?: Client) {
-        this.UID = client ? client.UID : "";
-        this.type = client ? client.type : "";
-        this.name = client ? client.name : "";
-        this.email = client ? client.email : "";
-        this.cedula = client ? client.cedula : "";
-        this.lastName = client ? client.lastName : "";
-    }
-
-    setType(type: string) {
-        this.type = type;
-    }
-}

@@ -1,5 +1,5 @@
-import { Usuario } from '../hooks/UserContext';
-import { IObjectDatabase } from '../hooks/DatabaseContext';
+import { IObjectDatabase } from '../../hooks/DatabaseContext';
+import Usuario from './Usuario';
 
 class Adviser extends Usuario implements IObjectDatabase {
     
