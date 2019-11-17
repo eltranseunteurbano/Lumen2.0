@@ -11,7 +11,7 @@
     width: 100%;
     height: 100vh;
 
-    &__header{
+    &__header {
         width: 100%;
         border-bottom: solid 1px $darkGray;
         padding-top: 50px;
@@ -23,8 +23,8 @@
         justify-content: center;
         align-content: center;
         align-items: center;
-        
-        &__titulo{
+
+        &__titulo {
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;
@@ -35,19 +35,20 @@
             width: 50%;
             margin-bottom: 20px;
 
-            &__img{
+            &__img {
                 margin-right: 20px;
                 width: 70px;
 
-                img{
+                img {
                     width: 100%;
                 }
             }
 
-            &__txt{
+            &__txt {
                 font-size: 20px;
                 color: $black;
-                strong{
+
+                strong {
                     font-size: 25px;
                     color: $orange;
                     font-weight: bolder;
@@ -55,7 +56,7 @@
             }
         }
 
-        &__progress{
+        &__progress {
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;
@@ -66,26 +67,38 @@
             width: 50%;
             margin-bottom: 50px;
 
-            &__txt{
+            &__txt {
                 font-size: 20px;
                 color: $gray;
                 font-weight: bolder;
                 margin-right: 40px;
             }
 
-            .ProgressBar{
+            .ProgressBar {
                 width: 35%;
             }
         }
     }
 
     &__pregunta {
+        width: 100%;
+        height: 60%;
         padding: 0 40px;
+
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-content: stretch;
+        align-items: flex-start;
+
         &__texto {
-            margin-bottom: 50px;
+            width: 100%;
+
             &__txt {
                 color: $black;
                 font-size: 20px;
+
                 strong {
                     font-weight: bolder;
                     font-size: 25px;
@@ -96,7 +109,7 @@
 
         }
 
-        &__opciones{
+        &__opciones {
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;
@@ -104,11 +117,10 @@
             align-content: stretch;
             align-items: center;
 
-            margin-bottom: 50px;
+            width: 100%;
 
-
-            &__opcion{
-                width: 25%;
+            &__opcion {
+                width: 20%;
                 min-width: 150px;
 
                 display: flex;
@@ -121,17 +133,17 @@
                 cursor: pointer;
                 transition: all .4s;
 
-                &__img{
+                &__img {
                     width: 100%;
                     height: 275px;
                     background: #FFFFFF;
-                    
+
                     margin-bottom: 20px;
                     padding: 20px;
 
                     border-radius: 10px;
                     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-                    
+
                     transition: all .4s;
 
                     display: flex;
@@ -141,21 +153,74 @@
                     align-content: stretch;
                     align-items: center;
 
-                    img{
+                    img {
                         width: 100%;
                     }
                 }
 
-                &__texto{
+                &__texto {
                     color: $black;
                     font-weight: bolder;
                     font-size: 20px;
                 }
+
+                &__description {
+                    color: $orange;
+                    margin-bottom: 5px;
+                    font-weight: bold;
+                }
             }
 
-            &__opcion:hover{
-                .CrearSolicitud__pregunta__opciones__opcion__img{
+            &__opcion:hover {
+                .CrearSolicitud__pregunta__opciones__opcion__img {
                     background: $orange;
+                }
+            }
+        }
+
+        .CrearSolicitud__pregunta__input-contenedor {
+            width: 100%;
+        }
+
+        &__input {
+            width: 100%;
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+            align-content: center;
+            align-items: center;
+
+            &__label {
+                margin-bottom: 20px;
+                width: 40%;
+
+                &__text {
+                    color: $black;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                }
+
+                &__input {
+                    background: $lightGray;
+                    border: 1px solid $darkGray;
+                    box-sizing: border-box;
+                    border-radius: 100px;
+                    padding: 10px 25px;
+                    color: $black;
+                    width: 100%;
+                }
+            }
+
+            &__canvas{
+                margin-bottom: 20px;
+                width: 50%;
+
+                canvas{
+                    height: 150px;
+                    width: 100%;
+                    border: solid 2px $black;
                 }
             }
         }
@@ -167,38 +232,42 @@
             justify-content: space-between;
             align-content: stretch;
             align-items: center;
-    
+
+            width: 100%;
+
             &__btn {
                 display: block;
                 width: 150px;
                 height: 35px;
-    
+
                 border: solid 2px $orange;
                 border-radius: 100px;
-    
+
                 font-weight: bolder;
                 font-size: 16px;
-    
+
                 cursor: pointer;
                 transition: all .4s;
-    
+
                 margin: 0 20px;
                 margin-top: 25px;
             }
-    
-            &__btn:first-child{
+
+            &__btn:first-child {
                 background: $white;
                 color: $orange;
             }
-    
-            &__btn:last-child{
+
+            &__btn:last-child {
                 background: $orange;
                 color: $white;
             }
-    
+
             &__btn:hover {
                 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             }
         }
     }
+
+
 }
