@@ -5,7 +5,7 @@ import RegisterComponent from '../../components/RegisterComponent/RegisterCompon
 
 const Register = () => {
 
-    const [ step, setStep ] = React.useState(2);
+    const [ step, setStep ] = React.useState(3);
 
     return(
         <section className="Register appear">
