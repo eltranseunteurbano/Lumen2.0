@@ -7,20 +7,14 @@ import HookUpdateManager from './HookUpdate';
 export class Service implements IObjectDatabase {
 
     UID?: string;
-    ROUTE?:string;
+    ROUTE?: string;
     userUID: string;
-    type: string;
-    zona: string;
-    electrodomesticos: string;
-    servicioPrevio: string;
-    numeroCatastral: string;
-    caracteristica: string;
-    facturaDigital: boolean;
-    enviado: boolean;
     history: UserHistory;
     orden: number;
     date: ODate;
     steps: StepManager;
+
+    information: ServiceData;
 
     updates: HookUpdateManager[];
 
@@ -31,22 +25,33 @@ export class Service implements IObjectDatabase {
         this.UID = service ? service.UID : undefined;
         this.ROUTE = this.UID ? `${BRANCHES.CASES}/${this.UID}` : undefined;
 
-        this.steps = service ? new StepManager(this, service.steps): new StepManager();
-
         this.date = service ? service.date : new ODate();
-        this.userUID = service ? service.userUID : "";
-        this.type = service ? service.type : "";
-        this.zona = service ? service.zona : "";
-        this.electrodomesticos = service ? service.electrodomesticos : "";
-        this.servicioPrevio = service ? service.servicioPrevio : "";
-        this.numeroCatastral = service ? service.numeroCatastral : "";
-        this.caracteristica = service ? service.caracteristica : "";
-        this.facturaDigital = service ? service.facturaDigital : false;
-        this.enviado = service ? service.enviado : false;
+        this.steps = service ? new StepManager(this, service.steps) : new StepManager();
         this.history = service ? new UserHistory(this, service.history) : new UserHistory();
+        this.updates = service ? service.updates : [];
+
+        this.userUID = service ? service.userUID : "";
         this.orden = service ? service.orden : 0;
 
-        this.updates = service ? service.updates : [];
+        this.information = {
+            NAME: service ? service.information.NAME : "",
+            TYPE: service ? service.information.TYPE : "",
+            ZONE: service ? service.information.ZONE : "",
+            HOME_APPLIANCES: service ? service.information.HOME_APPLIANCES : "",
+            PREVIOUS_SERVICES: service ? service.information.PREVIOUS_SERVICES : "",
+            CADASTRAL_NUMBER: service ? service.information.CADASTRAL_NUMBER : "",
+            CHARACTERISTIC: service ? service.information.CHARACTERISTIC : "",
+            DIGITAL_INVOICE: service ? service.information.DIGITAL_INVOICE : "false",
+            SEND: service ? service.information.SEND : "false",
+            TECNICO: {
+                NAME: service ? service.information.TECNICO.NAME : "",
+                LAST_NAME: service ? service.information.TECNICO.LAST_NAME : "",
+                CEDULA: service ? service.information.TECNICO.CEDULA : "",
+                PROFESSIONAL_CARD: service ? service.information.TECNICO.PROFESSIONAL_CARD : "",
+            }
+        }
+
+
     }
 
 
@@ -73,6 +78,24 @@ export class Service implements IObjectDatabase {
         return render;
     }
 
+}
+
+interface ServiceData {
+    NAME: string;
+    TYPE: string;
+    ZONE: string;
+    HOME_APPLIANCES: string;
+    PREVIOUS_SERVICES: string;
+    CADASTRAL_NUMBER: string;
+    CHARACTERISTIC: string;
+    DIGITAL_INVOICE: string;
+    SEND: string;
+    TECNICO: {
+        NAME: string;
+        LAST_NAME: string;
+        CEDULA: string;
+        PROFESSIONAL_CARD: string;
+    }
 }
 
 

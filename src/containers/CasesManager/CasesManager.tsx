@@ -8,6 +8,7 @@ import MenuCase from '../../components/MenuCase/MenuCase';
 
 import "./CasesManager.scss";
 import BarTitle from '../../components/BarTitle/BarTitle';
+import Task from '../Task/Task';
 
 
 interface IPropsCasesManager { }
@@ -17,8 +18,28 @@ export function CasesManager(props: IPropsCasesManager) {
 
     const servicesManager = useContext(ServicesContext);
 
-    const [page, setPage] = servicesManager.useState<number>("page", useState(0));
+    const [page, setPage] = servicesManager.useState<number>("page", useState(3));
     const [currentCase, setCurrentCase] = servicesManager.useState<Servicio>("service", useState(new Servicio()));
+
+    const choosePage = (numero: number) => {
+        let view = <></>;
+        switch (numero) {
+            case CasesManager.PROYECTS:
+                view = <Cases update={setCurrentCase} updatePage={setPage} />;
+                break;
+            case CasesManager.CASE:
+                view = <ViewCase service={currentCase} />;
+                break;
+            case CasesManager.REVIEW:
+                view = <ViewReview service={currentCase} />;
+                break;
+            case CasesManager.NOTIFICATIONS:
+                view = <Task />
+                break;
+        }
+
+        return view;
+    }
 
     return <div className="CasesManager">
 
@@ -29,15 +50,7 @@ export function CasesManager(props: IPropsCasesManager) {
         </div>
 
         <div className="CasesManager__information">
-            {page === 0 ?
-                <Cases update={setCurrentCase} updatePage={setPage} />
-                :
-                page === 1 ?
-                    <ViewCase service={currentCase} />
-                    : page === 2 ?
-                        <ViewReview service={currentCase} />
-                        : ""
-            }
+            {choosePage(page)}
         </div>
 
 
@@ -46,5 +59,8 @@ export function CasesManager(props: IPropsCasesManager) {
 
 export default CasesManager;
 
-CasesManager.Proyects = 0;
-CasesManager.Notifications = 3;
+CasesManager.PROYECTS = 0;
+CasesManager.CASE = 1;
+CasesManager.REVIEW = 2;
+CasesManager.NOTIFICATIONS = 3;
+

@@ -19,7 +19,7 @@ export function MenuCase(props: IPropsMenuCase) {
         </section>
         <section className="MenuCase__navegation">
             <div onClick={() => {
-                props.setPage(CasesManager.Proyects);
+                props.setPage(CasesManager.PROYECTS);
                 setSeleccion(MenuCase.Proyects);
             }} className={`MenuCase__navegation__proyects ${seleccion === MenuCase.Proyects ? "active" : ""}`}>
                 <div className="MenuCase__navegation__proyects__icon">
@@ -30,7 +30,7 @@ export function MenuCase(props: IPropsMenuCase) {
                 </div>
             </div>
             <div onClick={() => {
-                props.setPage(CasesManager.Notifications);
+                props.setPage(CasesManager.NOTIFICATIONS);
                 setSeleccion(MenuCase.Notification);
             }} className={`MenuCase__navegation__notification ${seleccion === MenuCase.Notification ? "active" : ""}`}>
                 <div className="MenuCase__navegation__notification__icon">

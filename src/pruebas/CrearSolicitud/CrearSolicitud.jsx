@@ -6,7 +6,7 @@ const CrearSolicitud = () => {
 
     const refCanvas = React.useRef();
     const refCanvasImg = React.useRef();
-
+/*
 
     var canvas, ctx, flag = false,
         prevX = 0,
@@ -85,13 +85,13 @@ const CrearSolicitud = () => {
         refCanvasImg.current.style.display = 'none';
         
     }
-
+*/
 
     return(
         <section className="CrearSolicitud">
 
             <HeaderSolicitud />
-            {/* Paso 1*
+            {/* Paso 1**//*
             <article className="CrearSolicitud__pregunta">
                 <div className="CrearSolicitud__pregunta__texto">
                     <p className="CrearSolicitud__pregunta__texto__txt">
@@ -120,10 +120,10 @@ const CrearSolicitud = () => {
                     <button className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
                     <button className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
                 </div>
-            </article>*/}
+            </article>}
 
-            {/* Paso 2*
-            <article className="CrearSolicitud__pregunta">
+            */}{/* Paso 2**/
+            /*<article className="CrearSolicitud__pregunta">
                 <div className="CrearSolicitud__pregunta__texto">
                     <p className="CrearSolicitud__pregunta__texto__txt">
                         <strong>2. </strong> Elige un nombre para tu proyecto. Te recomendamos usar el nombre del barrio en donde se vaya a realizar
@@ -143,8 +143,8 @@ const CrearSolicitud = () => {
                 </div>
             </article>*/}
 
-            {/* Paso 3  *
-            <article className="CrearSolicitud__pregunta">
+            {/* Paso 3  **/
+           /* <article className="CrearSolicitud__pregunta">
             <div className="CrearSolicitud__pregunta__texto">
                 <p className="CrearSolicitud__pregunta__texto__txt">
                     <strong>3. </strong> ¿En qué zona se encuentra tu vivienda o proyecto?
@@ -172,7 +172,7 @@ const CrearSolicitud = () => {
                 <button className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
                 <button className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
             </div>
-        </article>*/}
+        </article>/**/}
 
         {/* Paso 4*
             <article className="CrearSolicitud__pregunta">
@@ -216,7 +216,7 @@ const CrearSolicitud = () => {
             </div>
         </article>*/}
 
-        {/* Paso 5  *
+        {/* Paso 5  */
             <article className="CrearSolicitud__pregunta">
             <div className="CrearSolicitud__pregunta__texto">
                 <p className="CrearSolicitud__pregunta__texto__txt">
@@ -263,7 +263,7 @@ const CrearSolicitud = () => {
                 <button className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
                 <button className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
             </div>
-        </article>*/}
+        </article>/**/}
 
         {/* Paso 6*
             <article className="CrearSolicitud__pregunta">
@@ -442,7 +442,7 @@ const CrearSolicitud = () => {
             </div>
         </article>*/}
 
-        {/* Paso 8*/
+        {/* Paso 8*//*
             <article className="CrearSolicitud__pregunta">
             <div className="CrearSolicitud__pregunta__texto">
                 <p className="CrearSolicitud__pregunta__texto__txt">
@@ -479,7 +479,7 @@ const CrearSolicitud = () => {
                 <button className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
                 <button className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
             </div>
-        </article>}
+        </article>*/}
 
         
         </section>

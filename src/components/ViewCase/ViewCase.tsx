@@ -5,7 +5,6 @@ import Case from '../Cases/Case/Case';
 import Steps from "../Steps/Steps/Steps";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import Servicio from '../../objects/Service';
-import MenuCase from "../MenuCase/MenuCase";
 import IconEmpresa from "../../icons/Case/Empresa";
 import IconConstructora from '../../icons/Case/Constructora';
 import IconHouse from "../../icons/Case/House";
@@ -35,7 +34,7 @@ export function ViewCase(props: IPropsViewCase) {
                 </section>
                 <section className="ViewCase__container__navegation__title">
                     <h1>Pasos proyecto de solicitud de servicio de energía</h1>
-                    <h2>Orden #{props.service.orden}</h2>
+                    <h2>Orden #{service.orden}</h2>
                 </section>
                 <section className="ViewCase__container__navegation__next">
                    
@@ -50,22 +49,22 @@ export function ViewCase(props: IPropsViewCase) {
                     <section className="ViewCase__container__title__place__icon">
                         <section className="ViewCase__container__title__place__icon__svg">
                             <article className="ViewCase__container__title__place__icon__svg__image">
-                                {props.service.type === Case.empresa ?
+                                {service.information.TYPE === Case.empresa ?
                                    <IconEmpresa />
 
-                                    : props.service.type === Case.constructora ?
+                                    : service.information.TYPE === Case.constructora ?
                                         <IconConstructora />
 
-                                        : props.service.type === Case.casa ?
+                                        : service.information.TYPE === Case.casa ?
                                             <IconHouse />
                                             : ""}
                             </article>
                             <article className="ViewCase__container__title__place__icon__svg__title">
-                                {props.service.type === Case.empresa ?
+                                {service.information.TYPE === Case.empresa ?
                                     <h2>Empresa</h2>
-                                    : props.service.type === Case.constructora ?
+                                    : service.information.TYPE === Case.constructora ?
                                         <h2>Construtora</h2>
-                                        : props.service.type === Case.casa ?
+                                        : service.information.TYPE === Case.casa ?
                                             <h2>Casa</h2>
                                             : ""}
                             </article>
@@ -81,7 +80,7 @@ export function ViewCase(props: IPropsViewCase) {
                         <h1>Nombre de usuario</h1>
                         <h2>ha editado un elemento</h2>
                         <IconLupa />
-                        <div>{`${props.service.date.day}/${props.service.date.month}/${props.service.date.year}`}</div>
+                        <div>{`${service.date.day}/${service.date.month}/${service.date.year}`}</div>
                     </article>
 
                 </section>
@@ -91,7 +90,7 @@ export function ViewCase(props: IPropsViewCase) {
             <ProgressBar value={service.steps.currentStep +1} />
 
             <article className="ViewCase__container__steps">
-                <Steps service={props.service}></Steps>
+                <Steps service={service}></Steps>
             </article>
         </section>
 

@@ -7,7 +7,6 @@ import { faTimes, faQuestion } from '@fortawesome/free-solid-svg-icons';
 
 import * as Routes from '../../constants/Routes';
 import UserContext from '../../hooks/UserContext';
-import BarTitle from '../BarTitle/BarTitle';
 import { NameUser } from '../../hooks/UserContext';
 
 const IlustrationInformation = () => {

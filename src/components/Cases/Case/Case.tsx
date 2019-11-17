@@ -41,15 +41,15 @@ export const Case = (props: IPropsCase) => {
                     </section>
 
                     <article className="Casetask__card__container__header__icon">
-                        {service.type === Case.empresa ? <>
+                        {service.information.TYPE === Case.empresa ? <>
                             <IconEmpresa />
                         </> : ""}
 
-                        {service.type === Case.constructora ? <>
+                        {service.information.TYPE === Case.constructora ? <>
                             <IconConstructora />
                         </> : ""}
 
-                        {service.type === Case.casa ? <>
+                        {service.information.TYPE === Case.casa ? <>
                             <IconHouse />
                         </> : ""}
 
@@ -95,10 +95,15 @@ Case.electrodomesticoB = "2";
 Case.electrodomesticoC = "3";
 Case.electrodomesticoD = "4";
 
-Case.si = "Si";
-Case.no = "No";
+Case.si = "true";
+Case.no = "false";
 
 Case.residencial = "Residencial";
 Case.comercial = "Comercial";
 Case.oficial = "Oficial";
 Case.especial = "Especial";
+
+Case.monofasica120 = "monofasica_120";
+Case.monofasica240 = "monofasica_240";
+Case.trifasica120 = "trifasica_120";
+Case.trifasica240 = "trifasica_240";

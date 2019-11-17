@@ -31,7 +31,7 @@ const App = () => {
             <Route exact path={Routes.REGISTER}> <Register />  </Route>
             <Route exact path={Routes.CASES}> <CasesManager /> </Route>
             <Route exact path={Routes.TASK}> <Task /> </Route>
-            <Route exact path="/pruebas"> <Pruebas /> </Route>
+           { /*<Route exact path="/pruebas"> <Pruebas /> </Route>*/}
           </Switch>
         </HashRouter>
       </div>
