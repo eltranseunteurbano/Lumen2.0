@@ -19,25 +19,80 @@ export function Step(props: IPropsStep) {
 
     const servicesManager = useContext(ServicesContext);
 
-    const step = props.step;
-    const [page, setPage] = servicesManager.useState("page");
+    var step = props.step;
 
-    const progress: any = useRef<any>();
+    const [page, setPage] = servicesManager.useState("page");
 
     const onClick = () => {
         if (servicesManager.currentService) {
-
             servicesManager.currentService.steps.setCurrentStep(props.order - 1);
         }
 
         setPage(2);
     };
 
-    useEffect(() => {
-        setFill(progress, "white");
-    }, [props.progress])
+    const IconStepInformation = (step: number) => {
+        let view = <></>;
+        switch (step) {
+            case 1:
+                view = < img src="/img/steps/icon-lupa-user.png" alt="icono lupa" />
+                break;
+            case 2:
+                view = <img src="/img/steps/icon-send.png" alt="icono enviar" />
+                break;
+            case 3:
+                view = <img src="/img/steps/icon-404.png" alt="icono 404" />
+                break;
+            case 4:
+                view = <img src="/img/steps/icon-location.png" alt="icono location" />
+                break;
+            case 5:
+                view = <img src="/img/steps/icon-document.png" alt="icono documento" />
+                break;
+        }
+        return view;
+    }
 
-    return <article onClick={onClick} className={`Step ${step.status === 0 ? "disabled" : step.status === 1 ? "progress" : ""}`}>
+    const IconStepStatus = (status: number) => {
+        let view = <></>;
+        switch (status) {
+            case Step.disebled:
+                view = <div style={{ color: "black" }}>D</div>
+                break;
+            case Step.progress:
+                view = <div style={{ color: "black" }}>P</div>
+                break;
+            case Step.complete:
+                view = <IconLike />
+                break;
+            case Step.denegada:
+                view = <p>!</p>;
+                break;
+        }
+        return view;
+    }
+
+    const getClassNameStatus = (status: number) => {
+        let className = "";
+        switch (status) {
+            case Step.disebled:
+                className = "disabled"
+                break;
+            case Step.progress:
+                className = "progress"
+                break;
+            case Step.complete:
+                className = "complete"
+                break;
+            case Step.denegada:
+                className = "denied"
+                break;
+        }
+        return className;
+    }
+
+
+    return <article onClick={onClick} className={`Step ${getClassNameStatus(step.status)}`}>
         <section className="Step__container">
             <article className="Step__container__title">
                 <h1>Paso {props.order}:</h1>
@@ -48,30 +103,13 @@ export function Step(props: IPropsStep) {
                     <h2>{step.information}</h2>
                 </section>
                 <section className="Step__container__info__icon">
-                    {props.order === 1 ?
-                        <img src="/img/steps/icon-lupa-user.png" alt="" /> :
-                        props.order === 2 ?
-                            <img src="/img/steps/icon-send.png" alt="" /> :
-                            props.order === 3 ?
-                                <img src="/img/steps/icon-404.png" alt="" /> :
-                                props.order === 4 ?
-                                    <img src="/img/steps/icon-location.png" alt="" /> :
-                                    props.order === 5 ?
-                                        <img src="/img/steps/icon-document.png" alt="" /> : ""
-                    }
-
+                    {IconStepInformation(props.order)}
                 </section>
             </article>
             <hr className="Step__container__line" />
             <article className="Step__container__check">
                 <article className="Step__container__check__progress">
-
-                    {step.status === 0 ?
-                        <IconLike />
-                        :
-                        "Icono"
-                    }
-
+                    {IconStepStatus(step.status)}
                 </article>
                 <article className="Step__container__check__view"></article>
             </article>
@@ -79,18 +117,12 @@ export function Step(props: IPropsStep) {
     </article>;
 }
 
-function setFill(ref: any, value: string) {
-    if (ref.current) {
-        let container: any = ref.current.options.container.querySelector("path");
-        let path: SVGClipPathElement = container;
-        path.style.fill = value;
-    }
-}
-
 export default Step;
 
-Step.diseabled = 0;
-Step.progress = 0;
+Step.disebled = 0;
+Step.progress = 1;
+Step.complete = 2;
+Step.denegada = -1;
 
 
 Step.first = "Paso 1";

@@ -7,6 +7,7 @@ import IconHouse from '../../../icons/Case/House';
 import IconConstructora from '../../../icons/Case/Constructora';
 import { on } from 'cluster';
 import IconLike from '../../../icons/Notifications/Like';
+import Step from '../../Steps/Step/Step';
 
 export interface IPropsCase {
     title?: string;
@@ -60,7 +61,7 @@ export const Case = (props: IPropsCase) => {
                     </section>
                     <section className="Casetask__card__container__information__information">
                         {service.steps.steps.map((step, i) => {
-                            return <div key={i} className={`step${step.status == 2 ? " complete" : ""}`}>
+                            return <div key={i} className={`step${step.status == Step.complete ? " complete" : ""}`}>
                                 <div className="step__status">
                                     <div className="step__status__icon ">
                                         <IconLike />
