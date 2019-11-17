@@ -29,7 +29,7 @@ export function Step(props: IPropsStep) {
 
             servicesManager.currentService.steps.setCurrentStep(props.order - 1);
         }
-      
+
         setPage(2);
     };
 
@@ -37,7 +37,7 @@ export function Step(props: IPropsStep) {
         setFill(progress, "white");
     }, [props.progress])
 
-    return <article onClick={onClick} className={`Step ${step.status === 0 ? "Step__disabled" : step.status === 1 ? "Step__progress" : ""}`}>
+    return <article onClick={onClick} className={`Step ${step.status === 0 ? "disabled" : step.status === 1 ? "progress" : ""}`}>
         <section className="Step__container">
             <article className="Step__container__title">
                 <h1>Paso {props.order}:</h1>
@@ -88,6 +88,9 @@ function setFill(ref: any, value: string) {
 }
 
 export default Step;
+
+Step.diseabled = 0;
+Step.progress = 0;
 
 
 Step.first = "Paso 1";

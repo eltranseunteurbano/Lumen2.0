@@ -38,7 +38,6 @@ export function CasesManager(props: IPropsCasesManager) {
                 page === 1 ?
                     <ViewCase service={currentCase} />
                     : page === 2 ?
-
                         <ViewReview service={currentCase} />
                         : ""
             }
