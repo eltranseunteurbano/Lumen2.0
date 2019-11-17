@@ -6,7 +6,7 @@ const CrearSolicitud = () => {
 
     const refCanvas = React.useRef();
     const refCanvasImg = React.useRef();
-/*
+
 
     var canvas, ctx, flag = false,
         prevX = 0,
@@ -85,7 +85,7 @@ const CrearSolicitud = () => {
         refCanvasImg.current.style.display = 'none';
         
     }
-*/
+
 
     return(
         <section className="CrearSolicitud">
@@ -216,7 +216,7 @@ const CrearSolicitud = () => {
             </div>
         </article>*/}
 
-        {/* Paso 5  */
+        {/* Paso 5  *//*
             <article className="CrearSolicitud__pregunta">
             <div className="CrearSolicitud__pregunta__texto">
                 <p className="CrearSolicitud__pregunta__texto__txt">
@@ -292,7 +292,7 @@ const CrearSolicitud = () => {
                 <button className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
                 <button className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
             </div>
-        </article>}
+        </article>*/}
 
         {/* Paso 6*
             <article className="CrearSolicitud__pregunta">
@@ -442,7 +442,7 @@ const CrearSolicitud = () => {
             </div>
         </article>*/}
 
-        {/* Paso 8*//*
+        {/* Paso 8*/
             <article className="CrearSolicitud__pregunta">
             <div className="CrearSolicitud__pregunta__texto">
                 <p className="CrearSolicitud__pregunta__texto__txt">
@@ -479,7 +479,7 @@ const CrearSolicitud = () => {
                 <button className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
                 <button className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
             </div>
-        </article>*/}
+        </article>}
 
         
         </section>

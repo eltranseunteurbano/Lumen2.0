@@ -92,6 +92,10 @@ export class UserFirebase extends HookUpdateManager {
         }
     }
 
+    getUserLocal(){
+        DataBase.getUserChangeDataBase();
+    }
+
     logOut(load?: Function) {
         Firebase.auth().signOut().then(function () {
             if (load) {

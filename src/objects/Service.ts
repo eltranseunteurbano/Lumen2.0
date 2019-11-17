@@ -3,6 +3,8 @@ import { DataBase, IObjectDatabase } from '../hooks/DatabaseContext';
 import BRANCHES from '../constants/Branches';
 import StepManager from './StepManager';
 import HookUpdateManager from './HookUpdate';
+import { Storage } from '../hooks/StorageContenxt';
+import { User } from '../hooks/UserContext';
 
 export class Service implements IObjectDatabase {
 
@@ -40,6 +42,7 @@ export class Service implements IObjectDatabase {
             HOME_APPLIANCES: service ? service.information.HOME_APPLIANCES : "",
             PREVIOUS_SERVICES: service ? service.information.PREVIOUS_SERVICES : "",
             CADASTRAL_NUMBER: service ? service.information.CADASTRAL_NUMBER : "",
+            CADASTRAL_NUMBER_DOC: service ? service.information.CADASTRAL_NUMBER_DOC : "",
             CHARACTERISTIC: service ? service.information.CHARACTERISTIC : "",
             DIGITAL_INVOICE: service ? service.information.DIGITAL_INVOICE : "false",
             SEND: service ? service.information.SEND : "false",
@@ -48,8 +51,35 @@ export class Service implements IObjectDatabase {
                 LAST_NAME: service ? service.information.TECNICO.LAST_NAME : "",
                 CEDULA: service ? service.information.TECNICO.CEDULA : "",
                 PROFESSIONAL_CARD: service ? service.information.TECNICO.PROFESSIONAL_CARD : "",
+            },
+            PROPERTY: {
+                ADDRESS: service ? service.information.PROPERTY.ADDRESS : "",
+                NEIGHBORHOOD: service ? service.information.PROPERTY.NEIGHBORHOOD : "",
+                MUNICIPALITY: service ? service.information.PROPERTY.MUNICIPALITY : "",
+                NEIGHBOR_INVOICE: service ? service.information.PROPERTY.NEIGHBOR_INVOICE : "",
+                CEDULA_DOC: service ? service.information.PROPERTY.CEDULA_DOC : "",
+            },
+            FIRM: {
+                FIRM: service ? service.information.FIRM.FIRM : "",
+                AUTHORIZED: service ? service.information.FIRM.AUTHORIZED : "",
             }
         }
+
+
+    }
+
+    uploadFileCadastral(file: File, load?: Function) {
+        DataBase.getUserChangeDataBase(() => {
+            if (User.user) {
+                this.userUID = User.user.UID;
+                let ruta = `${BRANCHES.DOC}/${this.userUID}/${BRANCHES.DOC_CADASTRAL}`;
+                this.information.CADASTRAL_NUMBER_DOC = ruta;
+                Storage.almacenar(ruta, file);
+                if (load) {
+                    load(ruta + "/" + file.name);
+                }
+            }
+        });
 
 
     }
@@ -57,9 +87,9 @@ export class Service implements IObjectDatabase {
 
     addToDatabase() {
         DataBase.getUserChangeDataBase(() => {
-            if (DataBase.user) {
+            if (DataBase.userFirebase) {
 
-                this.userUID = DataBase.user.uid;
+                this.userUID = DataBase.userFirebase.uid;
                 let url = `${BRANCHES.CASES}`;
 
 
@@ -87,6 +117,7 @@ interface ServiceData {
     HOME_APPLIANCES: string;
     PREVIOUS_SERVICES: string;
     CADASTRAL_NUMBER: string;
+    CADASTRAL_NUMBER_DOC: string;
     CHARACTERISTIC: string;
     DIGITAL_INVOICE: string;
     SEND: string;
@@ -95,6 +126,17 @@ interface ServiceData {
         LAST_NAME: string;
         CEDULA: string;
         PROFESSIONAL_CARD: string;
+    };
+    PROPERTY: {
+        ADDRESS: string;
+        NEIGHBORHOOD: string;
+        MUNICIPALITY: string;
+        NEIGHBOR_INVOICE: string;
+        CEDULA_DOC: string;
+    };
+    FIRM: {
+        AUTHORIZED: string;
+        FIRM: string;
     }
 }
 

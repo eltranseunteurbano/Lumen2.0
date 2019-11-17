@@ -1,9 +1,11 @@
 import React from 'react';
 import Firebase from '../constants/firebase/firebaseSetup';
-import { UserFirebase } from './UserContext';
+import { UserFirebase, NameUser, User } from './UserContext';
 
 import BRANCHES from '../constants/Branches';
 import Usuario from '../objects/User/Usuario';
+import Client from '../objects/User/Client';
+import Adviser from '../objects/User/Adviser';
 
 export interface IObjectDatabase {
     UID?: string;
@@ -11,8 +13,8 @@ export interface IObjectDatabase {
 
 class DataBaseFirebase {
 
-    usuario?: UserFirebase;
-    user?: firebase.User;
+    user?: UserFirebase;
+    userFirebase?: firebase.User;
     database: firebase.database.Database;
 
     constructor() {
@@ -22,19 +24,33 @@ class DataBaseFirebase {
     }
 
     writeUserData(userData: UserFirebase) {
-        if (this.user) {
-            let ruta = `${BRANCHES.USERS}/${this.user.uid}`;
+        if (this.userFirebase) {
+            let ruta = `${BRANCHES.USERS}/${this.userFirebase.uid}`;
 
             let dataUser = JSON.parse(JSON.stringify(userData));
             this.writeDatabase(ruta, dataUser);
         }
     }
 
-    async getUserFirebase(user: any, action?: Function) {
-        this.user = user;
-        if (action) {
-            action();
-        }
+    async getUserFirebase(user: firebase.User, action?: Function) {
+        this.userFirebase = user;
+        let ruta = `${BRANCHES.USERS}/${this.userFirebase.uid}`;
+        this.user = User;
+        DataBase.readBrachOnlyDatabaseObject(ruta, (result: any) => {
+            let usuario: Client | Adviser = result.val();
+            if (this.user && this.user.user == null) {
+                if (usuario.type === NameUser.Client) {
+                    let userClient = usuario as Client;
+                    this.user.user = new Client(userClient);
+                } else if (usuario.type == NameUser.Adviser) {
+                    let userAdviser = usuario as Adviser;
+                    this.user.user = new Adviser(userAdviser);
+                }
+                if (action) {
+                    action();
+                }
+            }
+        });
     }
 
     readBrachOnlyDatabaseObject(ruta: string, load: Function) {
@@ -79,9 +95,11 @@ class DataBaseFirebase {
 
 
     getUserChangeDataBase(load?: Function) {
-        if (this.user == null) {
-            Firebase.auth().onAuthStateChanged((user: any) => {
-                this.getUserFirebase(user, load);
+        if (this.userFirebase == null) {
+            Firebase.auth().onAuthStateChanged((user: firebase.User | null) => {
+                if (user) {
+                    this.getUserFirebase(user, load);
+                }
             });
         } else {
             if (load) {
@@ -92,8 +110,8 @@ class DataBaseFirebase {
 
     getCurrentUserUID(load: Function) {
         this.getUserChangeDataBase(() => {
-            if (this.user) {
-                load(this.user.uid);
+            if (this.userFirebase) {
+                load(this.userFirebase.uid);
             }
         });
     }

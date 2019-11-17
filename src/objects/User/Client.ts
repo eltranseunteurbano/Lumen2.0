@@ -9,7 +9,7 @@ class Client extends Usuario implements IObjectDatabase {
     NIT: string;
 
     constructor(client?: Client) {
-        super();
+        super(client);
         this.requireService = client ? client.requireService : "true";
         this.clientType = client ? client.clientType : "";
         this.legalName = client ? client.legalName : "";

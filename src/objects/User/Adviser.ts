@@ -4,7 +4,7 @@ import Usuario from './Usuario';
 class Adviser extends Usuario implements IObjectDatabase {
     
     constructor(adviser?: Adviser) {
-        super();
+        super(adviser);
     }
 
 }

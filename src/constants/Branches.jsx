@@ -1,6 +1,8 @@
 export const BRANCHES = {
     USERS: "users",
-    CASES: "cases"
+    CASES: "cases",
+    DOC: "files",
+    DOC_CADASTRAL: "doc"
 };
 
 export default BRANCHES;
