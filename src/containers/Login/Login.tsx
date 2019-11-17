@@ -9,7 +9,7 @@ const Login = () => {
     return(
         <section className="Login">
             <LoginComponent />
-            <IlustrationInformation appear={false} />
+            <IlustrationInformation /*appear={false}*/ />
         </section>
     )
 }

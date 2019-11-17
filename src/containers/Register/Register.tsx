@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Register.scss';
 import RegisterHeader from '../../components/RegisterHeader/RegisterHeader';
 import RegisterComponent from '../../components/RegisterComponent/RegisterComponent';
 
 const Register = () => {
 
-    const [ step, setStep ] = React.useState(3);
+    const [ step, setStep ] = useState(3);
 
     return(
         <section className="Register appear">

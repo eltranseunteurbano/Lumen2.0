@@ -1,13 +1,16 @@
-import React, { useState, useContext, useEffect, createRef } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './RegisterComponent.scss';
 import UserContext from '../../hooks/UserContext';
 import { NameUser } from '../../hooks/UserContext';
 import Client from '../../objects/Client';
 import Adviser from '../../objects/Adviser';
+import ReactModal from 'react-modal';
 
+ReactModal.setAppElement('#root');
 
 interface IPropsRegisterComponent {
     step: number;
+    setStep: Function;
 }
 
 const RegisterComponent = (props: IPropsRegisterComponent) => {
@@ -25,27 +28,40 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
             user = useUser.user = new Client();
         }
     }
-    
+
     var client: Client | undefined = useUser.getClient();
     var asesor: Adviser | undefined = useUser.getAsesor();
 
 
-    const [step, stepStep] = useState<number>(1);
-    const [update, setUpdate] = useState(false);
+    const [step, stepStep] = [props.step, props.setStep];
+    var [password, setPassword] = useState("");
+    var [repassword, setRepassword] = useState("");
+
+    const [showModal, setShowModal] = React.useState(false);
+
+    const finalizar = () => {
+        if (password !== "" && password === repassword) {
+            setShowModal(true);
+        }
+    }
+
+    const closeFinalizar = () => {
+        setShowModal(false);
+    }
 
 
     const next = () => {
-      
+
         let allowNext = false;
         if (user) {
             switch (step) {
                 case 1:
-                    if (user.name != "" && user.lastName != "" && user.cedula != "") {
+                    if (user.name != "" && user.lastName != "" && user.cedula != "" && client && client.requireService != "") {
                         allowNext = true;
                     }
                     break;
                 case 2:
-                    if(client){
+                    if (client) {
                         if (client.clientType != "" && client.legalName != "" && client.NIT != "") {
                             allowNext = true;
                         }
@@ -62,7 +78,7 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
     }
 
     const back = () => {
-
+        stepStep(step - 1);
     }
 
     const changeInput = (type: string, event: React.ChangeEvent<HTMLInputElement>) => {
@@ -130,12 +146,14 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
 
                         <label className="RegisterComponent_one__top__label">
                             <p className="RegisterComponent_one__top__label__txt">Nombre</p>
-                            <input onChange={(e) => { changeInput(REGISTER.NAME, e) }} className="RegisterComponent_one__top__label__input" type="text" name="namecliente" autoComplete="true" autoSave="true" autoFocus />
+                            <input onChange={(e) => { changeInput(REGISTER.NAME, e) }} className="RegisterComponent_one__top__label__input" type="text" name="namecliente" autoComplete="true" autoSave="true" autoFocus
+                                defaultValue={user ? user.name : ""} />
                         </label>
 
                         <label className="RegisterComponent_one__top__label">
                             <p className="RegisterComponent_one__top__label__txt">Apellido</p>
-                            <input onChange={(e) => { changeInput(REGISTER.LASTNAME, e) }} className="RegisterComponent_one__top__label__input" type="text" name="lastnamecliente" autoComplete="true" autoSave="true" />
+                            <input onChange={(e) => { changeInput(REGISTER.LASTNAME, e) }} className="RegisterComponent_one__top__label__input" type="text" name="lastnamecliente" autoComplete="true" autoSave="true"
+                                defaultValue={user ? user.lastName : ""} />
                         </label>
 
                     </div>
@@ -144,7 +162,8 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
 
                         <label className="RegisterComponent_one__bottom__label">
                             <p className="RegisterComponent_one__bottom__label__txt">Cédula de ciudadanía CC.</p>
-                            <input onChange={(e) => { changeInput(REGISTER.CEDULA, e) }} className="RegisterComponent_one__bottom__label__input" type="number" name="idcliente" />
+                            <input onChange={(e) => { changeInput(REGISTER.CEDULA, e) }} className="RegisterComponent_one__bottom__label__input" type="number" name="idcliente"
+                                defaultValue={user ? user.cedula : ""} />
                         </label>
 
                         <form onSubmit={changeForm} className="RegisterComponent_one__bottom__label">
@@ -152,11 +171,12 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
 
                             <div className="RegisterComponent_one__bottom__label-input">
                                 <label>
-                                    <input onClick={() => { changeForm() }} className="RegisterComponent_one__bottom__label__input" type="radio" name="usercliente" value="true" /> Si
+                                    <input onClick={() => { changeForm() }} className="RegisterComponent_one__bottom__label__input" type="radio" name="usercliente" value="true" defaultChecked={client ? client.requireService === "true" ? true : false : true} /> Si
                                         <span className="checkmark"></span>
                                 </label>
                                 <label>
-                                    <input onClick={() => { changeForm() }} className="RegisterComponent_one__bottom__label__input" type="radio" name="usercliente" value="false" /> No
+                                    <input onClick={() => { changeForm() }} className="RegisterComponent_one__bottom__label__input" type="radio" name="usercliente" value="false"
+                                        defaultChecked={client ? client.requireService === "false" ? true : false : false} /> No
                                         <span className="checkmark"></span>
                                 </label>
                             </div>
@@ -176,12 +196,15 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
                         <div className="RegisterComponent_two__top__inputs">
 
                             <label className="RegisterComponent_two__top__inputs__label">
-                                <input onClick={() => { changeForm() }} className="RegisterComponent_two__top__inputs__label__input" type="radio" name="tipoCliente" value={REGISTER.TYPE_CLIENT_NATURAL} /> Individuo o cliente natural
+                                <input onClick={() => { changeForm() }} className="RegisterComponent_two__top__inputs__label__input" type="radio" name="tipoCliente" value={REGISTER.TYPE_CLIENT_NATURAL}
+                                    defaultChecked={client ? client.clientType === REGISTER.TYPE_CLIENT_NATURAL ? true : false : undefined} /> Individuo o cliente natural
                                 <span className="checkmark"></span>
                             </label>
 
                             <label className="RegisterComponent_two__top__inputs__label">
-                                <input onClick={() => { changeForm() }} className="RegisterComponent_two__top__inputs__label__input" type="radio" name="tipoCliente" value={REGISTER.TYPE_CLIENT_CONTRUCTORA} /> Constructora
+                                <input onClick={() => { changeForm() }} className="RegisterComponent_two__top__inputs__label__input" type="radio" name="tipoCliente" value={REGISTER.TYPE_CLIENT_CONTRUCTORA}
+                                    defaultChecked={client ? client.clientType === REGISTER.TYPE_CLIENT_CONTRUCTORA ? true : false : undefined} /> Constructora
+
                                 <span className="checkmark"></span>
                             </label>
 
@@ -194,12 +217,13 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
                         <div className="RegisterComponent_two__bottom__inputs">
                             <label className="RegisterComponent_two__bottom__inputs__label">
                                 <p className="RegisterComponent_two__bottom__inputs__label__txt">Nombre Jurídico</p>
-                                <input onChange={(e) => { changeInput(REGISTER.LEGAL_NAME, e) }} type="text" name="nombrejuridico" />
+                                <input onChange={(e) => { changeInput(REGISTER.LEGAL_NAME, e) }} defaultValue={client ? client.legalName : ""} type="text" name="nombrejuridico" />
                             </label>
 
                             <label className="RegisterComponent_two__bottom__inputs__label">
                                 <p className="RegisterComponent_two__bottom__inputs__label__txt">NIT</p>
-                                <input onChange={(e) => { changeInput(REGISTER.NIT, e) }} type="number" name="nit" />
+                                <input onChange={(e) => { changeInput(REGISTER.NIT, e) }} type="number"
+                                    defaultValue={client ? client.NIT : ""} name="nit" />
                             </label>
                         </div>
 
@@ -212,6 +236,46 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
                 </article>;
                 break;
             case 3:
+                view = <article className="RegisterComponent_three appear">
+                    <p className="RegisterComponent_three__txt">
+                        Crea una contraseña de al menos <strong>4 números</strong> para proteger tus datos personales.
+                </p>
+                    <p className="RegisterComponent_three__txt">
+                        Con esta podrás acceder a Lumen y ver el progreso de tu proyecto.
+                </p>
+
+                    <div className="RegisterComponent_three__bottom">
+                        <label className="RegisterComponent_three__bottom__inputs__label">
+                            <p className="RegisterComponent_three__bottom__inputs__label__txt">Contraseña</p>
+                            <input onChange={(e) => setPassword(e.target.value)} type="password" name="contrasena"
+                                defaultValue={password} />
+                        </label>
+
+                        <label className="RegisterComponent_three__bottom__inputs__label">
+                            <p className="RegisterComponent_three__bottom__inputs__label__txt">Confirmar Contraseña</p>
+                            <input onChange={(e) => setRepassword(e.target.value)} type="password"
+                                defaultValue={repassword} name="confirmarcontrasena" />
+                        </label>
+                    </div>
+
+                    <div className="RegisterComponent_two__btns">
+                        <button onClick={back} type="button" className="RegisterComponent_three__btns__btn">Atrás</button>
+                        <button type="button" className="RegisterComponent_three__btns__btn" onClick={finalizar}>Finalizar</button>
+                    </div>
+
+                    <ReactModal
+                        isOpen={showModal}
+                        contentLabel="Confirmar Registro"
+                        className="Modal"
+                        overlayClassName="Overlay">
+                        <h1>¿Estás seguro que deseas finalizar el formulario?</h1>
+                        <p>Puedes devolverte y revisar que los datos sean los correctos antes de enviar el formulario de registro.</p>
+                        <div className="RegisterComponent_two__btns">
+                            <button type="button" className="RegisterComponent_three__btns__btn" onClick={closeFinalizar}>Revisar</button>
+                            <button type="button" className="RegisterComponent_three__btns__btn" >Finalizar</button>
+                        </div>
+                    </ReactModal>
+                </article>
                 break;
 
             default:
