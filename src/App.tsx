@@ -12,6 +12,7 @@ import Home from './containers/Home/Home';
 import Login from './containers/Login/Login';
 import CasesManager from './containers/CasesManager/CasesManager';
 import Task from './containers/Task/Task';
+import Register from './containers/Register/Register';
 
 const App = () => {
 
@@ -24,8 +25,9 @@ const App = () => {
           <Switch>
             <Route exact path={Routes.INDEX}> <Home /> </Route>
             <Route exact path={Routes.LOGIN}> <Login /> </Route>
-            <Route exact path={Routes.Cases}> <CasesManager /> </Route>
-            <Route exact path={Routes.Task}> <Task /> </Route>
+            <Route exact path={Routes.REGISTER}> <Register/>  </Route>
+            <Route exact path={Routes.CASES}> <CasesManager /> </Route>
+            <Route exact path={Routes.TASK}> <Task /> </Route>
           </Switch>
         </HashRouter>
       </div>

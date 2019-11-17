@@ -3,13 +3,13 @@ import "./ProgressBar.scss";
 
 interface IProgressBar {
     value: number;
-    className?: string;
+    max?: number;
 }
 
 export function ProgressBar(props: IProgressBar) {
 
-    return <div className={`ProgressBar ` + props.className ? props.className: ""}>
-        <progress className="ProgressBar__progress" max="5" value={props.value} />
+    return <div className="ProgressBar">
+        <progress className="ProgressBar__progress" max={props.max ? props.max : 5} value={props.value} />
     </div>;
 
 }

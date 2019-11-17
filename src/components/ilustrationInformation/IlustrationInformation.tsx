@@ -13,18 +13,13 @@ const IlustrationInformation = () => {
 
     const useUser = React.useContext(UserContext);
 
-    const backgroundImage = {
-        backgroundImage: 'url(' + process.env.PUBLIC_URL + '/img/Fondo Ilustración.svg)'
-    }
+    console.log(useUser)
+
 
     return (
-        <section className="IlustrationInformation appear" style={backgroundImage}>
+        <section className="IlustrationInformation appear">
             <BarTitle />
-            {/** <div className="IlustrationInformation__icons">
-                <Link to={Routes.INDEX} className="IlustrationInformation__icons__item"> <FontAwesomeIcon icon={faQuestion} /> </Link>
-                <Link to={Routes.INDEX} className="IlustrationInformation__icons__item"> <FontAwesomeIcon icon={faTimes} /> </Link>
-            </div>
-             */}
+         
             {
                 useUser.type === '' ?
                     <img src={process.env.PUBLIC_URL + '/img/Ilustración Home Uno.svg'} alt="Ilustración" className="appear" />
