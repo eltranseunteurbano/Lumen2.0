@@ -17,20 +17,17 @@ export function CasesManager(props: IPropsCasesManager) {
 
     const servicesManager = useContext(ServicesContext);
 
-    const [page, setPage] = useState(0);
-    const [currentCase, setCurrentCase] = useState<Servicio>(new Servicio());
-
-    servicesManager.addUpdate("page", page, setPage);
-    servicesManager.addUpdate("service", currentCase, setCurrentCase);
+    const [page, setPage] = servicesManager.useState<number>("page", useState(0));
+    const [currentCase, setCurrentCase] = servicesManager.useState<Servicio>("service", useState(new Servicio()));
 
     return <div className="CasesManager">
-        
+
         <BarTitle />
 
         <div className="CasesManager__menu">
             <MenuCase setPage={setPage} />
         </div>
-        
+
         <div className="CasesManager__information">
             {page === 0 ?
                 <Cases update={setCurrentCase} updatePage={setPage} />

@@ -4,22 +4,25 @@ export class HookUpdateManager {
 
     addUpdate(type: string, value: Object, update: Function) {
         let find = false;
-        //let index = 0;
+        let index = 0;
 
         for (let i = 0; i < this.updates.length; i++) {
             let update = this.updates[i];
             if (type === update.id) {
                 find = true;
+                index = i;
                 i = this.updates.length;
-                // index = i;
             }
         }
 
-        if (!find) {
-            let newHook = new HookUpdate(type, value, update);
-            this.updates.push(newHook);
-            return newHook;
+        if (find) {
+            this.updates.splice(index, 1);
         }
+
+        let newHook = new HookUpdate(type, value, update);
+        this.updates.push(newHook);
+
+        return newHook;
     }
 
     updateValue(type: string) {
@@ -32,23 +35,22 @@ export class HookUpdateManager {
         return val;
     }
 
-    useState<T>(type: string, propiedades?: [T, React.Dispatch<React.SetStateAction<any>>]):[T, Function] {
+    useState<T>(type: string, propiedades?: [T, React.Dispatch<React.SetStateAction<any>>]): [T, Function] {
 
         let value: any = [];
-        let find = false;
+        //let find = false;
         for (let i = 0; i < this.updates.length; i++) {
             let update = this.updates[i];
 
             if (update.id === type) {
                 value = update.useState.bind(update)();
                 i = this.updates.length;
-                find = true;
+                //find = true;
             }
         }
 
-        if (!find) {
+        if (propiedades) {
             value = propiedades;
-
             let hook = this.addUpdate(type, value[0], value[1]);
             if (hook) {
                 value = hook.useState<T>();
