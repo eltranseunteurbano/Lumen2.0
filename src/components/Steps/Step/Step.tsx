@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 
 import Service from "../../../objects/Service";
 
@@ -22,13 +22,13 @@ export function Step(props: IPropsStep) {
     var step = props.step;
  
 
-    const [page, setPage] = servicesManager.useState("page");
+    const [,setPage] = servicesManager.useState("page");
 
     const onClick = () => {
+        
         if (servicesManager.currentService) {
             servicesManager.currentService.steps.setCurrentStep(props.order - 1);
         }
-
         setPage(2);
     };
 

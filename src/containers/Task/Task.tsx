@@ -1,16 +1,13 @@
 import React, { useState, createRef, useEffect, useContext } from "react";
-import Desktop, { DesktopStep, Paso } from "../../components/Desktop/Desktop";
-import ViewItem from '../../components/ViewItem/ViewItem';
 
-import "./Task.scss"
 import Case from '../../components/Cases/Case/Case';
 import Service from '../../objects/Service';
-import MenuCase from "../../components/MenuCase/MenuCase";
 import Firm from '../../objects/Firm';
 import HeaderSolicitud from "./HeaderSolicitud/HeaderSolicitud";
 import ServicesContext from '../../hooks/ServicesContext';
 import CasesManager from '../CasesManager/CasesManager';
 
+import "./Task.scss"
 
 
 
@@ -18,11 +15,10 @@ import CasesManager from '../CasesManager/CasesManager';
 export const Task = () => {
 
     const servicesManager = useContext(ServicesContext);
-    const [pageG, setPageG] = servicesManager.useState<number>("page");
-    const [currentCase, setCurrentCase] = servicesManager.useState<Service>("service");
+    const [, setPageG] = servicesManager.useState<number>("page");
 
     const [update, setUpdate] = useState(false);
-    const [service, setservice] = useState(new Service());
+    const [service] = useState(new Service());
     const [page, setPage] = useState(0);
 
     var step = page === 0 ? 1 :
@@ -40,9 +36,8 @@ export const Task = () => {
     const [fileCadastral, setFileCadastra] = useState();
     const [filePropertyCedula, setFilePropertyCedula] = useState();
 
-    const [firmaState, setFirmaState] = useState<Firm>(new Firm());
+    const [firmaState] = useState<Firm>(new Firm());
     const refCanvasContainer = createRef<HTMLDivElement>();
-    const refCanvasImg = createRef<HTMLImageElement>();
 
     const erase = () => {
 
@@ -70,27 +65,27 @@ export const Task = () => {
         let allowNext = false;
         switch (page) {
             case 0:
-                if (service.information.TYPE != "") {
+                if (service.information.TYPE !== "") {
                     allowNext = true;
                 }
                 break;
             case 1:
-                if (service.information.NAME != "") {
+                if (service.information.NAME !== "") {
                     allowNext = true;
                 }
                 break;
             case 2:
-                if (service.information.ZONE != "") {
+                if (service.information.ZONE !== "") {
                     allowNext = true;
                 }
                 break;
             case 3:
-                if (service.information.TECNICO.NAME != "" && service.information.TECNICO.LAST_NAME != "" && service.information.TECNICO.CEDULA != "" && service.information.TECNICO.PROFESSIONAL_CARD != "") {
+                if (service.information.TECNICO.NAME !== "" && service.information.TECNICO.LAST_NAME !== "" && service.information.TECNICO.CEDULA !== "" && service.information.TECNICO.PROFESSIONAL_CARD !== "") {
                     allowNext = true;
                 }
                 break;
             case 4:
-                if (service.information.HOME_APPLIANCES != "") {
+                if (service.information.HOME_APPLIANCES !== "") {
                     allowNext = true;
                 }
                 break;
@@ -99,22 +94,22 @@ export const Task = () => {
                 break;
 
             case 6:
-                if (service.information.CADASTRAL_NUMBER != "" && fileCadastral != undefined) {
+                if (service.information.CADASTRAL_NUMBER !== "" && fileCadastral !== undefined) {
                     allowNext = true;
                 }
                 break;
             case 7:
-                if (service.information.PROPERTY.ADDRESS != "" && service.information.PROPERTY.MUNICIPALITY != "" && service.information.PROPERTY.NEIGHBORHOOD != "" && service.information.PROPERTY.NEIGHBOR_INVOICE != "") {
+                if (service.information.PROPERTY.ADDRESS !== "" && service.information.PROPERTY.MUNICIPALITY !== "" && service.information.PROPERTY.NEIGHBORHOOD !== "" && service.information.PROPERTY.NEIGHBOR_INVOICE !== "") {
                     allowNext = true;
                 }
                 break;
             case 8:
-                if (filePropertyCedula != null) {
+                if (filePropertyCedula !== null) {
                     allowNext = true;
                 }
                 break;
             case 9:
-                if (service.information.FIRM.AUTHORIZED != "") {
+                if (service.information.FIRM.AUTHORIZED !== "") {
                     allowNext = true;
                 }
                 break;
@@ -244,14 +239,14 @@ export const Task = () => {
 
                     <div className="CrearSolicitud__pregunta__opciones">
 
-                        <div onClick={() => { changeDataCase(TASK.TYPE, Case.empresa) }} className={"CrearSolicitud__pregunta__opciones__opcion" + ` ${service.information.TYPE === Case.empresa ? "select" : ""}`}>
+                        <div onClick={() => { changeDataCase(TASK.TYPE, Case.empresa) }} className={`CrearSolicitud__pregunta__opciones__opcion ${service.information.TYPE === Case.empresa ? "select" : ""}`}>
                             <div className="CrearSolicitud__pregunta__opciones__opcion__img">
                                 <img src={process.env.PUBLIC_URL + '/img/tasks/location/icon-empresa.png'} alt="Icono" />
                             </div>
                             <p className="CrearSolicitud__pregunta__opciones__opcion__texto">Empresa</p>
                         </div>
 
-                        <div onClick={() => { changeDataCase(TASK.TYPE, Case.casa) }} className={"CrearSolicitud__pregunta__opciones__opcion" + ` ${service.information.TYPE === Case.casa ? "select" : ""}`}>
+                        <div onClick={() => { changeDataCase(TASK.TYPE, Case.casa) }} className={`CrearSolicitud__pregunta__opciones__opcion ${service.information.TYPE === Case.casa ? "select" : ""}`}>
                             <div className="CrearSolicitud__pregunta__opciones__opcion__img">
                                 <img src={process.env.PUBLIC_URL + '/img/tasks/location/icon-rural.png'} alt="Icono" />
                             </div>
@@ -290,14 +285,14 @@ export const Task = () => {
 
                     <div className="CrearSolicitud__pregunta__opciones">
 
-                        <div onClick={() => { changeDataCase(TASK.ZONE, Case.urbana) }} className={"CrearSolicitud__pregunta__opciones__opcion" + ` ${service.information.ZONE === Case.urbana ? "select" : ""}`}>
+                        <div onClick={() => { changeDataCase(TASK.ZONE, Case.urbana) }} className={`CrearSolicitud__pregunta__opciones__opcion ${service.information.ZONE === Case.urbana ? "select" : ""}`}>
                             <div className="CrearSolicitud__pregunta__opciones__opcion__img">
                                 <img src={process.env.PUBLIC_URL + '/img/tasks/location/icon-ciudad.png'} alt="Icono" />
                             </div>
                             <p className="CrearSolicitud__pregunta__opciones__opcion__texto">Urbana</p>
                         </div>
 
-                        <div onClick={() => { changeDataCase(TASK.ZONE, Case.rural) }} className={"CrearSolicitud__pregunta__opciones__opcion" + ` ${service.information.ZONE === Case.rural ? "select" : ""}`}>
+                        <div onClick={() => { changeDataCase(TASK.ZONE, Case.rural) }} className={`CrearSolicitud__pregunta__opciones__opcion ${service.information.ZONE === Case.rural ? "select" : ""}`}>
                             <div className="CrearSolicitud__pregunta__opciones__opcion__img">
                                 <img src={process.env.PUBLIC_URL + '/img/tasks/location/icon-rural.png'} alt="Icono" />
                             </div>
@@ -357,7 +352,7 @@ export const Task = () => {
 
                     <div className="CrearSolicitud__pregunta__opciones">
 
-                        <div onClick={() => { changeDataCase(TASK.HOME_APPLIANCES, Case.monofasica120) }} className={"CrearSolicitud__pregunta__opciones__opcion" + ` ${service.information.HOME_APPLIANCES === Case.monofasica120 ? "select" : ""}`}>
+                        <div onClick={() => { changeDataCase(TASK.HOME_APPLIANCES, Case.monofasica120) }} className={`CrearSolicitud__pregunta__opciones__opcion ${service.information.HOME_APPLIANCES === Case.monofasica120 ? "select" : ""}`}>
                             <div className="CrearSolicitud__pregunta__opciones__opcion__img">
                                 <img src={process.env.PUBLIC_URL + '/img/tasks/electrodomesticos/electrodomestico-1.svg'} alt="Icono" />
                             </div>
@@ -365,7 +360,7 @@ export const Task = () => {
                             <p className="CrearSolicitud__pregunta__opciones__opcion__texto">Monofásica</p>
                         </div>
 
-                        <div onClick={() => { changeDataCase(TASK.HOME_APPLIANCES, Case.monofasica240) }} className={"CrearSolicitud__pregunta__opciones__opcion" + ` ${service.information.HOME_APPLIANCES === Case.monofasica240 ? "select" : ""}`}>
+                        <div onClick={() => { changeDataCase(TASK.HOME_APPLIANCES, Case.monofasica240) }} className={`CrearSolicitud__pregunta__opciones__opcion ${service.information.HOME_APPLIANCES === Case.monofasica240 ? "select" : ""}`}>
                             <div className="CrearSolicitud__pregunta__opciones__opcion__img">
                                 <img src={process.env.PUBLIC_URL + '/img/tasks/electrodomesticos/electrodomestico-2.svg'} alt="Icono" />
                             </div>
@@ -373,7 +368,7 @@ export const Task = () => {
                             <p className="CrearSolicitud__pregunta__opciones__opcion__texto">Monofásica</p>
                         </div>
 
-                        <div onClick={() => { changeDataCase(TASK.HOME_APPLIANCES, Case.trifasica120) }} className={"CrearSolicitud__pregunta__opciones__opcion" + ` ${service.information.HOME_APPLIANCES === Case.trifasica120 ? "select" : ""}`}>
+                        <div onClick={() => { changeDataCase(TASK.HOME_APPLIANCES, Case.trifasica120) }} className={`CrearSolicitud__pregunta__opciones__opcion ${service.information.HOME_APPLIANCES === Case.trifasica120 ? "select" : ""}`}>
                             <div className="CrearSolicitud__pregunta__opciones__opcion__img">
                                 <img src={process.env.PUBLIC_URL + '/img/tasks/electrodomesticos/electrodomestico-3.svg'} alt="Icono" />
                             </div>
@@ -381,7 +376,7 @@ export const Task = () => {
                             <p className="CrearSolicitud__pregunta__opciones__opcion__texto">Trifásica</p>
                         </div>
 
-                        <div onClick={() => { changeDataCase(TASK.HOME_APPLIANCES, Case.trifasica240) }} className={"CrearSolicitud__pregunta__opciones__opcion" + ` ${service.information.HOME_APPLIANCES === Case.trifasica240 ? "select" : ""}`}>
+                        <div onClick={() => { changeDataCase(TASK.HOME_APPLIANCES, Case.trifasica240) }} className={`CrearSolicitud__pregunta__opciones__opcion ${service.information.HOME_APPLIANCES === Case.trifasica240 ? "select" : ""}`}>
                             <div className="CrearSolicitud__pregunta__opciones__opcion__img">
                                 <img src={process.env.PUBLIC_URL + '/img/tasks/electrodomesticos/electrodomestico-4.svg'} alt="Icono" />
                             </div>
@@ -571,7 +566,7 @@ export const Task = () => {
 
                         <div className="CrearSolicitud__pregunta__input">
                             <div ref={refCanvasContainer} className="CrearSolicitud__pregunta__input__canvas" >
-                                <img ref={refCanvasImg} style={{ position: 'absolute', top: '10%', left: '52%', display: 'none' }} />
+                                <img style={{ position: 'absolute', top: '10%', left: '52%', display: 'none' }} />
                             </div>
 
                         </div>

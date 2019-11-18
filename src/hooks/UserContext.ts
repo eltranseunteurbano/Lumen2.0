@@ -49,7 +49,7 @@ export class UserFirebase extends HookUpdateManager {
                             if (usuario.type === NameUser.Client) {
                                 let userClient = usuario as Client;
                                 this.user = new Client(userClient);
-                            } else if (usuario.type == NameUser.Adviser) {
+                            } else if (usuario.type === NameUser.Adviser) {
                                 let userAdviser = usuario as Adviser;
                                 this.user = new Adviser(userAdviser);
                             }

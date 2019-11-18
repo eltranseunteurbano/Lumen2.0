@@ -100,10 +100,10 @@ export class Service implements IObjectDatabase {
             if (User.user) {
                 this.userUID = User.user.UID;
 
-                this.information.FIRM.FIRM = ruta + "/" + "firm.png";
+                this.information.FIRM.FIRM = ruta + "/firm.png";
                 Storage.saveBlob(ruta, file, "firm.png");
                 if (load) {
-                    load(ruta + "/" + "firm.png");
+                    load(ruta + "/firm.png");
                 }
             }
         });

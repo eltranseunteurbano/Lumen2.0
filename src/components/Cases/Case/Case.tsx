@@ -5,7 +5,6 @@ import ServicesContext from '../../../hooks/ServicesContext';
 import IconEmpresa from '../../../icons/Case/Empresa';
 import IconHouse from '../../../icons/Case/House';
 import IconConstructora from '../../../icons/Case/Constructora';
-import { on } from 'cluster';
 import IconLike from '../../../icons/Notifications/Like';
 import Step from '../../Steps/Step/Step';
 
@@ -22,7 +21,7 @@ export const Case = (props: IPropsCase) => {
 
     var service = props.service;
 
-    const [page, setPage] = servicesManger.useState("page");
+    const [, setPage] = servicesManger.useState("page");
 
     const onClick = () => {
         setPage(1);

@@ -18,7 +18,7 @@ class DataBaseFirebase {
     database: firebase.database.Database;
 
     constructor() {
-        console.log("Inicializando")
+      
         this.getUserChangeDataBase();
         this.database = Firebase.database();
     }
@@ -48,7 +48,7 @@ class DataBaseFirebase {
                     let userClient = usuario as Client;
                     this.user.user = new Client(userClient);
                     User.type = this.user.user.type;
-                } else if (usuario.type == NameUser.Adviser) {
+                } else if (usuario.type === NameUser.Adviser) {
                     let userAdviser = usuario as Adviser;
                     this.user.user = new Adviser(userAdviser);
                     User.type = this.user.user.type;

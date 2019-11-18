@@ -82,7 +82,7 @@ export class HookUpdate {
     }
 
     useState<T>(): [T, Function, Function] {
-        let propiedad: T = <any>this.valueObject;
+        let propiedad: T = this.valueObject as any;
         return [propiedad, this.setUpdate.bind(this), this.value.bind(this)];
     }
 

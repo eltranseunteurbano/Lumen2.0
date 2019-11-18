@@ -32,7 +32,7 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
     }
 
     var client: Client | undefined = useUser.getClient();
-    var asesor: Adviser | undefined = useUser.getAsesor();
+    //var asesor: Adviser | undefined = useUser.getAsesor();
 
 
     const [step, stepStep] = [props.step, props.setStep];
@@ -58,7 +58,6 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
         setShowModal(false);
     }
 
-
     const next = () => {
 
         let allowNext = false;
@@ -67,13 +66,13 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
             if (user.type === NameUser.Client) {
                 switch (step) {
                     case 1:
-                        if (user.name != "" && user.lastName != "" && user.cedula != "" && client && client.requireService != "") {
+                        if (user.name !== "" && user.lastName !== "" && user.cedula !== "" && client && client.requireService !== "") {
                             allowNext = true;
                         }
                         break;
                     case 2:
                         if (client) {
-                            if (client.clientType != "" && client.legalName != "" && client.NIT != "") {
+                            if (client.clientType !== "" && client.legalName !== "" && client.NIT !== "") {
                                 allowNext = true;
                             }
                         }
@@ -82,7 +81,7 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
             } else if (user.type === NameUser.Adviser) {
                 switch (step) {
                     case 1:
-                        if (user.name != "" && user.lastName != "" && user.cedula != "") {
+                        if (user.name !== "" && user.lastName !== "" && user.cedula !== "") {
                             allowNext = true;
                         }
                         break;

@@ -13,18 +13,19 @@ import Login from './containers/Login/Login';
 import CasesManager from './containers/CasesManager/CasesManager';
 import Task from './containers/Task/Task';
 import Register from './containers/Register/Register';
-import Pruebas from './pruebas/Pruebas';
+//import Pruebas from './pruebas/Pruebas';
 import BarTitle from './components/BarTitle/BarTitle';
 
 
 const App = () => {
 
   const user = React.useContext(UserContext);
-  const [loadUser, setloadUser] = useState(false);
+  const [loadUser, setLoadUser] = useState(false);
 
   useEffect(() => {
     user.getUserLocal(() => {
-      setloadUser(!loadUser);
+      let value = !loadUser;
+      setLoadUser(value);
     });
   }, []);
 

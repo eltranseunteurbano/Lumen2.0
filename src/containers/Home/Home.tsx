@@ -4,7 +4,6 @@ import './Home.scss';
 import IlustrationInformation from '../../components/ilustrationInformation/IlustrationInformation';
 import WelcomeInformation from '../../components/WelcomeInformation/WelcomeInformation';
 import UserContext from '../../hooks/UserContext';
-import BarTitle from '../../components/BarTitle/BarTitle';
 
 const Home = () => {
 

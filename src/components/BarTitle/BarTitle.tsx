@@ -24,8 +24,8 @@ var BarTitle = () => {
             <Link to={Routes.INDEX} className="BarTitle__icons__item"> <FontAwesomeIcon icon={faQuestion} /> </Link>
             <Link to={Routes.INDEX} className="BarTitle__icons__item"> <FontAwesomeIcon icon={faTimes} /> </Link>
              */}
-            <a onClick={close} className="BarTitle__icons__item"> <FontAwesomeIcon icon={faQuestion} /> </a>
-            <a onClick={close} className="BarTitle__icons__item"> <FontAwesomeIcon icon={faTimes} /> </a>
+            <div onClick={close} className="BarTitle__icons__item"> <FontAwesomeIcon icon={faQuestion} /> </div>
+            <div onClick={close} className="BarTitle__icons__item"> <FontAwesomeIcon icon={faTimes} /> </div>
         </div>
     </div>
 }

@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import ServicesContext from "../../hooks/ServicesContext";
-import Service from '../../objects/Service';
 import Cases from '../../components/Cases/Cases/Cases';
 import { ViewCase } from "../../components/ViewCase/ViewCase";
 import ViewReview from "../../components/ViewReview/ViewReview";
@@ -18,14 +17,17 @@ export function CasesManager(props: IPropsCasesManager) {
 
     var servicesManager = useContext(ServicesContext);
 
-    const [page, setPage] = servicesManager.useState<number>("page", useState(3));
-    const [update, setUpdate, updateValue] = servicesManager.useState<boolean>("updateServices", useState(false));
+    const [page, setPage] = servicesManager.useState<number>("page", useState(0));
+    const [, setUpdate, updateValue] = servicesManager.useState<boolean>("updateServices", useState(false));
 
     var currentCase = servicesManager.currentService;
 
     useEffect(() => {
-        
-        servicesManager.getAllServices(() => {          
+
+        servicesManager.getAllServices(() => {
+            if (servicesManager.services.length <= 0) {
+                setPage(CasesManager.TASK);
+            }
             setUpdate(!updateValue());
         });
 
@@ -46,6 +48,9 @@ export function CasesManager(props: IPropsCasesManager) {
                     view = <ViewReview service={currentCase} />;
                 break;
             case CasesManager.NOTIFICATIONS:
+               
+                break;
+            case CasesManager.TASK:
                 view = <Task />
                 break;
 
@@ -76,4 +81,5 @@ CasesManager.PROYECTS = 0;
 CasesManager.CASE = 1;
 CasesManager.REVIEW = 2;
 CasesManager.NOTIFICATIONS = 3;
+CasesManager.TASK = 4;
 

@@ -42,7 +42,7 @@ export class StepManager {
 
     constructorSteps(stepManager: StepManager) {
         var resultStep: ServiceStep[] = [];
-        console.log(stepManager.steps)
+   
         for (let i = 0; i < stepManager.steps.length; i++) {
             let step = stepManager.steps[i];
             let newStep = new ServiceStep(this, step, `steps/${i}`);

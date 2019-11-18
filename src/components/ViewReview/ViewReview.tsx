@@ -13,9 +13,8 @@ interface IPropsViewReview {
 
 function ViewReview(props: IPropsViewReview) {
 
-    var service = (props.service);
-    var steps = (service.steps);
-    var [step, setStep] = useState<ServiceStep>();
+    var service = props.service;
+    var steps = service.steps;
     var [review, setReview] = useState<ReviewManager>();
     const [update, setUpdate] = useState(false);
 
@@ -36,7 +35,6 @@ function ViewReview(props: IPropsViewReview) {
 
     useEffect(() => {
         let stepData = steps.getCurrentStep();
-        setStep(stepData);
 
         if (stepData) {
             stepData.review.startReview();

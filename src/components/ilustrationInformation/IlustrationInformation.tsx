@@ -1,11 +1,6 @@
 import React from 'react';
 import './IlustrationInformation.scss';
 
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faQuestion } from '@fortawesome/free-solid-svg-icons';
-
-import * as Routes from '../../constants/Routes';
 import UserContext from '../../hooks/UserContext';
 import { NameUser } from '../../hooks/UserContext';
 

@@ -16,11 +16,10 @@ export class ServicesManager extends HookUpdateManager {
     }
 
     getAllServices(load?: Function) {
-        console.log("Va bein")
-        console.log(User.user)
+      
         User.getUserLocal(() => {
             if (User.user) {
-                console.log(User.user)
+          
                 let ruta = `${BRANCHES.CASES}`;
 
                 if (User.type === NameUser.Adviser) {
@@ -40,9 +39,9 @@ export class ServicesManager extends HookUpdateManager {
                     });
 
                 } else if (User.type === NameUser.Client) {
-                    console.log("Soy un cliente")
+                 
                     DataBase.readBrachDatabaseFilter(ruta, "userUID", User.user.UID, (services: Servicio[]) => {
-                        console.log("Servicios ", services)
+                     
                         let tempServices: Servicio[] = [];
                         services.forEach((s) => {
                             tempServices.push(new Service(s));
