@@ -92,7 +92,6 @@ export class UserFirebase extends HookUpdateManager {
     }
 
     getUserLocal(load?: Function) {
-        
         DataBase.getUserChangeDataBase(load);
     }
 

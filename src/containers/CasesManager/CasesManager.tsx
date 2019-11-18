@@ -24,7 +24,7 @@ export function CasesManager(props: IPropsCasesManager) {
     var currentCase = servicesManager.currentService;
 
     useEffect(() => {
-     
+        
         servicesManager.getAllServices(() => {          
             setUpdate(!updateValue());
         });

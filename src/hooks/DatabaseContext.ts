@@ -38,6 +38,7 @@ class DataBaseFirebase {
         this.user.userFirebase = user;
         this.userFirebase = user;
 
+
         let ruta = `${BRANCHES.USERS}/${this.userFirebase.uid}`;
 
         DataBase.readBrachOnlyDatabaseObject(ruta, (result: any) => {
@@ -46,15 +47,17 @@ class DataBaseFirebase {
                 if (usuario.type === NameUser.Client) {
                     let userClient = usuario as Client;
                     this.user.user = new Client(userClient);
+                    User.type = this.user.user.type;
                 } else if (usuario.type == NameUser.Adviser) {
                     let userAdviser = usuario as Adviser;
                     this.user.user = new Adviser(userAdviser);
+                    User.type = this.user.user.type;
                 }
             }
-   
+
             if (load) {
                 load();
-                
+
             }
         });
     }
@@ -113,6 +116,24 @@ class DataBaseFirebase {
 
             load(result, nChilds);
         });
+    }
+
+    readBrachDatabaseFilter(ruta: string, fitro: string, value: string, load: Function) {
+        var refDataBase = Firebase.database().ref(ruta);
+
+        refDataBase.orderByChild(fitro).equalTo(value).on("value", (snapshotsResult) => {
+            let result: any[] = [];
+            let nChilds: number = 0;
+
+            snapshotsResult.forEach((snapshot: any) => {
+                result.push(snapshot.val());
+                nChilds++;
+            });
+
+            load(result, nChilds);
+        });
+
+
     }
 
 

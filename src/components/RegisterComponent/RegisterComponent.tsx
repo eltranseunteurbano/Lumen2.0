@@ -28,7 +28,7 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
             user = useUser.user = new Adviser();
             user.type = useUser.type;
         }
-    
+
     }
 
     var client: Client | undefined = useUser.getClient();
@@ -46,7 +46,7 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
         if (password !== "" && password === repassword) {
             if (showModal && useUser.user) {
                 useUser.user.email = `${useUser.user.cedula}@hotmail.com`;
-                useUser.singUp(useUser.user.email, password, ()=>{
+                useUser.singUp(useUser.user.email, password, () => {
                     setRedirect(true);
                 });
             }
@@ -62,21 +62,34 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
     const next = () => {
 
         let allowNext = false;
-        console.log(client)
+
         if (user) {
-            switch (step) {
-                case 1:
-                    if (user.name != "" && user.lastName != "" && user.cedula != "" && client && client.requireService != "") {
-                        allowNext = true;
-                    }
-                    break;
-                case 2:
-                    if (client) {
-                        if (client.clientType != "" && client.legalName != "" && client.NIT != "") {
+            if (user.type === NameUser.Client) {
+                switch (step) {
+                    case 1:
+                        if (user.name != "" && user.lastName != "" && user.cedula != "" && client && client.requireService != "") {
                             allowNext = true;
                         }
-                    }
-                    break;
+                        break;
+                    case 2:
+                        if (client) {
+                            if (client.clientType != "" && client.legalName != "" && client.NIT != "") {
+                                allowNext = true;
+                            }
+                        }
+                        break;
+                }
+            } else if (user.type === NameUser.Adviser) {
+                switch (step) {
+                    case 1:
+                        if (user.name != "" && user.lastName != "" && user.cedula != "") {
+                            allowNext = true;
+                        }
+                        break;
+                    case 2:
+                        allowNext = true;
+                        break;
+                }
             }
 
         }

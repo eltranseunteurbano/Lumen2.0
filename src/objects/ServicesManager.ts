@@ -2,7 +2,7 @@ import BRANCHES from '../constants/Branches';
 import Servicio, { Service } from './Service';
 import { DataBase } from '../hooks/DatabaseContext';
 import HookUpdateManager from './HookUpdate';
-import { User } from '../hooks/UserContext';
+import { User, NameUser } from '../hooks/UserContext';
 
 export class ServicesManager extends HookUpdateManager {
 
@@ -18,25 +18,46 @@ export class ServicesManager extends HookUpdateManager {
     getAllServices(load?: Function) {
         console.log("Va bein")
         console.log(User.user)
-
         User.getUserLocal(() => {
+            if (User.user) {
+                console.log(User.user)
+                let ruta = `${BRANCHES.CASES}`;
 
-            let ruta = `${BRANCHES.CASES}`;
+                if (User.type === NameUser.Adviser) {
 
-            DataBase.readBrachDatabase(ruta, (services: Servicio[]) => {
-                let tempServices: Servicio[] = [];
-                services.forEach((s) => {
-                    tempServices.push(new Service(s));
-                });
+                    DataBase.readBrachDatabase(ruta, (services: Servicio[]) => {
+                        let tempServices: Servicio[] = [];
+                        services.forEach((s) => {
+                            tempServices.push(new Service(s));
+                        });
 
-                this.services = tempServices;
-                this.updateService();
+                        this.services = tempServices;
+                        this.updateService();
 
-                if (load) {
-                    load(this.services)
+                        if (load) {
+                            load(this.services)
+                        }
+                    });
+
+                } else if (User.type === NameUser.Client) {
+                    console.log("Soy un cliente")
+                    DataBase.readBrachDatabaseFilter(ruta, "userUID", User.user.UID, (services: Servicio[]) => {
+                        console.log("Servicios ", services)
+                        let tempServices: Servicio[] = [];
+                        services.forEach((s) => {
+                            tempServices.push(new Service(s));
+                        });
+
+                        this.services = tempServices;
+                        this.updateService();
+
+                        if (load) {
+                            load(this.services)
+                        }
+                    });
+
                 }
-
-            });
+            }
 
         });
     }

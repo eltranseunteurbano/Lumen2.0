@@ -138,7 +138,7 @@ export const Task = () => {
 
             firmaState.getImage((image: Blob) => {
                 service.addToDatabase(fileCadastral, filePropertyCedula, image, () => {
-                    setCurrentCase(service);
+                    servicesManager.setCurrentService(service);
                     setPageG(CasesManager.CASE);
                 });
             })
