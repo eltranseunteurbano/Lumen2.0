@@ -4,24 +4,19 @@ import ServicesContext from '../../../hooks/ServicesContext';
 
 import Service from '../../../objects/Service';
 import './Cases.scss';
+import UserContext from '../../../hooks/UserContext';
 
 interface IPropsCases {
-    update: Function;
-    updatePage: Function;
+
 }
 
 export const Cases = (props: IPropsCases) => {
 
-    const servicesManager = useContext(ServicesContext);
-    const [services, setServices] = servicesManager.useState<Service[]>("services", useState([]));
+    const useUser = useContext(UserContext);
+    var servicesManager = useContext(ServicesContext);
 
-    useEffect(() => {
-
-        servicesManager.getAllServices((servicesData: Service[]) => {
-            setServices(servicesData);
-        });
-
-    }, []);
+    var services = servicesManager.services;
+    console.log(servicesManager.services)
 
     return (
         <section className="Cases">

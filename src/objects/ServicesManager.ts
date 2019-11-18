@@ -2,8 +2,9 @@ import BRANCHES from '../constants/Branches';
 import Servicio, { Service } from './Service';
 import { DataBase } from '../hooks/DatabaseContext';
 import HookUpdateManager from './HookUpdate';
+import { User } from '../hooks/UserContext';
 
-export class ServicesManager extends HookUpdateManager{
+export class ServicesManager extends HookUpdateManager {
 
     services: Servicio[];
     currentService?: Servicio;
@@ -15,27 +16,43 @@ export class ServicesManager extends HookUpdateManager{
     }
 
     getAllServices(load?: Function) {
+        console.log("Va bein")
+        console.log(User.user)
 
-        DataBase.getUserChangeDataBase(async () => {
-            console.log("Obteniendo casos.......");
+        User.getUserLocal(() => {
 
             let ruta = `${BRANCHES.CASES}`;
 
-            DataBase.readBrachOnlyDatabase(ruta, (services: Servicio[]) => {
+            DataBase.readBrachDatabase(ruta, (services: Servicio[]) => {
                 let tempServices: Servicio[] = [];
                 services.forEach((s) => {
                     tempServices.push(new Service(s));
                 });
+
                 this.services = tempServices;
-                // this.updateComponent();
+                this.updateService();
+
                 if (load) {
                     load(this.services)
-                   
                 }
-            
+
             });
 
         });
+    }
+
+    updateService() {
+        if (this.currentService) {
+            console.log("Actualizando")
+            this.services.forEach((service) => {
+                if (this.currentService) {
+                    if (this.currentService.UID === service.UID) {
+                        this.setCurrentService(service);
+                        return;
+                    }
+                }
+            });
+        }
     }
 
     setCurrentService(service: Servicio) {

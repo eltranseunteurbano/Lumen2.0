@@ -35,7 +35,7 @@ export class HookUpdateManager {
         return val;
     }
 
-    useState<T>(type: string, propiedades?: [T, React.Dispatch<React.SetStateAction<any>>]): [T, Function] {
+    useState<T>(type: string, propiedades?: [T, React.Dispatch<React.SetStateAction<any>>]): [T, Function, Function] {
 
         let value: any = [];
         //let find = false;
@@ -81,9 +81,9 @@ export class HookUpdate {
         this.update(object);
     }
 
-    useState<T>(): [T, Function] {
+    useState<T>(): [T, Function, Function] {
         let propiedad: T = <any>this.valueObject;
-        return [propiedad, this.setUpdate.bind(this)];
+        return [propiedad, this.setUpdate.bind(this), this.value.bind(this)];
     }
 
     value() {

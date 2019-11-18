@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './styles/reset.scss';
 import './styles/general.scss'
 
@@ -16,12 +16,16 @@ import Register from './containers/Register/Register';
 import Pruebas from './pruebas/Pruebas';
 import BarTitle from './components/BarTitle/BarTitle';
 
+
 const App = () => {
 
   const user = React.useContext(UserContext);
+  const [loadUser, setloadUser] = useState(false);
 
   useEffect(() => {
-    user.getUserLocal();
+    user.getUserLocal(() => {
+      setloadUser(!loadUser);
+    });
   }, []);
 
   return (

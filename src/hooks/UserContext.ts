@@ -88,12 +88,12 @@ export class UserFirebase extends HookUpdateManager {
                 });
 
             }
-
         }
     }
 
-    getUserLocal(){
-        DataBase.getUserChangeDataBase();
+    getUserLocal(load?: Function) {
+        
+        DataBase.getUserChangeDataBase(load);
     }
 
     logOut(load?: Function) {

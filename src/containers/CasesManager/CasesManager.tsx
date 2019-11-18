@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import ServicesContext from "../../hooks/ServicesContext";
 import Service from '../../objects/Service';
 import Cases from '../../components/Cases/Cases/Cases';
@@ -16,26 +16,39 @@ interface IPropsCasesManager { }
 
 export function CasesManager(props: IPropsCasesManager) {
 
-    const servicesManager = useContext(ServicesContext);
+    var servicesManager = useContext(ServicesContext);
 
     const [page, setPage] = servicesManager.useState<number>("page", useState(3));
-    const [currentCase, setCurrentCase] = servicesManager.useState<Service>("service", useState(new Service()));
+    const [update, setUpdate, updateValue] = servicesManager.useState<boolean>("updateServices", useState(false));
+
+    var currentCase = servicesManager.currentService;
+
+    useEffect(() => {
+     
+        servicesManager.getAllServices(() => {          
+            setUpdate(!updateValue());
+        });
+
+    }, []);
 
     const choosePage = (numero: number) => {
         let view = <></>;
         switch (numero) {
             case CasesManager.PROYECTS:
-                view = <Cases update={setCurrentCase} updatePage={setPage} />;
+                view = <Cases />;
                 break;
             case CasesManager.CASE:
-                view = <ViewCase service={currentCase} />;
+                if (currentCase)
+                    view = <ViewCase service={currentCase} />;
                 break;
             case CasesManager.REVIEW:
-                view = <ViewReview service={currentCase} />;
+                if (currentCase)
+                    view = <ViewReview service={currentCase} />;
                 break;
             case CasesManager.NOTIFICATIONS:
                 view = <Task />
                 break;
+
         }
 
         return view;

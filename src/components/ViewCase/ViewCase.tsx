@@ -11,6 +11,7 @@ import IconHouse from "../../icons/Case/House";
 import IconLupa from '../../icons/Case/Lupa';
 import UserContext from "../../hooks/UserContext";
 import { NameUser } from '../../hooks/UserContext';
+import ServicesContext from '../../hooks/ServicesContext';
 
 interface IPropsViewCase {
     service: Servicio;
@@ -19,12 +20,13 @@ interface IPropsViewCase {
 export function ViewCase(props: IPropsViewCase) {
 
     const useUser = useContext(UserContext);
+    const serviceManager = useContext(ServicesContext);
     var service = props.service;
-    service.steps.startStep();
+
 
     useEffect(() => {
-        console.log(useUser)
         if (useUser.type === NameUser.Adviser) {
+            service.steps.startStep();
             service.history.addHistroy();
         }
     }, [])

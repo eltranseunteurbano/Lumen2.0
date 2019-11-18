@@ -36,15 +36,19 @@ export class StepManager {
 
     setCurrentStep(value: number) {
         this.currentStep = value;
-        DataBase.writeDatabase(`${this.ROUTE}/currentStep`, value)
+        let url = `${this.ROUTE}/currentStep`;
+        DataBase.writeDatabase(url, value)
     }
 
     constructorSteps(stepManager: StepManager) {
         var resultStep: ServiceStep[] = [];
-        stepManager.steps.forEach((step, index) => {
-            let newStep = new ServiceStep(this, step, `steps/${index}`);
+        console.log(stepManager.steps)
+        for (let i = 0; i < stepManager.steps.length; i++) {
+            let step = stepManager.steps[i];
+            let newStep = new ServiceStep(this, step, `steps/${i}`);
             resultStep.push(newStep);
-        });
+        }
+       
         return resultStep;
     }
 }
@@ -72,7 +76,7 @@ export class ServiceStep {
 
     setStatus(value: number) {
         this.status = value;
-        DataBase.writeDatabase(`${this.ROUTE}/status`, value);
+        DataBase.writeDatabase(`${this.ROUTE} / status`, value);
     }
 
     constructorReviewManager(reviewManager: ReviewManager) {

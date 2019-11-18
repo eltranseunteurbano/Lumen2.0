@@ -23,12 +23,10 @@ export const Case = (props: IPropsCase) => {
     var service = props.service;
 
     const [page, setPage] = servicesManger.useState("page");
-    const [serviceG, setServiceG] = servicesManger.useState("service");
 
     const onClick = () => {
         setPage(1);
         servicesManger.setCurrentService(props.service);
-        setServiceG(props.service);
     };
 
     return (

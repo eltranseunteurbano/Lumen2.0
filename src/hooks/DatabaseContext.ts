@@ -32,10 +32,14 @@ class DataBaseFirebase {
         }
     }
 
-    async getUserFirebase(user: firebase.User, action?: Function) {
-        this.userFirebase = user;
-        let ruta = `${BRANCHES.USERS}/${this.userFirebase.uid}`;
+    async getUserFirebase(user: firebase.User, load?: Function) {
+
         this.user = User;
+        this.user.userFirebase = user;
+        this.userFirebase = user;
+
+        let ruta = `${BRANCHES.USERS}/${this.userFirebase.uid}`;
+
         DataBase.readBrachOnlyDatabaseObject(ruta, (result: any) => {
             let usuario: Client | Adviser = result.val();
             if (this.user && this.user.user == null) {
@@ -46,9 +50,11 @@ class DataBaseFirebase {
                     let userAdviser = usuario as Adviser;
                     this.user.user = new Adviser(userAdviser);
                 }
-                if (action) {
-                    action();
-                }
+            }
+   
+            if (load) {
+                load();
+                
             }
         });
     }
@@ -98,22 +104,23 @@ class DataBaseFirebase {
         var refDataBase = Firebase.database().ref(ruta);
 
         refDataBase.on('value', (snapshots: firebase.database.DataSnapshot) => {
-            let objetos: { result: any, url: string }[] | any = [];
+            let result: any[] = [];
             let nChilds: number = 0;
             snapshots.forEach(snapshot => {
-                objetos.push(snapshot.val());
+                result.push(snapshot.val());
                 nChilds++;
             });
 
-            load(objetos, nChilds);
+            load(result, nChilds);
         });
     }
 
 
 
     getUserChangeDataBase(load?: Function) {
-        if (this.userFirebase == null) {
+        if (this.userFirebase == null || this.user == null) {
             Firebase.auth().onAuthStateChanged((user: firebase.User | null) => {
+
                 if (user) {
                     this.getUserFirebase(user, load);
                 }
