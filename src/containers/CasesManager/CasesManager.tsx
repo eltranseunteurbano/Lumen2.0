@@ -22,8 +22,6 @@ export function CasesManager(props: IPropsCasesManager) {
 
     var currentCase = servicesManager.currentService;
 
-    console.log("Renderizando", pageVal())
-
     useEffect(() => {
 
         servicesManager.getAllServices(() => {

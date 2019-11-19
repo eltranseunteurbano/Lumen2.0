@@ -23,8 +23,10 @@ var BarTitle = () => {
     }
 
     const back = () => {
-        if(pageBack()){
-            setPage(pageBack());
+        let backValue = pageBack();
+        
+        if(backValue != null){
+            setPage(backValue);
         }
     }
 

@@ -25,9 +25,9 @@ export class HookUpdateManager {
 
             for (let i = 0; i < this.historyState.length; i++) {
                 let historia = this.historyState[i];
-                console.log("Paso")
+
                 if (historia.id === type) {
-                    console.log("Lo encontro")
+
                     currentHistory = historia;
                     i = this.historyState.length;
                 }
@@ -39,9 +39,6 @@ export class HookUpdateManager {
                 this.historyState.push(currentHistory)
             }
         }
-
-
-
 
         let newHook = new HookUpdate(this, type, value, update, currentHistory);
         this.updates.push(newHook);
@@ -78,6 +75,7 @@ export class HookUpdateManager {
 
             let hook = this.addUpdate(type, value[0], value[1], history);
             if (hook) {
+                
                 value = hook.useState<T>();
             }
         }
@@ -95,7 +93,6 @@ export class HookUpdate {
     id: string;
     valueObject: Object;
     update: Function;
-    hook?: any;
     history?: HookHistoryState;
 
 
@@ -105,7 +102,7 @@ export class HookUpdate {
         this.valueObject = value;
         this.update = update;
 
-        if (history) {
+        if (history != null) {
             this.history = history;
         }
     }
@@ -114,13 +111,11 @@ export class HookUpdate {
         if (this.history) {
             this.history.addState(object);
         }
-
         this.valueObject = object;
         this.update(object);
     }
 
     getBackValue() {
-
         if (this.history) {
             return this.history.getBackState();
         }
@@ -136,10 +131,6 @@ export class HookUpdate {
     }
 }
 
-class HookHistoryStateManager {
-
-}
-
 
 class HookHistoryState {
     id: string;
@@ -151,28 +142,36 @@ class HookHistoryState {
     }
 
     addState(value: Object) {
-        console.log("add", this.history)
-        if(this.getBack() != value){
+        if (this.getLast() != value) {
             this.history.push(value);
         }
-      
+    }
+
+    getLast() {
+        if (this.history.length > 0) {
+            let val = this.history[this.history.length - 1];
+            return val;
+        }
     }
 
     getBack() {
-        if (this.history.length > 0) {
-            let val = this.history[this.history.length - 1];
+        if (this.history.length > 1) {
+            let val = this.history[this.history.length - 2];
             return val;
         }
     }
 
     getBackState() {
-        if (this.history.length > 0) {
-            let val = this.history[this.history.length - 1];
-            if(this.history.length > 1){
+       
+        if (this.history.length > 1) {
+            let val = this.history[this.history.length - 2];
+            if (this.history.length > 1) {
                 this.history.pop();
             }
-            console.log("delete", this.history)
+            
             return val;
+        } else if (this.history.length > 0) {
+            return this.history[this.history.length - 1];
         }
     }
 }
