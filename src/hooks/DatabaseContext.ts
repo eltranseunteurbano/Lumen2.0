@@ -18,7 +18,7 @@ class DataBaseFirebase {
     database: firebase.database.Database;
 
     constructor() {
-      
+
         this.getUserChangeDataBase();
         this.database = Firebase.database();
     }
@@ -54,7 +54,7 @@ class DataBaseFirebase {
                     User.type = this.user.user.type;
                 }
             }
-           
+
 
             if (load) {
                 load();
@@ -68,6 +68,14 @@ class DataBaseFirebase {
 
         refDataBase.once('value', (snapshots: firebase.database.DataSnapshot) => {
             load(snapshots);
+        });
+    }
+
+    readBrachOnlyDatabaseObjectType(ruta: string, load: Function) {
+        var refDataBase = this.database.ref(ruta);
+
+        refDataBase.once('value', (snapshots: firebase.database.DataSnapshot) => {
+            load(snapshots.val());
         });
     }
 
@@ -136,8 +144,6 @@ class DataBaseFirebase {
 
 
     }
-
-
 
     getUserChangeDataBase(load?: Function) {
         if (this.userFirebase == null || this.user == null) {

@@ -19,6 +19,16 @@ class StorageFirebase {
         refStorage.put(file);
     }
 
+    loadFile(route: string, load:Function) {
+        let refStorage = Storage.storege.ref(route)
+        refStorage.getDownloadURL().then((url) => {
+            // `url` is the download URL for 'images/stars.jpg'
+            load(url)
+        }).catch(function (error) {
+            // Handle any errors
+        });
+    }
+
 }
 
 export var Storage = new StorageFirebase();

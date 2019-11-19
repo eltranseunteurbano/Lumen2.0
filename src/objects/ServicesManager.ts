@@ -16,10 +16,10 @@ export class ServicesManager extends HookUpdateManager {
     }
 
     getAllServices(load?: Function) {
-      
+
         User.getUserLocal(() => {
             if (User.user) {
-          
+
                 let ruta = `${BRANCHES.CASES}`;
 
                 if (User.type === NameUser.Adviser) {
@@ -39,9 +39,9 @@ export class ServicesManager extends HookUpdateManager {
                     });
 
                 } else if (User.type === NameUser.Client) {
-                 
+
                     DataBase.readBrachDatabaseFilter(ruta, "userUID", User.user.UID, (services: Servicio[]) => {
-                     
+
                         let tempServices: Servicio[] = [];
                         services.forEach((s) => {
                             tempServices.push(new Service(s));
@@ -73,6 +73,10 @@ export class ServicesManager extends HookUpdateManager {
                 }
             });
         }
+    }
+
+    getCurrentService() {
+        return this.currentService;
     }
 
     setCurrentService(service: Servicio) {

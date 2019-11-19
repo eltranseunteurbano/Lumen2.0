@@ -1,0 +1,50 @@
+@import "../../../styles//types.scss";
+
+.ReviewA {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .step1 {
+        width: 100%;
+        height: 80%;
+
+        &__container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+
+            width: 100%;
+            height: 100%;
+
+            &__card {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+                border-radius: 20px;
+                @extend %shawdon-card;
+
+                width: 23%;
+                height: 40%;
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+
+                &__icon,
+                &__title {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                }
+
+            }
+
+        }
+    }
+}

@@ -5,6 +5,8 @@ import ReviewManager from '../../objects/ReviewManger';
 import { ServiceStep } from '../../objects/StepManager';
 
 import "./ViewReview.scss";
+import ReviewA from './ReviewA/ReviewA';
+import BackTitle from '../BackTitle/BackTitle';
 
 
 interface IPropsViewReview {
@@ -18,6 +20,7 @@ function ViewReview(props: IPropsViewReview) {
     var reviwe
     var [review, setReview] = useState<ReviewManager>();
     const [update, setUpdate] = useState(false);
+    
 
     var currentStep = steps.getCurrentStep();
 
@@ -51,46 +54,20 @@ function ViewReview(props: IPropsViewReview) {
         switch (steps.currentStep) {
             case 0:
                 view =
-                    <div className="step1">
-                        <div>
-                            <h1>Paso 1 : Unidad San Joaquín</h1>
-                        </div>
-                        <div className="step1__container">
-                            <div className="step1__container__card">
-                                <div className="step1__container__card__icon">
-                                    <img src="/img/icon/review/icon-user.png" alt="" />
-                                </div>
-                                <div className="step1__container__card__title">
-                                    <h2>Información del Solicitante</h2>
-                                </div>
-                            </div>
-                            <div className="step1__container__card">
-                                <div className="step1__container__card__icon">
-                                    <img src="/img/icon/review/icon-predio.png" alt="" />
-                                </div>
-                                <div className="step1__container__card__title">
-                                    <h2>Información del Predio</h2>
-                                </div>
-                            </div>
-                            <div className="step1__container__card">
-                                <div className="step1__container__card__icon">
-                                    <img src="/img/icon/review/icon-caracteristica.png" alt="" />
-                                </div>
-                                <div className="step1__container__card__title">
-                                    <h2>Caracteristicas del Servicio</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                   <ReviewA />
                 break;
         }
         return view;
     }
 
+    const chooseReviewStep1 = () => {
+        return 
+    }
+ 
 
     return <div className="ViewReview">
         <div className="ViewReview__navbar">
-
+         
         </div>
         <div className="ViewReview__information">
             {chooseReview()}

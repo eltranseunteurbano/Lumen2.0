@@ -4,13 +4,16 @@ import BRANCHES from '../constants/Branches';
 import StepManager from './StepManager';
 import HookUpdateManager from './HookUpdate';
 import { Storage } from '../hooks/StorageContenxt';
-import { User } from '../hooks/UserContext';
+import { User, NameUser } from '../hooks/UserContext';
+import Usuario from './User/Usuario';
+import Client from './User/Client';
 
 export class Service implements IObjectDatabase {
 
     UID?: string;
     ROUTE?: string;
     userUID: string;
+    user?: Client;
     history: UserHistory;
     orden: number;
     date: ODate;
@@ -24,6 +27,7 @@ export class Service implements IObjectDatabase {
     constructor(service?: Service) {
 
         /**-------Init var-------- */
+
         this.UID = service ? service.UID : undefined;
         this.ROUTE = this.UID ? `${BRANCHES.CASES}/${this.UID}` : undefined;
 
@@ -64,8 +68,23 @@ export class Service implements IObjectDatabase {
                 AUTHORIZED: service ? service.information.FIRM.AUTHORIZED : "",
             }
         }
+        if (service) {
 
+            this.findUseInDatabase();
+        }
+    }
 
+    findUseInDatabase() {
+        let route = `${BRANCHES.USERS}/${this.userUID}`;
+
+        DataBase.readBrachOnlyDatabaseObjectType(route, (result: Usuario) => {
+
+            if (result.type === NameUser.Client) {
+                let userClient = result as Client;
+                this.user = new Client(userClient);
+
+            }
+        })
     }
 
     uploadFileCadastral(ruta: string, file: File, load?: Function) {
