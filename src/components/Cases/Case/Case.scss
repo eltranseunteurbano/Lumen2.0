@@ -1,208 +1,317 @@
 @import "../../../styles/colors";
+@import "../../../styles/types.scss";
+
+%Case-share {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    @extend %shawdon-card;
+
+    margin: 10px;
+
+    background: $white;
+   
+    border-radius: 5px;
+
+    max-width: 250px;
+}
 
 .Casetask {
 
-    &__card {
+    @extend %Case-share;
+    height: 50%;
 
+    &__container {
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 40%;
-        height: 50%;
+        width: 90%;
+        height: 90%;
 
-        background: $white;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-        border-radius: 5px;
 
-        margin: 10px;
+        transition: all .5s ease;
 
-        &__container {
+
+        &:hover {
+            cursor: pointer;
+            width: 95%;
+            height: 95%;
+        }
+
+        &__header {
+
             display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 90%;
-            height: 90%;
-
-
-            transition: all .5s ease;
-
-
-            &:hover {
-                cursor: pointer;
-                width: 95%;
-                height: 95%;
-            }
-
-            &__header {
-
-                display: flex;
-                height: 20%;
-                border-bottom: 1px solid $black;
-
-                &__information {
-                    width: 70%;
-                    font-weight: bold;
-                    padding: 0 10px;
-
-                    .order {
-                        font-size: .9em;
-                        color: $orange;
-                    }
-
-                    .register {
-
-                        font-size: 1em;
-
-                    }
-
-
-                }
-
-                &__icon {
-                    width: 30%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    color: $white;
-                    align-items: center;
-
-                    svg {
-                        width: 50%;
-                        height: 50%;
-                        fill: $orange;
-                    }
-
-                    h2 {
-                        margin-top: 5px;
-                        font-size: .7em;
-                    }
-                }
-            }
-
-
+            height: 20%;
+            border-bottom: 1px solid $black;
 
             &__information {
-                width: 100%;
-                height: 80%;
-                padding: 5px;
+                width: 70%;
+                font-weight: bold;
+                padding: 0 10px;
 
-                &__title {
-                    height: 10%;
-                    color: grey;
-
-                    h2 {
-                        font-size: .6em;
-                    }
+                .order {
+                    font-size: .9em;
+                    color: $orange;
                 }
 
-                &__information {
-                    height: 90%;
+                .register {
 
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-around;
-                    align-items: stretch;
-                    margin-top: 5px;
+                    font-size: 1em;
 
-                    .step {
-                        display: flex;
-                        justify-content: flex-start;
-                        align-items: flex-start;
-                        flex-grow: 1;
-                        color: grey;
-
-
-                        &:last-child {
-
-                            .step__status::after {
-                                background: none;
-                            }
-                        }
-
-
-                        &__status {
-
-                            display: flex;
-                            flex-direction: column;
-                            justify-content: flex-start;
-                            align-items: center;
-                            position: relative;
-                            width: 10%;
-                            height: 100%;
-
-
-
-
-                            &::after {
-                                content: "";
-                                display: block;
-                                background: $gray;
-                                width: .8px;
-                                flex-grow: 1;
-                                z-index: 0;
-                            }
-
-
-
-                            &__icon {
-                                position: relative;
-                                display: flex;
-                                flex-direction: column;
-                                justify-content: center;
-                                align-items: center;
-
-                                border: .5px solid $gray;
-                                border-radius: 50px;
-
-                                width: 15px;
-                                height: 15px;
-
-
-                                svg {
-                                    width: 70%;
-                                    height: 70%;
-                                    fill: none;
-
-                                }
-                            }
-                        }
-
-                        &__information {
-                            padding-top: 3px;
-                            width: 80%;
-                            font-size: .7em;
-                        }
-
-                    }
                 }
 
-                .complete {
-                    color: black;
 
-                    .step {
-
-
-                        &__status__icon {
-
-                            background: $orange;
-
-
-                            svg {
-                                fill: $white;
-                            }
-
-                        }
-                    }
-                }
             }
 
+            &__icon {
+                width: 30%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                color: $white;
+                align-items: center;
 
+                svg {
+                    width: 50%;
+                    height: 50%;
+                    fill: $orange;
+                }
+
+                h2 {
+                    margin-top: 5px;
+                    font-size: .7em;
+                }
+            }
         }
 
 
 
+        &__information {
+            width: 100%;
+            height: 80%;
+            padding: 5px;
 
 
+            &__title {
+                height: 10%;
+                color: grey;
+
+                h2 {
+                    font-size: .6em;
+                }
+            }
+
+            &__information {
+                height: 90%;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: stretch;
+                margin-top: 5px;
+
+                .step {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+                    flex-grow: 1;
+                    color: grey;
+
+
+                    &:last-child {
+
+                        .step__status::after {
+                            background: none;
+                        }
+                    }
+
+
+                    &__status {
+
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-start;
+                        align-items: center;
+                        position: relative;
+                        width: 10%;
+                        height: 100%;
+
+
+
+
+                        &::after {
+                            content: "";
+                            display: block;
+                            background: $gray;
+                            width: .8px;
+                            flex-grow: 1;
+                            z-index: 0;
+                        }
+
+
+
+                        &__icon {
+                            position: relative;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+
+                            border: .5px solid $gray;
+                            border-radius: 50px;
+
+                            width: 15px;
+                            height: 15px;
+
+
+                            svg {
+                                width: 70%;
+                                height: 70%;
+                                fill: none;
+
+                            }
+                        }
+                    }
+
+                    &__information {
+                        padding-top: 3px;
+                        width: 80%;
+                        font-size: .7em;
+                    }
+
+                }
+            }
+
+            .complete {
+                color: black;
+
+                .step {
+
+
+                    &__status__icon {
+
+                        background: $orange;
+
+
+                        svg {
+                            fill: $white;
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+.CaseAdviser {
+
+    @extend %Case-share;
+    height: 35%;
+
+    &__container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+        height: 90%;
+
+        transition: all .5s ease;
+
+        &:hover {
+            cursor: pointer;
+            width: 95%;
+            height: 95%;
+        }
+
+        &__header {
+
+            display: flex;
+            height: 30%;
+            width: 100%;
+            border-bottom: 1px solid $black;
+
+            &__information {
+                width: 100%;
+                font-weight: bold;
+                padding: 0 10px;
+
+                .order {
+                    font-size: .9em;
+                    color: $orange;
+                }
+
+                .register {
+
+                    font-size: 1em;
+
+                }
+            }
+        }
+
+        &__information {
+
+            display: flex;
+            width: 100%;
+            height: 70%;
+            padding: 5px;
+
+            &__icon {
+
+
+                width: 30%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                color: $orange;
+                align-items: center;
+
+                svg {
+                    width: 50%;
+                    height: 50%;
+                    fill: $orange;
+                }
+
+                h2 {
+                    margin-top: 5px;
+                    font-size: .7em;
+                }
+            }
+
+
+            &__content {
+                height: 90%;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: stretch;
+                margin-top: 5px;
+
+                &__item {
+                    h1 {
+                        color: $orange;
+                        font-size: .9em;
+                    }
+
+                    h2 {
+                        font-size: 1.1em;
+                    }
+                }
+
+                .step {
+                    h2 {
+                        font-size: .7em;
+                    }
+                }
+
+            }
+
+        }
     }
 }

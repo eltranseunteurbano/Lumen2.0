@@ -17,10 +17,12 @@ export function CasesManager(props: IPropsCasesManager) {
 
     var servicesManager = useContext(ServicesContext);
 
-    const [page, setPage] = servicesManager.useState<number>("page", useState(0));
+    const [page, setPage, pageVal] = servicesManager.useState<number>("page", useState(0), true);
     const [, setUpdate, updateValue] = servicesManager.useState<boolean>("updateServices", useState(false));
 
     var currentCase = servicesManager.currentService;
+
+    console.log("Renderizando", pageVal())
 
     useEffect(() => {
 
@@ -64,11 +66,11 @@ export function CasesManager(props: IPropsCasesManager) {
         <BarTitle />
 
         <div className="CasesManager__menu">
-            <MenuCase setPage={setPage} />
+            <MenuCase />
         </div>
 
         <div className="CasesManager__information">
-            {choosePage(page)}
+            {choosePage(pageVal())}
         </div>
 
 

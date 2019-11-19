@@ -20,7 +20,8 @@ export class StepManager {
     }
 
     getCurrentStep() {
-        return this.steps[this.currentStep];
+        let index = this.currentStep !== -1 ? this.currentStep : 0;
+        return this.steps[this.currentStep ];
     }
 
     startStep() {
@@ -76,7 +77,7 @@ export class ServiceStep {
 
     setStatus(value: number) {
         this.status = value;
-        DataBase.writeDatabase(`${this.ROUTE} / status`, value);
+        DataBase.writeDatabase(`${this.ROUTE}/status`, value);
     }
 
     constructorReviewManager(reviewManager: ReviewManager) {

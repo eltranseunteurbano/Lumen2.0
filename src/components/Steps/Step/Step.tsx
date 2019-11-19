@@ -7,6 +7,9 @@ import { ServiceStep } from '../../../objects/StepManager';
 
 import "./Step.scss";
 import IconLike from '../../../icons/Notifications/Like';
+import UserContext from "../../../hooks/UserContext";
+import { NameUser } from '../../../hooks/UserContext';
+import CasesManager from '../../../containers/CasesManager/CasesManager';
 
 interface IPropsStep {
     progress?: number;
@@ -17,19 +20,21 @@ interface IPropsStep {
 
 export function Step(props: IPropsStep) {
 
+    const useUser = useContext(UserContext);
     const servicesManager = useContext(ServicesContext);
 
     var step = props.step;
- 
 
-    const [,setPage] = servicesManager.useState("page");
+
+    const [, setPage] = servicesManager.useState("page");
 
     const onClick = () => {
-        
-        if (servicesManager.currentService) {
-            servicesManager.currentService.steps.setCurrentStep(props.order - 1);
+        if (useUser.type === NameUser.Adviser) {
+            if (servicesManager.currentService) {
+                servicesManager.currentService.steps.setCurrentStep(props.order - 1);
+            }
+            setPage(CasesManager.REVIEW);
         }
-        setPage(2);
     };
 
     const IconStepInformation = (step: number) => {
@@ -58,10 +63,10 @@ export function Step(props: IPropsStep) {
         let view = <></>;
         switch (status) {
             case Step.disebled:
-                view = <div style={{ color: "black" }}>D</div>
+                view = <div style={{ color: "black" }}>DES</div>
                 break;
             case Step.progress:
-                view = <div style={{ color: "black" }}>P</div>
+                view = <div style={{ color: "black" }}>PROG</div>
                 break;
             case Step.complete:
                 view = <IconLike />

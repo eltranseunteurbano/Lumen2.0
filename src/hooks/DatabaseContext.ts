@@ -54,6 +54,7 @@ class DataBaseFirebase {
                     User.type = this.user.user.type;
                 }
             }
+           
 
             if (load) {
                 load();

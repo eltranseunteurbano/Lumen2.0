@@ -1,17 +1,18 @@
-import React, { useState } from "react";
-import "./MenuCase.scss";
+import React, { useState, useContext } from "react";
 import CasesManager from '../../containers/CasesManager/CasesManager';
 import IconCampana from '../../icons/Notifications/Campana';
 import IconRayo from '../../icons/Notifications/Rayo';
 import IconLumen from "../../icons/IconLumen/IconLumen";
+import ServicesContext from '../../hooks/ServicesContext';
 
-interface IPropsMenuCase {
-    setPage: Function;
-}
+import "./MenuCase.scss";
+
+interface IPropsMenuCase { }
 
 export function MenuCase(props: IPropsMenuCase) {
 
-    const [seleccion, setSeleccion] = useState(MenuCase.Proyects);
+    const serviceManager = useContext(ServicesContext);
+    const [page, setPage, pageVal] = serviceManager.useState("page");
 
     return <div className="MenuCase">
         <section className="MenuCase__title">
@@ -19,9 +20,8 @@ export function MenuCase(props: IPropsMenuCase) {
         </section>
         <section className="MenuCase__navegation">
             <div onClick={() => {
-                props.setPage(CasesManager.PROYECTS);
-                setSeleccion(MenuCase.Proyects);
-            }} className={`MenuCase__navegation__proyects ${seleccion === MenuCase.Proyects ? "active" : ""}`}>
+                setPage(CasesManager.PROYECTS);
+            }} className={`MenuCase__navegation__proyects ${pageVal() !== CasesManager.NOTIFICATIONS ? "active" : ""}`}>
                 <div className="MenuCase__navegation__proyects__icon">
                     <IconRayo />
                 </div>
@@ -30,9 +30,8 @@ export function MenuCase(props: IPropsMenuCase) {
                 </div>
             </div>
             <div onClick={() => {
-                props.setPage(CasesManager.NOTIFICATIONS);
-                setSeleccion(MenuCase.Notification);
-            }} className={`MenuCase__navegation__notification ${seleccion === MenuCase.Notification ? "active" : ""}`}>
+                setPage(CasesManager.NOTIFICATIONS);
+            }} className={`MenuCase__navegation__notification ${pageVal() === CasesManager.NOTIFICATIONS ? "active" : ""}`}>
                 <div className="MenuCase__navegation__notification__icon">
                     <IconCampana />
                 </div>

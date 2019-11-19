@@ -4,6 +4,8 @@ import ServicesContext from '../../../hooks/ServicesContext';
 
 import './Cases.scss';
 import CasesManager from '../../../containers/CasesManager/CasesManager';
+import UserContext from '../../../hooks/UserContext';
+import { NameUser } from '../../../hooks/UserContext';
 
 
 interface IPropsCases {
@@ -11,6 +13,8 @@ interface IPropsCases {
 }
 
 export const Cases = (props: IPropsCases) => {
+
+    const useUser = useContext(UserContext);
     var servicesManager = useContext(ServicesContext);
 
     var services = servicesManager.services;
@@ -42,12 +46,14 @@ export const Cases = (props: IPropsCases) => {
             </article>
             <article className="Cases__admin scrollview">
                 <section className="Cases__admin__container">
-                    <div onClick={createService} className="Cases__admin__container__new">
-                        <div className="Cases__admin__container__new__container">
-                            <img src="/img/icon/icon-newcase.svg" alt="" />
-                            <h2>Crear nueva solicitud</h2>
-                        </div>
-                    </div>
+                    {useUser.user ? useUser.user.type === NameUser.Client ?
+                        < div onClick={createService} className="Cases__admin__container__new">
+                            <div className="Cases__admin__container__new__container">
+                                <img src="/img/icon/icon-newcase.svg" alt="" />
+                                <h2>Crear nueva solicitud</h2>
+                            </div>
+                        </div> : "" : ""
+                    }
                     {services.length === 0 ? <h1>No se encontraron casos</h1>
                         : services.map((service, i) => {
                             return <Case key={i} service={service} />
@@ -55,7 +61,7 @@ export const Cases = (props: IPropsCases) => {
                     }
                 </section>
             </article>
-        </section>
+        </section >
     )
 }
 

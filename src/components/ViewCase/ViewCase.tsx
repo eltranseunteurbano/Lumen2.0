@@ -23,11 +23,13 @@ export function ViewCase(props: IPropsViewCase) {
 
 
     useEffect(() => {
-        if (useUser.type === NameUser.Adviser) {
+        if (useUser.user && useUser.user.type === NameUser.Adviser) {
             steps.startStep();
             history.addHistroy();
         }
-    }, [])
+    }, []);
+
+    
 
     const chooseIcon = (type: string) => {
         let view = <></>;
@@ -50,7 +52,6 @@ export function ViewCase(props: IPropsViewCase) {
             <article className="ViewCase__container__navegation">
                 <article className="ViewCase__container__navegation__container">
                     <section className="ViewCase__container__navegation__container__back">
-
                         {chooseIcon(information.TYPE)}
                     </section>
                     <section className="ViewCase__container__navegation__container__title">
@@ -68,7 +69,7 @@ export function ViewCase(props: IPropsViewCase) {
             <article className="ViewCase__container__progress">
                 <section className="ViewCase__container__progress__container">
                     <h2>{steps.currentStep + 1} de 5 pasos</h2>
-                    <ProgressBar className="ViewCase__container__progress__bar" value={steps.currentStep} max={5} />
+                    <ProgressBar className="ViewCase__container__progress__bar" value={steps.currentStep + 1} max={5} />
                 </section>
             </article>
 
