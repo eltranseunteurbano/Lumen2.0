@@ -21,6 +21,8 @@ const ReviewA = (props: IPropsReviewA) => {
     var currentService = serviceManager.getCurrentService();
     var service = currentService ? currentService : new Service();
     var user = service.user || new Client();
+    
+    var { FIRM, PROPIETY_CEDULA_DOC, CADASTRAL_NUMBER_DOC } = service.fileRoute || service.generateDefaulFileRoutes();
 
     const choosePage = () => {
         let view = <></>;
@@ -66,6 +68,9 @@ const ReviewA = (props: IPropsReviewA) => {
                     {user.name}
                     <h2>Direccion</h2>
                     {service.information.PROPERTY.ADDRESS}
+
+
+
                 </div>
                 break;
             case 2:

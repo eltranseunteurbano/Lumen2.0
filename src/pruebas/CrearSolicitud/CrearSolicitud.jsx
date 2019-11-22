@@ -114,7 +114,7 @@ const CrearSolicitud = () => {
                 </div>
             </article>}
 
-            */}{/* Paso 2**/
+            {/* Paso 2
             /*<article className="CrearSolicitud__pregunta">
                 <div className="CrearSolicitud__pregunta__texto">
                     <p className="CrearSolicitud__pregunta__texto__txt">

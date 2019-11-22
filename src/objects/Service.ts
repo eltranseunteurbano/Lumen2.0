@@ -23,6 +23,8 @@ export class Service implements IObjectDatabase {
 
     updates: HookUpdateManager[];
 
+    fileRoute?: ServiceFiles;
+
 
     constructor(service?: Service) {
 
@@ -69,8 +71,15 @@ export class Service implements IObjectDatabase {
             }
         }
         if (service) {
-
             this.findUseInDatabase();
+            this.fileRoute = {
+                FIRM: "",
+                CADASTRAL_NUMBER_DOC: "",
+                PROPIETY_CEDULA_DOC: ""
+            }
+            this.getFileCadastral();
+            this.getFileFirm();
+            this.getFilePropertyCedula();
         }
     }
 
@@ -128,7 +137,47 @@ export class Service implements IObjectDatabase {
         });
     }
 
+    getFileFirm(load?: Function) {
+        Storage.loadFile(this.information.FIRM.FIRM, ((url: string) => {
+            if (this.fileRoute) {
+                this.fileRoute.FIRM = url;
+            }
+            if (load) {
+                load(url)
+            }
+        }));
+    }
 
+    getFilePropertyCedula(load?: Function) {
+        Storage.loadFile(this.information.PROPERTY.CEDULA_DOC, ((url: string) => {
+            if (this.fileRoute) {
+                this.fileRoute.PROPIETY_CEDULA_DOC = url;
+            }
+            if (load) {
+                load(url)
+            }
+        }));
+    }
+
+    getFileCadastral(load?: Function) {
+        Storage.loadFile(this.information.CADASTRAL_NUMBER_DOC, ((url: string) => {
+            if (this.fileRoute) {
+                this.fileRoute.CADASTRAL_NUMBER_DOC = url;
+            }
+            if (load) {
+                load(url)
+            }
+        }));
+    }
+
+    generateDefaulFileRoutes() {
+        let fileRoute = {
+            FIRM: "",
+            CADASTRAL_NUMBER_DOC: "",
+            PROPIETY_CEDULA_DOC: ""
+        }
+        return fileRoute;
+    }
 
 
     addToDatabase(fileCadastral: File, filePropertyCedula: File, firmaState: Blob, load: Function) {
@@ -168,6 +217,12 @@ export class Service implements IObjectDatabase {
         return render;
     }
 
+}
+
+interface ServiceFiles {
+    FIRM: string;
+    PROPIETY_CEDULA_DOC: string;
+    CADASTRAL_NUMBER_DOC: string;
 }
 
 interface ServiceData {
