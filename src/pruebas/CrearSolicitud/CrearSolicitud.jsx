@@ -91,7 +91,7 @@ const CrearSolicitud = () => {
         <section className="CrearSolicitud">
 
             <HeaderSolicitud />
-            {/* Paso 1*/
+            {/* Paso 1*
             <article className="CrearSolicitud__pregunta">
                 <div className="CrearSolicitud__pregunta__texto">
                     <p className="CrearSolicitud__pregunta__texto__txt">
@@ -120,7 +120,7 @@ const CrearSolicitud = () => {
                     <button className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
                     <button className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
                 </div>
-            </article>}
+            </article>*/}
 
             {/* Paso 2*
             <article className="CrearSolicitud__pregunta">
@@ -335,7 +335,7 @@ const CrearSolicitud = () => {
                 </div>
         </article>*/}
 
-        {/* Paso 6*
+        {/* Paso 6*/
             <article className="CrearSolicitud__pregunta">
             <div className="CrearSolicitud__pregunta__texto">
                 <p className="CrearSolicitud__pregunta__texto__txt">
@@ -369,13 +369,23 @@ const CrearSolicitud = () => {
                     </label>
                 </div>
 
+                <div className="CrearSolicitud__pregunta__input">
+                    <label className="CrearSolicitud__pregunta__input__label">
+                        <p className="CrearSolicitud__pregunta__input__label__text">Tipo de predio / vivienda</p>
+                        <input className="CrearSolicitud__pregunta__input__label__input" type="text" placeholder="Municipio"/>
+                    </label>
+
+                    <label className="CrearSolicitud__pregunta__input__label">
+                    </label>
+                </div>
+
             </div>
             
             <div className="CrearSolicitud__pregunta__btns">
                 <button className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
                 <button className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
             </div>
-        </article>*/}
+        </article>}
 
         {/* Paso 7*
             <article className="CrearSolicitud__pregunta">
@@ -406,7 +416,7 @@ const CrearSolicitud = () => {
                 <button className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
                 <button className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
             </div>
-        </article>*/}
+        </article>}
 
         {/* Paso 8*
             <article className="CrearSolicitud__pregunta">

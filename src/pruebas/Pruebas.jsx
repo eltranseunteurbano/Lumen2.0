@@ -10,7 +10,7 @@ const Pruebas = () => {
     return(
         <section className="Pruebas">
             <MenuUsuario />
-            <Notificaciones />
+            <CrearSolicitud />
         </section>
     )
 }
