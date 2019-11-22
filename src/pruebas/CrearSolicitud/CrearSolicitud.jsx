@@ -19,7 +19,7 @@ const CrearSolicitud = () => {
         h = 0,
         dot_flag = false;
 
-        React.useEffect( () => {
+        /*React.useEffect( () => {
             canvas = refCanvas.current;
             ctx = canvas.getContext('2d');
             w = canvas.width;
@@ -37,7 +37,7 @@ const CrearSolicitud = () => {
             canvas.addEventListener("mouseout", function (e) {
                 findxy('out', e)
             }, false);
-        })
+        })*/
 
     function draw() {
         ctx.beginPath();
@@ -91,7 +91,7 @@ const CrearSolicitud = () => {
         <section className="CrearSolicitud">
 
             <HeaderSolicitud />
-            {/* Paso 1*
+            {/* Paso 1*/
             <article className="CrearSolicitud__pregunta">
                 <div className="CrearSolicitud__pregunta__texto">
                     <p className="CrearSolicitud__pregunta__texto__txt">
@@ -120,7 +120,7 @@ const CrearSolicitud = () => {
                     <button className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
                     <button className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
                 </div>
-            </article>*/}
+            </article>}
 
             {/* Paso 2*
             <article className="CrearSolicitud__pregunta">
@@ -442,7 +442,7 @@ const CrearSolicitud = () => {
             </div>
         </article>*/}
 
-        {/* Paso 8*/
+        {/* Paso 8*
             <article className="CrearSolicitud__pregunta">
             <div className="CrearSolicitud__pregunta__texto">
                 <p className="CrearSolicitud__pregunta__texto__txt">
@@ -479,7 +479,7 @@ const CrearSolicitud = () => {
                 <button className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
                 <button className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
             </div>
-        </article>}
+        </article>*/}
 
         
         </section>
