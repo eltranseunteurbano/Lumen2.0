@@ -217,4 +217,119 @@
             }
         }
     }
+
+    &__header{
+        width: 100%;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-content: center;
+        align-items: center;
+
+        padding: 20px 50px;
+        border: solid 1px $darkGray;
+        border-left: none;
+        border-right: none;
+
+        &__noappear{
+            color: transparent;
+        }
+
+        &__title{    
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-content: stretch;
+            align-items: center;
+            h1{
+                font-size: 20px;
+                color: $black;
+                margin-bottom: 10px;
+            }
+    
+            p{
+                color: $orange;
+            }
+        }
+
+        &__icon {
+            svg {
+                width: 25px;
+                height: 25px;
+                cursor: pointer;
+                fill: $black;
+                transition: all .4s;
+            }
+        }
+
+        &__icon:hover {
+            svg {
+                fill: $orange;
+            }
+        }
+
+    }
+
+    &__mensaje{
+        position: relative;
+        background: $lightGray;
+        width: calc(100% - 100px);
+        height: 100%;
+        border-radius: 25px;
+        margin: 50px 0;
+
+        padding: 50px;
+        box-sizing: border-box;
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: flex-start;
+        align-items: flex-start;
+
+        &__title{
+            width: 100%;
+            font-size: 30px;
+            color: $black;
+            font-weight: bolder;
+            text-align: left;
+        }
+
+        &__text{
+            font-size: 20px;
+            color: $black;
+            margin-top: 25px;
+        }
+
+        &__btn {
+            position: absolute;
+            bottom: 50px;
+
+            display: block;
+            width: 200px;
+            height: 35px;
+
+            background: $orange;
+            border: solid 2px $orange;
+            border-radius: 100px;
+
+            color: $white;
+            font-weight: bolder;
+            font-size: 16px;
+
+            cursor: pointer;
+            transition: all .4s;
+
+            margin: 0 20px;
+            margin-top: 25px;
+        }
+
+        &__btn:hover {
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+    }
 }
