@@ -1,7 +1,7 @@
 import React from 'react';
 import MenuUsuario from './MenuUsuario/MenuUsuario';
 import CrearSolicitud from './CrearSolicitud/CrearSolicitud';
-import Notificaciones from './Notificaciones/Notificaciones';
+import Notificaciones from '../containers/Notificaciones/Notificaciones';
 
 import './Pruebas.scss';
 

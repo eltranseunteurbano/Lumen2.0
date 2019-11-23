@@ -8,6 +8,8 @@ import MenuCase from '../../components/MenuCase/MenuCase';
 import "./CasesManager.scss";
 import BarTitle from '../../components/BarTitle/BarTitle';
 import Task from '../Task/Task';
+import Notificaciones from '../Notificaciones/Notificaciones';
+
 
 
 interface IPropsCasesManager { }
@@ -48,7 +50,7 @@ export function CasesManager(props: IPropsCasesManager) {
                     view = <ViewReview service={currentCase} />;
                 break;
             case CasesManager.NOTIFICATIONS:
-               
+                    view = <Notificaciones />
                 break;
             case CasesManager.TASK:
                 view = <Task />

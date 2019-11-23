@@ -14,12 +14,12 @@ const CrearSolicitud = () => {
         prevY = 0,
         currY = 0,
         x = null,
-        y= null,
+        y = null,
         w = 0,
         h = 0,
         dot_flag = false;
 
-        /*React.useEffect( () => {
+        React.useEffect( () => {
             canvas = refCanvas.current;
             ctx = canvas.getContext('2d');
             w = canvas.width;
@@ -79,42 +79,42 @@ const CrearSolicitud = () => {
     }
 
 
-    return(
-        <section className="CrearSolicitud">
+return (
+    <section className="CrearSolicitud">
 
-            <HeaderSolicitud />
-            {/* Paso 1*/
+        <HeaderSolicitud />
+        {/* Paso 1*/
             <article className="CrearSolicitud__pregunta">
                 <div className="CrearSolicitud__pregunta__texto">
                     <p className="CrearSolicitud__pregunta__texto__txt">
                         <strong>1. </strong> El servicio de energía es para:
                     </p>
                 </div>
-                
+
                 <div className="CrearSolicitud__pregunta__opciones">
-                    
+
                     <div className="CrearSolicitud__pregunta__opciones__opcion">
                         <div className="CrearSolicitud__pregunta__opciones__opcion__img">
-                            <img src={process.env.PUBLIC_URL + '/img/tasks/location/icon-empresa.png'} alt="Icono"/>
+                            <img src={process.env.PUBLIC_URL + '/img/tasks/location/icon-empresa.png'} alt="Icono" />
                         </div>
                         <p className="CrearSolicitud__pregunta__opciones__opcion__texto">Empresa</p>
                     </div>
 
                     <div className="CrearSolicitud__pregunta__opciones__opcion">
                         <div className="CrearSolicitud__pregunta__opciones__opcion__img">
-                            <img src={process.env.PUBLIC_URL + '/img/tasks/location/icon-rural.png'} alt="Icono"/>
+                            <img src={process.env.PUBLIC_URL + '/img/tasks/location/icon-rural.png'} alt="Icono" />
                         </div>
                         <p className="CrearSolicitud__pregunta__opciones__opcion__texto">Casa</p>
                     </div>
                 </div>
-                
+
                 <div className="CrearSolicitud__pregunta__btns">
                     <button className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
                     <button className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
                 </div>
             </article>}
 
-            {/* Paso 2
+        {/* Paso 2
             /*<article className="CrearSolicitud__pregunta">
                 <div className="CrearSolicitud__pregunta__texto">
                     <p className="CrearSolicitud__pregunta__texto__txt">
@@ -135,7 +135,7 @@ const CrearSolicitud = () => {
                 </div>
             </article>*/}
 
-            {/* Paso 3  **/
+        {/* Paso 3  **/
            /* <article className="CrearSolicitud__pregunta">
             <div className="CrearSolicitud__pregunta__texto">
                 <p className="CrearSolicitud__pregunta__texto__txt">
@@ -473,9 +473,10 @@ const CrearSolicitud = () => {
             </div>
         </article>*/}
 
-        
-        </section>
-    )
+    </section>
+
+
+)
 }
 
 export default CrearSolicitud;
