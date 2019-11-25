@@ -60,9 +60,6 @@ function ViewReview(props: IPropsViewReview) {
         return view;
     }
 
-    const chooseReviewStep1 = () => {
-        return 
-    }
  
 
     return <div className="ViewReview">
@@ -71,7 +68,6 @@ function ViewReview(props: IPropsViewReview) {
         </div>
         <div className="ViewReview__information">
             {chooseReview()}
-
         </div>
 
     </div>;
