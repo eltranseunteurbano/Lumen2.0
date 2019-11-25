@@ -4,6 +4,8 @@ import ServicesContext from '../../../hooks/ServicesContext';
 import Service from '../../../objects/Service';
 import HookUpdateManager from '../../../objects/HookUpdate';
 
+import "./ReviewB.scss";
+
 const ReviewB = () => {
 
     const serviceManager = useContext(ServicesContext);
@@ -33,8 +35,8 @@ const ReviewB = () => {
         switch (page) {
 
             case 0:
-                view = <section className="ReviewA__card">
-                    <article className="ReviewA__card__container">
+                view = <section className="ReviewB__card">
+                    <article className="ReviewB__card__container">
                         <section className="Solicitud">
                             <h2 className="Solicitud__title">Por favor selecciona una de las siguientes opciones para notificarle al cliente si su solicitud de energia ha sido</h2>
                             <div className="Solicitud__option vertical">
@@ -53,8 +55,8 @@ const ReviewB = () => {
                 </section>
                 break;
             case 1:
-                view = <section className="ReviewA__card">
-                    <article className="ReviewA__card__container">
+                view = <section className="ReviewB__card">
+                    <article className="ReviewB__card__container">
                         <section className="Solicitud">
                             <h2 className="Solicitud__title">Por favor selecciona una o más razones por las cuales el formato de solicitud no está correcto</h2>
                             <div className="Solicitud__option">
@@ -86,26 +88,26 @@ const ReviewB = () => {
     }
 
 
-    return <div className="ReviewA">
+    return <div className="ReviewB">
         <BackTitle onClick={back} />
-        <div className="ReviewA__header">
-            <section className="ReviewA__header__title">
+        <div className="ReviewB__header">
+            <section className="ReviewB__header__title">
                 <h1>Paso 1 : Unidad San Joaquín</h1>
             </section>
-            <section className="ReviewA__header__info">
+            <section className="ReviewB__header__info">
                 <h2><span>Orden #</span>{service.orden}</h2>
             </section>
         </div>
-        <div className="ReviewA__body">
+        <div className="ReviewB__body">
             {choosePage()}
         </div>
 
-        <div className="ReviewA__navegation">
-            <section className="ReviewA__navegation__next">
+        <div className="ReviewB__navegation">
+            <section className="ReviewB__navegation__next">
                 {(page === 1 || page === 2 || page === 3 || page === 5 || page === 6) ? <button onClick={back}>Atras</button> : <></>}
                 <button onClick={next}>Siguiente</button>
             </section>
-            <section className="ReviewA__navegation__info">
+            <section className="ReviewB__navegation__info">
                 <p>Antes de aprobar la solicitud de energía, es necesario revisar el formulario que el usuario llenó</p>
             </section>
         </div>
