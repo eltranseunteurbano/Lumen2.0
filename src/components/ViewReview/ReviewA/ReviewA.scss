@@ -12,6 +12,90 @@
 
     background: $lightGray;
 
+    .confirmation {
+        background: $white;
+        width: 500px;
+        height: 300px;
+        border-radius: 20px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &__container {
+            width: 80%;
+            height: 60%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+    }
+
+    .boton {
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        color: $orange;
+        background: $white;
+        border: 2px solid $orange;
+        box-sizing: border-box;
+        border-radius: 61px;
+        height: 40px;
+        width: 80%;
+
+        transition: all .4s ease;
+
+        &:hover {
+            cursor: pointer;
+            color: $white;
+            background: $orange;
+        }
+    }
+
+    .select {
+        color: $white;
+        background: $orange;
+    }
+
+    .item {
+        display: flex;
+        align-items: center;
+    }
+
+    .horizontal {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        padding: 0 60px;
+
+        .item {
+            margin: 20px 0;
+
+        }
+
+        .vertical {
+            padding: 0 0px;
+        }
+
+    }
+
+    .vertical {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        padding: 0 60px;
+
+        .item {
+            margin: 20px 0;
+        }
+    }
+
     &__header {
         display: flex;
         flex-direction: column;
@@ -94,6 +178,53 @@
             border-radius: 10px;
             width: 80%;
             height: 90%;
+
+            .Solicitud {
+
+                height: 100%;
+                width: 80%;
+
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                margin: 0 auto;
+
+                &__title {
+                    height: 20%;
+
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                }
+
+                &__option {
+                    height: 80%;
+
+                    label{
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: space-around;
+
+                        height: 60%;
+
+                        input{
+                            transform: scale(2);
+                        }
+                    }
+
+                    &__accepted {}
+
+                    &__bar {
+                        background: black;
+                        width: 1px;
+                        height: 70%;
+                    }
+
+                    &__denegado {}
+                }
+            }
 
             .item {
                 display: flex;

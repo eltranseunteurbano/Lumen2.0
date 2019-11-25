@@ -17,6 +17,12 @@ import IconVoltage from '../icon/IconVoltage';
 import IconTornillo from '../icon/IconTornillo';
 import IconLlave from '../icon/IconLlave';
 import IconFirma from '../icon/IconFirma';
+import IconHouse from '../icon/IconHouse';
+import IconUser from '../icon/IconUser';
+import IconMail from '../icon/IconMail';
+import IconPhone from '../icon/IconPhone';
+import ReactModal from 'react-modal';
+import PopUp from '../../PopUp/PopUp';
 
 
 interface IPropsReviewA { }
@@ -76,8 +82,50 @@ const ReviewA = (props: IPropsReviewA) => {
             case 1:
                 view =
                     <section className="ReviewA__card">
-                        <article className="ReviewA__card__container">
+                        <article className="ReviewA__card__container horizontal">
 
+                            <section>
+                                <ItemViewReview
+                                    title="Propietario"
+                                    description=""
+                                    icon={11} />
+
+                                <article className="vertical">
+                                    <ItemViewReview
+                                        title="Nombre:"
+                                        description="Juan Esteban Peréz Londoño "
+                                        icon={12} />
+                                    <ItemViewReview
+                                        title="C.C:"
+                                        description="1113567854"
+                                        icon={-1} />
+                                    <ItemViewReview
+                                        title="De:"
+                                        description=" Palmira, Valle del Cauca"
+                                        icon={-1} />
+
+                                </article>
+                            </section>
+
+                            <section className="vertical">
+                                <ItemViewReview
+                                    title="Correo electrónico:"
+                                    description="Juanesperlon87@gmail.com"
+                                    icon={13} />
+                                <ItemViewReview
+                                    title="Teléfono:"
+                                    description="+57 3012345432"
+                                    icon={14} />
+                            </section>
+
+                        </article>
+                    </section>
+                break;
+            case 2:
+                view = <section className="ReviewA__card">
+                    <article className="ReviewA__card__container vertical">
+
+                        <section>
                             <ItemViewReview
                                 title="Número Catastral:"
                                 description="2906432YK5320N001QMP2"
@@ -94,7 +142,9 @@ const ReviewA = (props: IPropsReviewA) => {
                                 title="Dirección de envío de factura:"
                                 description="Calle 25 # 02-53"
                                 icon={3} />
+                        </section>
 
+                        <section>
                             <ItemViewReview
                                 title="Barrio:"
                                 description="Rincón Del Bosque"
@@ -103,22 +153,81 @@ const ReviewA = (props: IPropsReviewA) => {
                                 title="Estrato asignado:"
                                 description="3"
                                 icon={5} />
+                        </section>
 
+                    </article>
+                </section>
+                break;
+            case 5:
+                view = <section className="ReviewA__card">
+                    <article className="ReviewA__card__container">
+                        <section className="Solicitud">
+                            <h2 className="Solicitud__title">Por favor selecciona una de las siguientes opciones para notificarle al cliente si su solicitud de energia ha sido</h2>
+                            <div className="Solicitud__option vertical">
+                                <label className="Solicitud__option__accepted">
+                                    <img src="/img/icon/review/icon-aprobada.svg" alt="" />
+                                    <input name="review" type="radio" />
+                                </label>
+                                <div className="Solicitud__option__bar"></div>
+                                <label className="Solicitud__option__denegado">
+                                    <img src="/img/icon/review/icon-denegada.svg" alt="" />
+                                    <input name="review" type="radio" />
+                                </label>
+                            </div>
+                        </section>
+                    </article>
+                </section>
+                break;
+        }
 
+        console.log(page)
 
-                            <h2>Nombre</h2>
-                            {user.name}
-                            <h2>Direccion</h2>
-                            {service.information.PROPERTY.ADDRESS}
-                        </article>
+        if (page === 3 || page === 4) {
+            view = view = <section className="ReviewA__card">
+                <article className="ReviewA__card__container horizontal">
+
+                    <section className="vertical">
+                        <ItemViewReview
+                            title="Uso del Servicio:"
+                            description="Residencial"
+                            icon={6} />
+                        <ItemViewReview
+                            title="Voltaje:"
+                            description="1x120V"
+                            icon={7} />
+                        <ItemViewReview
+                            title="Red:"
+                            description="Monofásica"
+                            icon={8} />
                     </section>
-                break;
-            case 2:
-                view = <div>Información del Predio</div>
-                break;
-            case 3:
-                view = <div>Caracteristicas del Servicio</div>
-                break;
+
+                    <section>
+                        <ItemViewReview
+                            title="Modalidad de la instalación:"
+                            description="Alquiler de instalación completa con mano de obra de varilla de puesta a tierra"
+                            icon={9} />
+
+                    </section>
+
+                    <section>
+                        <ItemViewReview
+                            title="Firma : "
+                            description=""
+                            icon={10} />
+
+                    </section>
+
+                </article>
+                <PopUp visible={(page === 4)}>
+                    <div className="confirmation">
+                        <section className="confirmation__container">
+                            <h1>¿Seguro que has terminado la revisión?</h1>
+                            <div onClick={next} className="boton">Si</div>
+                            <div onClick={back} className="boton">No</div>
+                        </section>
+                    </div>
+                </PopUp>
+            </section>;
         }
         return view;
     }
@@ -132,7 +241,9 @@ const ReviewA = (props: IPropsReviewA) => {
     }
 
     const next = () => {
-        setPage(page + 1);
+        if (page !== 5) {
+            setPage(page + 1);
+        } 
     }
 
     const returnTitlePage = () => {
@@ -171,7 +282,7 @@ const ReviewA = (props: IPropsReviewA) => {
 
         <div className="ReviewA__navegation">
             <section className="ReviewA__navegation__next">
-                {(page === 1 || page === 2 || page === 3) ? <button onClick={next}>Atras</button> : <></>}
+                {(page === 1 || page === 2 || page === 3 || page === 5) ? <button onClick={back}>Atras</button> : <></>}
                 <button onClick={next}>Siguiente</button>
             </section>
             <section className="ReviewA__navegation__info">
@@ -197,7 +308,7 @@ export var ItemViewReview = (props: IPropsItemViewReview) => {
         switch (number) {
             case 0:
                 view = <svg width="16" height="21" viewBox="0 0 16 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M5.982 12.231H8.906L10.017 8.231H7.093L5.982 12.231ZM8.696 20.462L6.768 19.927L8.35 14.231H5.426L3.696 20.462L1.768 19.927L3.35 14.231H0V12.231H3.906L5.017 8.231H0V6.231H5.573L7.303 0L9.231 0.535L7.649 6.231H10.573L12.303 0L14.231 0.535L12.649 6.231H16V8.231H12.093L10.982 12.231H16V14.231H10.426L8.696 20.462Z" fill="#F07500" />
+                    <path fillRule="evenodd" clipRule="evenodd" d="M5.982 12.231H8.906L10.017 8.231H7.093L5.982 12.231ZM8.696 20.462L6.768 19.927L8.35 14.231H5.426L3.696 20.462L1.768 19.927L3.35 14.231H0V12.231H3.906L5.017 8.231H0V6.231H5.573L7.303 0L9.231 0.535L7.649 6.231H10.573L12.303 0L14.231 0.535L12.649 6.231H16V8.231H12.093L10.982 12.231H16V14.231H10.426L8.696 20.462Z" fill="#F07500" />
                 </svg>
                 break;
             case 1:
@@ -219,20 +330,30 @@ export var ItemViewReview = (props: IPropsItemViewReview) => {
                 view = <IconConfig />
                 break;
             case 7:
-                view = <IconConfig />
-                break;
-            case 8:
                 view = <IconVoltage />
                 break;
-            case 9:
+            case 8:
                 view = <IconTornillo />
                 break;
-            case 10:
+            case 9:
                 view = <IconLlave />
                 break;
             case 10:
                 view = <IconFirma />
                 break;
+            case 11:
+                view = <IconHouse />
+                break;
+            case 12:
+                view = <IconUser />
+                break;
+            case 13:
+                view = <IconMail />
+                break;
+            case 14:
+                view = <IconPhone />
+                break;
+
 
 
         }

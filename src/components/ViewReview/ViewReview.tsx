@@ -7,6 +7,7 @@ import { ServiceStep } from '../../objects/StepManager';
 import "./ViewReview.scss";
 import ReviewA from './ReviewA/ReviewA';
 import BackTitle from '../BackTitle/BackTitle';
+import ReviewB from './ReviewB/ReviewB';
 
 
 interface IPropsViewReview {
@@ -20,7 +21,7 @@ function ViewReview(props: IPropsViewReview) {
     var reviwe
     var [review, setReview] = useState<ReviewManager>();
     const [update, setUpdate] = useState(false);
-    
+
 
     var currentStep = steps.getCurrentStep();
 
@@ -53,18 +54,20 @@ function ViewReview(props: IPropsViewReview) {
         console.log(steps.currentStep)
         switch (steps.currentStep) {
             case 0:
-                view =
-                   <ReviewA />
+                view = <ReviewA />
+                break;
+            case 1:
+                view = <ReviewB />
                 break;
         }
         return view;
     }
 
- 
+
 
     return <div className="ViewReview">
         <div className="ViewReview__navbar">
-         
+
         </div>
         <div className="ViewReview__information">
             {chooseReview()}
