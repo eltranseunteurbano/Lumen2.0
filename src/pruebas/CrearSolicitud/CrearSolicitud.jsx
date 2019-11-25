@@ -294,7 +294,7 @@ const CrearSolicitud = () => {
             </div>
         </article>}
 
-        {/* Paso 6*
+        {/* Paso 6*/
             <article className="CrearSolicitud__pregunta">
                 <div className="CrearSolicitud__pregunta__texto">
                     <p className="CrearSolicitud__pregunta__texto__txt">
@@ -333,7 +333,7 @@ const CrearSolicitud = () => {
                     <button className="CrearSolicitud__pregunta__btns__btn"> Atrás</button>
                     <button className="CrearSolicitud__pregunta__btns__btn"> Continuar</button>
                 </div>
-        </article>*/}
+        </article>}
 
         {/* Paso 6*/
             <article className="CrearSolicitud__pregunta">

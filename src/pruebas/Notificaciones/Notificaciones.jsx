@@ -5,6 +5,31 @@ const Notificaciones = () => {
 
     return(
         <section className="Notificaciones">
+            <div className="Notificaciones__title">
+                <h1>Notificaciones</h1>
+            </div>
+
+            <article className="Notificaciones__header">
+                <div className="Notificaciones__header__title">
+                    <h1>Nuevo Mensaje</h1>
+                    <div className="Notificaciones__header__content">
+                        <p>Asunto: </p> <input type="text" />
+                    </div>
+                </div>            
+            </article>
+
+            <article className="Notificaciones__inputFile">
+                <input type="file" className="Notificaciones__inputFile__input" /> 
+            </article>
+
+            <article className="Notificaciones__inputFile">
+                <button type="file" className="Notificaciones__inputFile__enviar"> Enviar </button> 
+            </article>
+        </section>
+    )
+
+    /*return(
+        <section className="Notificaciones">
             
             <div className="Notificaciones__title">
                 <h1>Notificaciones</h1>
@@ -35,7 +60,7 @@ const Notificaciones = () => {
         </article>
 
         </section>
-    )
+    )*/
 
     /* General
     return(

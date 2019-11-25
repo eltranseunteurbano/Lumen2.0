@@ -14,6 +14,7 @@ import CasesManager from './containers/CasesManager/CasesManager';
 import Task from './containers/Task/Task';
 import Register from './containers/Register/Register';
 import Pruebas from './pruebas/Pruebas';
+import Notificaciones from './pruebas/Notificaciones/Notificaciones';
 
 const App = () => {
 
