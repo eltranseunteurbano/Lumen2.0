@@ -4,16 +4,13 @@ import Cases from '../../components/Cases/Cases/Cases';
 import { ViewCase } from "../../components/ViewCase/ViewCase";
 import ViewReview from "../../components/ViewReview/ViewReview";
 import MenuCase from '../../components/MenuCase/MenuCase';
-
-import "./CasesManager.scss";
 import BarTitle from '../../components/BarTitle/BarTitle';
 import Task from '../Task/Task';
 import Notificaciones from '../Notificaciones/Notificaciones';
 
-
+import "./CasesManager.scss";
 
 interface IPropsCasesManager { }
-
 
 export function CasesManager(props: IPropsCasesManager) {
 

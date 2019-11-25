@@ -16,7 +16,7 @@ function ViewReview(props: IPropsViewReview) {
 
     var service = props.service;
     var steps = service.steps;
-    var reviwe
+   
     var [review, setReview] = useState<ReviewManager>();
     const [update, setUpdate] = useState(false);
 

@@ -20,9 +20,11 @@ import IconHouse from '../icon/IconHouse';
 import IconUser from '../icon/IconUser';
 import IconMail from '../icon/IconMail';
 import IconPhone from '../icon/IconPhone';
-import ReactModal from 'react-modal';
 import PopUp from '../../PopUp/PopUp';
 import Service from '../../../objects/Service/Service';
+import Case from '../../Cases/Case/Case';
+import { CASES } from '../../../constants/Routes';
+import CasesManager from '../../../containers/CasesManager/CasesManager';
 
 
 interface IPropsReviewA { }
@@ -40,6 +42,13 @@ const ReviewA = (props: IPropsReviewA) => {
     var user = service.user || new Client();
 
     var { FIRM, PROPIETY_CEDULA_DOC, CADASTRAL_NUMBER_DOC } = service.fileRoute || service.generateDefaulFileRoutes();
+
+
+    const [accept, setAccept] = useState(false);
+
+    const changeAccept = (value: boolean) => {
+        setAccept(value);
+    }
 
 
     const choosePage = () => {
@@ -165,12 +174,12 @@ const ReviewA = (props: IPropsReviewA) => {
                             <div className="Solicitud__option vertical">
                                 <label className="Solicitud__option__label Solicitud__option__accepted">
                                     <img src="/img/icon/review/icon-aprobada.svg" alt="" />
-                                    <input name="review" type="radio" />
+                                    <input onClick={() => { changeAccept(true) }} name="review" type="radio" />
                                 </label>
                                 <div className="Solicitud__option__bar"></div>
                                 <label className="Solicitud__option__label Solicitud__option__denegado">
                                     <img src="/img/icon/review/icon-denegada.svg" alt="" />
-                                    <input name="review" type="radio" />
+                                    <input onClick={() => { changeAccept(false) }} name="review" type="radio" />
                                 </label>
                             </div>
                         </section>
@@ -188,7 +197,7 @@ const ReviewA = (props: IPropsReviewA) => {
                                         <input name="razon" type="radio" />
                                         <p>La información está incompleta</p>
                                     </label>
-                               
+
                                     <label className="Solicitud__option__form__item">
                                         <input name="razon" type="radio" />
                                         <p>Hay un documento mal escaneado</p>
@@ -196,7 +205,7 @@ const ReviewA = (props: IPropsReviewA) => {
                                     <label className="Solicitud__option__form__item">
                                         <input className="otro" name="razon" type="radio" />
                                         <p>Otro</p>
-                                        <input className="otro__value" type="text"/>
+                                        <input className="otro__value" type="text" />
                                     </label>
                                 </form>
 
@@ -266,8 +275,18 @@ const ReviewA = (props: IPropsReviewA) => {
     }
 
     const next = () => {
+        console.log("Lo que reviso", accept)
         if (page !== 6) {
-            setPage(page + 1);
+            if (page === 5) {
+                if (accept) {
+                    service.steps.approvedStep();
+                    setPageG(CasesManager.CASE);
+                } else {
+                    setPage(page + 1);
+                }
+            } else {
+                setPage(page + 1);
+            }
         }
     }
 
@@ -307,7 +326,7 @@ const ReviewA = (props: IPropsReviewA) => {
 
         <div className="ReviewA__navegation">
             <section className="ReviewA__navegation__next">
-                {(page === 1 || page === 2 || page === 3 || page === 5 || page===6) ? <button onClick={back}>Atras</button> : <></>}
+                {(page === 1 || page === 2 || page === 3 || page === 5 || page === 6) ? <button onClick={back}>Atras</button> : <></>}
                 <button onClick={next}>Siguiente</button>
             </section>
             <section className="ReviewA__navegation__info">

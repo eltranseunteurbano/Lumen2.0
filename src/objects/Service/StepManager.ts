@@ -1,6 +1,8 @@
 import ReviewManager from '../ReviewManger';
 import Service from './Service';
 import { DataBase } from '../../hooks/DatabaseContext';
+import { thisExpression } from '@babel/types';
+import Step from '../../components/Steps/Step/Step';
 
 
 export class StepManager {
@@ -21,7 +23,7 @@ export class StepManager {
 
     getCurrentStep() {
         let index = this.currentStep !== -1 ? this.currentStep : 0;
-        return this.steps[this.currentStep ];
+        return this.steps[this.currentStep];
     }
 
     startStep() {
@@ -33,6 +35,16 @@ export class StepManager {
                 step.setStatus(1);
             }
         }
+    }
+
+    approvedStep(){
+        let step = this.getCurrentStep();
+        if(step){
+
+            step.setStatus(Step.complete);
+            this.setCurrentStep(this.currentStep + 1);
+        }
+       
     }
 
     setCurrentStep(value: number) {
