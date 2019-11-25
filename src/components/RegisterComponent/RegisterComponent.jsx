@@ -124,6 +124,15 @@ const RegisterComponent = (props) => {
                     
                     <div className="RegisterComponent_three__bottom">
                         <label className="RegisterComponent_three__bottom__inputs__label">
+                            <p className="RegisterComponent_three__bottom__inputs__label__txt">Correo Electrónico</p>
+                            <input type="email" name="Correo"/>
+                        </label>
+
+                        <label className="RegisterComponent_three__bottom__inputs__label" />
+                    </div>
+
+                    <div className="RegisterComponent_three__bottom">
+                        <label className="RegisterComponent_three__bottom__inputs__label">
                             <p className="RegisterComponent_three__bottom__inputs__label__txt">Contraseña</p>
                             <input type="password" name="contrasena"/>
                         </label>
