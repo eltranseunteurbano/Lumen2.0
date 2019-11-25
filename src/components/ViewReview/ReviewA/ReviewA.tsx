@@ -30,12 +30,13 @@ interface IPropsReviewA { }
 const ReviewA = (props: IPropsReviewA) => {
 
     const serviceManager = useContext(ServicesContext);
-    const [navegator] = useState(new HookUpdateManager())
-    const [page, setPage, , pageBack] = navegator.useState("page", useState(0), true);
-    const [, setPageG, , pageBackG] = serviceManager.useState("page");
-
     var currentService = serviceManager.getCurrentService();
     var service = currentService ? currentService : new Service();
+
+    const [navegator] = useState(new HookUpdateManager())
+    const [page, setPage, , pageBack] = navegator.useState("page", useState(0), true);
+
+    const [, setPageG, , pageBackG] = serviceManager.useState("page");
     var user = service.user || new Client();
 
     var { FIRM, PROPIETY_CEDULA_DOC, CADASTRAL_NUMBER_DOC } = service.fileRoute || service.generateDefaulFileRoutes();
@@ -315,7 +316,6 @@ const ReviewA = (props: IPropsReviewA) => {
                 <p>Antes de aprobar la solicitud de energía, es necesario revisar el formulario que el usuario llenó</p>
             </section>
         </div>
-
     </div>
 }
 
