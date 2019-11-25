@@ -1,5 +1,5 @@
 import React from "react";
-import Service from '../../../objects/Service';
+import Service from '../../../objects/Service/Service';
 import Step from "../Step/Step";
 
 import "./Steps.scss"

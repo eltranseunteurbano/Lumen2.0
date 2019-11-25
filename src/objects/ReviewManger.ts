@@ -1,4 +1,4 @@
-import { ServiceStep } from './StepManager';
+import { ServiceStep } from './Service/StepManager';
 import { DataBase } from '../hooks/DatabaseContext';
 
 

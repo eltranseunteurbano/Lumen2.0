@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import Service from '../../../objects/Service';
+import Service from '../../../objects/Service/Service';
 import './Case.scss';
 import ServicesContext from '../../../hooks/ServicesContext';
 import IconEmpresa from '../../../icons/Case/Empresa';

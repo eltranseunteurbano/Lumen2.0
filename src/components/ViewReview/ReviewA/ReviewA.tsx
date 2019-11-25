@@ -5,7 +5,6 @@ import HookUpdateManager from '../../../objects/HookUpdate';
 import BackTitle from '../../BackTitle/BackTitle';
 
 import ServicesContext from '../../../hooks/ServicesContext';
-import Service from '../../../objects/Service';
 import Client from '../../../objects/User/Client';
 import IconOffice from '../icon/IconOffice';
 import IconLocalitation from '../icon/IconLocalitation';
@@ -23,6 +22,7 @@ import IconMail from '../icon/IconMail';
 import IconPhone from '../icon/IconPhone';
 import ReactModal from 'react-modal';
 import PopUp from '../../PopUp/PopUp';
+import Service from '../../../objects/Service/Service';
 
 
 interface IPropsReviewA { }
@@ -40,8 +40,6 @@ const ReviewA = (props: IPropsReviewA) => {
     var user = service.user || new Client();
 
     var { FIRM, PROPIETY_CEDULA_DOC, CADASTRAL_NUMBER_DOC } = service.fileRoute || service.generateDefaulFileRoutes();
-
-
 
 
     const choosePage = () => {

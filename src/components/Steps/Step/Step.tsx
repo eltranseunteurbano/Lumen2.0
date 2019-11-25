@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 
-import Service from "../../../objects/Service";
+import Service from "../../../objects/Service/Service";
 
 import ServicesContext from "../../../hooks/ServicesContext";
-import { ServiceStep } from '../../../objects/StepManager';
+import { ServiceStep } from '../../../objects/Service/StepManager';
 
 import "./Step.scss";
 import IconLike from '../../../icons/Notifications/Like';

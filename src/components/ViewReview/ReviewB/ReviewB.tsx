@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react";
 import BackTitle from '../../BackTitle/BackTitle';
 import ServicesContext from '../../../hooks/ServicesContext';
-import Service from '../../../objects/Service';
+import Service from '../../../objects/Service/Service';
+
 import HookUpdateManager from '../../../objects/HookUpdate';
 
 import "./ReviewB.scss";

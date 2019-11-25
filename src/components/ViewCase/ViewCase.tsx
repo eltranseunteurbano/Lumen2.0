@@ -4,7 +4,7 @@ import "./ViewCase.scss";
 import Case from '../Cases/Case/Case';
 import Steps from "../Steps/Steps/Steps";
 import ProgressBar from "../ProgressBar/ProgressBar";
-import Servicio from '../../objects/Service';
+import Servicio from '../../objects/Service/Service';
 import IconEmpresa from "../../icons/Case/Empresa";
 import IconConstructora from '../../icons/Case/Constructora';
 import IconHouse from "../../icons/Case/House";

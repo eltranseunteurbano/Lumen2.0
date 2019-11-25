@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Service from "../../objects/Service";
+import Service from "../../objects/Service/Service";
 import ReviewManager from '../../objects/ReviewManger';
 
 import ReviewA from './ReviewA/ReviewA';

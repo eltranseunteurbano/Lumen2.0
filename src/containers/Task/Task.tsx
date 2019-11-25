@@ -1,7 +1,7 @@
 import React, { useState, createRef, useEffect, useContext } from "react";
 
 import Case from '../../components/Cases/Case/Case';
-import Service from '../../objects/Service';
+import Service from '../../objects/Service/Service';
 import Firm from '../../objects/Firm';
 import HeaderSolicitud from "./HeaderSolicitud/HeaderSolicitud";
 import ServicesContext from '../../hooks/ServicesContext';

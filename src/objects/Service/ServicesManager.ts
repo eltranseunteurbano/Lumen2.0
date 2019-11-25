@@ -1,8 +1,8 @@
-import BRANCHES from '../constants/Branches';
+import BRANCHES from '../../constants/Branches';
 import Servicio, { Service } from './Service';
-import { DataBase } from '../hooks/DatabaseContext';
-import HookUpdateManager from './HookUpdate';
-import { User, NameUser } from '../hooks/UserContext';
+import { DataBase } from '../../hooks/DatabaseContext';
+import HookUpdateManager from '../HookUpdate';
+import { User, NameUser } from '../../hooks/UserContext';
 
 export class ServicesManager extends HookUpdateManager {
 

@@ -1,5 +1,5 @@
 import { DataBase } from '../hooks/DatabaseContext';
-import Service from './Service';
+import Service from './Service/Service';
 
 export class ODate {
     day: string;
@@ -38,7 +38,7 @@ export class UserHistoryItem {
     }
 
     getUserUID() {
-        
+
         DataBase.getCurrentUserUID((UID: string) => {
             this.userUID = UID;
             if (this.ROUTE) {

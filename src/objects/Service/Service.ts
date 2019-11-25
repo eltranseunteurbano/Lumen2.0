@@ -1,12 +1,13 @@
-import UserHistory, { ODate } from './UserHistory';
-import { DataBase, IObjectDatabase } from '../hooks/DatabaseContext';
-import BRANCHES from '../constants/Branches';
+import UserHistory, { ODate } from '../UserHistory';
+import { DataBase, IObjectDatabase } from '../../hooks/DatabaseContext';
+import BRANCHES from '../../constants/Branches';
 import StepManager from './StepManager';
-import HookUpdateManager from './HookUpdate';
-import { Storage } from '../hooks/StorageContenxt';
-import { User, NameUser } from '../hooks/UserContext';
-import Usuario from './User/Usuario';
-import Client from './User/Client';
+import HookUpdateManager from '../HookUpdate';
+import { Storage } from '../../hooks/StorageContenxt';
+import { User, NameUser } from '../../hooks/UserContext';
+import Usuario from '../User/Usuario';
+import Client from '../User/Client';
+
 
 export class Service implements IObjectDatabase {
 

@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import ServicesManager from '../objects/ServicesManager';
+import ServicesManager from '../objects/Service/ServicesManager';
 
 export var ServicesData = new ServicesManager();
 

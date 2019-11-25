@@ -1,6 +1,6 @@
-import ReviewManager from './ReviewManger';
+import ReviewManager from '../ReviewManger';
 import Service from './Service';
-import { DataBase } from '../hooks/DatabaseContext';
+import { DataBase } from '../../hooks/DatabaseContext';
 
 
 export class StepManager {
