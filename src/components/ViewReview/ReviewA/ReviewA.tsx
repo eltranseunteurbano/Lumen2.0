@@ -164,12 +164,12 @@ const ReviewA = (props: IPropsReviewA) => {
                         <section className="Solicitud">
                             <h2 className="Solicitud__title">Por favor selecciona una de las siguientes opciones para notificarle al cliente si su solicitud de energia ha sido</h2>
                             <div className="Solicitud__option vertical">
-                                <label className="Solicitud__option__accepted">
+                                <label className="Solicitud__option__label Solicitud__option__accepted">
                                     <img src="/img/icon/review/icon-aprobada.svg" alt="" />
                                     <input name="review" type="radio" />
                                 </label>
                                 <div className="Solicitud__option__bar"></div>
-                                <label className="Solicitud__option__denegado">
+                                <label className="Solicitud__option__label Solicitud__option__denegado">
                                     <img src="/img/icon/review/icon-denegada.svg" alt="" />
                                     <input name="review" type="radio" />
                                 </label>
@@ -178,9 +178,35 @@ const ReviewA = (props: IPropsReviewA) => {
                     </article>
                 </section>
                 break;
-        }
+            case 6:
+                view = <section className="ReviewA__card">
+                    <article className="ReviewA__card__container">
+                        <section className="Solicitud">
+                            <h2 className="Solicitud__title">Por favor selecciona una o más razones por las cuales el formato de solicitud no está correcto</h2>
+                            <div className="Solicitud__option">
+                                <form className="Solicitud__option__form" onSubmit={(e) => e.preventDefault()}>
+                                    <label className="Solicitud__option__form__item">
+                                        <input name="razon" type="radio" />
+                                        <p>La información está incompleta</p>
+                                    </label>
+                               
+                                    <label className="Solicitud__option__form__item">
+                                        <input name="razon" type="radio" />
+                                        <p>Hay un documento mal escaneado</p>
+                                    </label>
+                                    <label className="Solicitud__option__form__item">
+                                        <input className="otro" name="razon" type="radio" />
+                                        <p>Otro</p>
+                                        <input className="otro__value" type="text"/>
+                                    </label>
+                                </form>
 
-        console.log(page)
+                            </div>
+                        </section>
+                    </article>
+                </section>
+                break;
+        }
 
         if (page === 3 || page === 4) {
             view = view = <section className="ReviewA__card">
@@ -241,9 +267,9 @@ const ReviewA = (props: IPropsReviewA) => {
     }
 
     const next = () => {
-        if (page !== 5) {
+        if (page !== 6) {
             setPage(page + 1);
-        } 
+        }
     }
 
     const returnTitlePage = () => {
@@ -282,7 +308,7 @@ const ReviewA = (props: IPropsReviewA) => {
 
         <div className="ReviewA__navegation">
             <section className="ReviewA__navegation__next">
-                {(page === 1 || page === 2 || page === 3 || page === 5) ? <button onClick={back}>Atras</button> : <></>}
+                {(page === 1 || page === 2 || page === 3 || page === 5 || page===6) ? <button onClick={back}>Atras</button> : <></>}
                 <button onClick={next}>Siguiente</button>
             </section>
             <section className="ReviewA__navegation__info">

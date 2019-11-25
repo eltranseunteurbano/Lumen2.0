@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Desktop, { DesktopStep } from '../Desktop/Desktop';
 import Service from "../../objects/Service";
 import ReviewManager from '../../objects/ReviewManger';
-import { ServiceStep } from '../../objects/StepManager';
+
+import ReviewA from './ReviewA/ReviewA';
+import ReviewB from './ReviewB/ReviewB';
 
 import "./ViewReview.scss";
-import ReviewA from './ReviewA/ReviewA';
-import BackTitle from '../BackTitle/BackTitle';
-import ReviewB from './ReviewB/ReviewB';
 
 
 interface IPropsViewReview {

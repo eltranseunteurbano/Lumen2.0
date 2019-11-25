@@ -12,6 +12,8 @@
 
     background: $lightGray;
 
+  
+
     .confirmation {
         background: $white;
         width: 500px;
@@ -201,7 +203,7 @@
                 &__option {
                     height: 80%;
 
-                    label{
+                    &__label{
                         display: flex;
                         flex-direction: column;
                         align-items: center;
@@ -214,6 +216,7 @@
                         }
                     }
 
+                  
                     &__accepted {}
 
                     &__bar {
@@ -223,6 +226,34 @@
                     }
 
                     &__denegado {}
+
+                    &__form{
+
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-around;
+                        align-items: center;
+
+                        height: 60%;
+
+                        &__item{
+                            display: flex;
+                            flex-direction: row;
+                        }
+
+                        
+                        .otro__value{
+                            display: none;
+                        }
+
+                        .otro:checked ~.otro__value{
+                            display: block;
+                        }
+
+
+                        
+                    }
+
                 }
             }
 
