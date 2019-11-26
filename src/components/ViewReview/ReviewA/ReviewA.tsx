@@ -101,15 +101,15 @@ const ReviewA = (props: IPropsReviewA) => {
                                 <article className="vertical">
                                     <ItemViewReview
                                         title="Nombre:"
-                                        description="Juan Esteban Peréz Londoño "
+                                        description={user.name}
                                         icon={12} />
                                     <ItemViewReview
                                         title="C.C:"
-                                        description="1113567854"
+                                        description={user.cedula}
                                         icon={-1} />
                                     <ItemViewReview
                                         title="De:"
-                                        description=" Palmira, Valle del Cauca"
+                                        description={`${service.information.PROPERTY.ADDRESS}, ${service.information.PROPERTY.MUNICIPALITY}`}
                                         icon={-1} />
 
                                 </article>
@@ -118,7 +118,7 @@ const ReviewA = (props: IPropsReviewA) => {
                             <section className="vertical">
                                 <ItemViewReview
                                     title="Correo electrónico:"
-                                    description="Juanesperlon87@gmail.com"
+                                    description={user.email}
                                     icon={13} />
                                 <ItemViewReview
                                     title="Teléfono:"
@@ -136,26 +136,26 @@ const ReviewA = (props: IPropsReviewA) => {
                         <section>
                             <ItemViewReview
                                 title="Número Catastral:"
-                                description="2906432YK5320N001QMP2"
+                                description={`${service.information.CADASTRAL_NUMBER}`}
                                 icon={0} />
                             <ItemViewReview
                                 title="Dirección:"
-                                description="Calle25 # 02-53"
+                                description={`${service.information.PROPERTY.NEIGHBORHOOD}`}
                                 icon={1} />
                             <ItemViewReview
                                 title="Municipio:"
-                                description="Palmira, Valle del Cauca"
+                                description={`${service.information.PROPERTY.MUNICIPALITY}`}
                                 icon={2} />
                             <ItemViewReview
                                 title="Dirección de envío de factura:"
-                                description="Calle 25 # 02-53"
+                                description={`${service.information.PROPERTY.ADDRESS}`}
                                 icon={3} />
                         </section>
 
                         <section>
                             <ItemViewReview
                                 title="Barrio:"
-                                description="Rincón Del Bosque"
+                                description={`${service.information.PROPERTY.NEIGHBORHOOD}`}
                                 icon={4} />
                             <ItemViewReview
                                 title="Estrato asignado:"
@@ -223,7 +223,7 @@ const ReviewA = (props: IPropsReviewA) => {
                     <section className="vertical">
                         <ItemViewReview
                             title="Uso del Servicio:"
-                            description="Residencial"
+                            description={service ? "Residencial":""}
                             icon={6} />
                         <ItemViewReview
                             title="Voltaje:"

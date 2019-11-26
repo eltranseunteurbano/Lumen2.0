@@ -18,10 +18,17 @@ export function Steps(props: IPropsSteps) {
         <section className="Steps__container">
             {service.steps.steps.map((step, i) => {
                 return <Step key={i} order={i + 1} step={step} service={service} />
-
             })}
         </section>
-            <PopUp visible={(service.steps.complete === true)} close={true}>Completado</PopUp>
+        <PopUp visible={(service.steps.complete === true)} close={true}>
+            <div className="Steps__modal">
+                <section className="Steps__modal__container">
+                    <h1>¡Enhorabuena!</h1>
+                    <h2>Los asesores de CELSIA encargados encargados de tu orden  han validado todos los pasos de tu proyecto.</h2>
+                    <img className="Steps__modal__container__icon" src="/img/icon/icon-bombillo.png" alt=""/>
+                </section>
+            </div>
+        </PopUp>
     </section>;
 }
 

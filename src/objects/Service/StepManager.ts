@@ -66,6 +66,7 @@ export class StepManager {
         let step = this.getCurrentStep();
         if (step) {
             step.setStatus(Step.denegada);
+            this.setComplete(false);
         }
     }
 

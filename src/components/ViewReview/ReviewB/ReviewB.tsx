@@ -7,6 +7,7 @@ import HookUpdateManager from '../../../objects/HookUpdate';
 
 import "./ReviewB.scss";
 import CasesManager from '../../../containers/CasesManager/CasesManager';
+import Notification from '../../../objects/Notification/Notification';
 
 const ReviewB = () => {
 
@@ -19,6 +20,7 @@ const ReviewB = () => {
     const [, setPageG, , pageBackG] = serviceManager.useState("page");
 
     const [accept, setAccept] = useState(false);
+    const [justification, setJustification] = useState("");
 
     const changeAccept = (value: boolean) => {
         setAccept(value);
@@ -36,17 +38,64 @@ const ReviewB = () => {
         if (page === 0) {
             if (accept) {
                 service.steps.approvedStep();
+                notificar(true);
                 setPageG(CasesManager.CASE);
             } else {
                 setPage(page + 1);
             }
         } else if (page === 1) {
             service.steps.refuseStep();
+            notificar(false);
             setPageG(CasesManager.CASE);
         } else {
             setPage(page + 1);
         }
     }
+
+
+
+
+    const notificar = (accept: boolean) => {
+        let razones: HTMLInputElement[] = document.getElementsByName("razon") as any;
+        var notification = new Notification();
+
+        notification.setTo(service.userUID, () => {
+
+            if (accept) {
+                notification.setSubject(`Orden #${service.orden}`);
+                notification.setSubject__subtitle(`Completada`);
+                notification.setDescription("Los asesores de CELSIA encargados encargados de tu orden  han validado todos los pasos de tu proyecto.");
+            } else {
+                notification.setSubject(`Error en Paso ${service.steps.currentStep + 1}`);
+                notification.setSubject__subtitle(`Orden #${service.orden}`);
+
+                if (razones) {
+                    razones.forEach((razon, i) => {
+                        if (razon.checked) {
+                            switch (razon.value) {
+                                case RAZON.INFORMATION_IMCOMPLETE:
+                                    notification.setDescription(`La documentación suministrada en el Paso ${service.steps.currentStep + 1}: ${service.steps.getCurrentStep().information}, en donde la ${razon.value}. Por favor, verifique la infomación y vuelva a responder esta pregunta.`);
+                                    break;
+                                case RAZON.BAD_SCANNED_DOCUMENT:
+                                    notification.setDescription(`La documentación suministrada en el Paso ${service.steps.currentStep + 1}: ${service.steps.getCurrentStep().information}, en donde la ${razon.value}. Por favor, verifique la infomación y vuelva a responder esta pregunta.`);
+                                    break;
+                                case RAZON.OTHER:
+                                    notification.setDescription(`La documentación suministrada en el Paso ${service.steps.currentStep + 1}: ${service.steps.getCurrentStep().information}, en donde la ${justification}. Por favor, verifique la infomación y vuelva a responder esta pregunta.`);
+                                    break;
+
+                            }
+
+                        }
+                    });
+                }
+            }
+
+            notification.addToDatabase(() => {
+
+            });
+
+        });
+    };
 
     const choosePage = () => {
         let view = <></>;
@@ -80,18 +129,18 @@ const ReviewB = () => {
                             <div className="Solicitud__option">
                                 <form className="Solicitud__option__form" onSubmit={(e) => e.preventDefault()}>
                                     <label className="Solicitud__option__form__item">
-                                        <input name="razon" type="radio" />
-                                        <p>La información está incompleta</p>
+                                        <input name="razon" type="radio" value={RAZON.INFORMATION_IMCOMPLETE} />
+                                        <p>{RAZON.INFORMATION_IMCOMPLETE}</p>
                                     </label>
 
                                     <label className="Solicitud__option__form__item">
-                                        <input name="razon" type="radio" />
-                                        <p>Hay un documento mal escaneado</p>
+                                        <input name="razon" type="radio" value={RAZON.BAD_SCANNED_DOCUMENT} />
+                                        <p>{RAZON.BAD_SCANNED_DOCUMENT}</p>
                                     </label>
                                     <label className="Solicitud__option__form__item">
-                                        <input className="otro" name="razon" type="radio" />
-                                        <p>Otro</p>
-                                        <input className="otro__value" type="text" />
+                                        <input className="otro" name="razon" type="radio" value={RAZON.OTHER} />
+                                        <p>{RAZON.OTHER}</p>
+                                        <textarea onChange={(e) => { setJustification(e.target.value) }} className="otro__value" />
                                     </label>
                                 </form>
 
@@ -133,3 +182,9 @@ const ReviewB = () => {
 }
 
 export default ReviewB;
+
+var RAZON = {
+    INFORMATION_IMCOMPLETE: "La información está incompleta",
+    BAD_SCANNED_DOCUMENT: "Hay un documento mal escaneado",
+    OTHER: "Otro"
+}
