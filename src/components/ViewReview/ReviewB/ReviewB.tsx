@@ -197,7 +197,7 @@ const ReviewB = () => {
 
 export default ReviewB;
 
-var RAZON = {
+export var RAZON = {
     INFORMATION_IMCOMPLETE: "La información está incompleta",
     BAD_SCANNED_DOCUMENT: "Hay un documento mal escaneado",
     OTHER: "Otro"

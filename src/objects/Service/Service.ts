@@ -84,6 +84,11 @@ export class Service implements IObjectDatabase {
         }
     }
 
+    updateInformation() {
+        let url = `${this.ROUTE}/information`;
+        DataBase.writeDatabase(url, this.information);
+    }
+
     findUseInDatabase() {
         let route = `${BRANCHES.USERS}/${this.userUID}`;
 
@@ -253,6 +258,36 @@ interface ServiceData {
     FIRM: {
         AUTHORIZED: string;
         FIRM: string;
+    }
+}
+
+export var ServiceDataTypes = {
+    NAME: "NAME",
+    TYPE: "TYPE",
+    ZONE: "ZONE",
+    HOME_APPLIANCES: "HOME_APPLIANCES",
+    PREVIOUS_SERVICES: "PREVIOUS_SERVICES",
+    CADASTRAL_NUMBER: "CADASTRAL_NUMBER",
+    CADASTRAL_NUMBER_DOC: "CADASTRAL_NUMBER_DOC",
+    CHARACTERISTIC: "CHARACTERISTIC",
+    DIGITAL_INVOICE: "DIGITAL_INVOICE",
+    SEND: "SEND",
+    TECNICO: {
+        NAME: "TECNICO/NAME",
+        LAST_NAME: "TECNICO/LAST_NAME",
+        CEDULA: "TECNICO/CEDULA",
+        PROFESSIONAL_CARD: "TECNICO/PROFESSIONAL_CARD",
+    },
+    PROPERTY: {
+        ADDRESS: "PROPERTY/ADDRESS",
+        NEIGHBORHOOD: "PROPERTY/NEIGHBORHOOD",
+        MUNICIPALITY: "PROPERTY/MUNICIPALITY",
+        NEIGHBOR_INVOICE: "PROPERTY/NEIGHBOR_INVOICE",
+        CEDULA_DOC: "PROPERTY/CEDULA_DOC",
+    },
+    FIRM: {
+        AUTHORIZED: "FIRM/AUTHORIZED",
+        FIRM: "FIRM/FIRM",
     }
 }
 

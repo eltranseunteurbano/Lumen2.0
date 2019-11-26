@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, createRef, useEffect } from 'react';
 
 import "./ReviewA.scss";
 import HookUpdateManager from '../../../objects/HookUpdate';
@@ -22,18 +22,39 @@ import IconMail from '../icon/IconMail';
 import IconPhone from '../icon/IconPhone';
 import PopUp from '../../PopUp/PopUp';
 import Service from '../../../objects/Service/Service';
-import Case from '../../Cases/Case/Case';
-import { CASES } from '../../../constants/Routes';
+
 import CasesManager from '../../../containers/CasesManager/CasesManager';
+import { RAZON } from '../ReviewB/ReviewB';
+import ONotification from '../../../objects/Notification/Notification';
+
+
 
 
 interface IPropsReviewA { }
 
 const ReviewA = (props: IPropsReviewA) => {
 
+
+
+    const razon1 = createRef<HTMLInputElement>();
+    const razon2 = createRef<HTMLInputElement>();
+    const razon3 = createRef<HTMLInputElement>();
+    const [justification, setJustification] = useState("");
+
+
     const serviceManager = useContext(ServicesContext);
     var currentService = serviceManager.getCurrentService();
     var service = currentService ? currentService : new Service();
+
+    const [firmUrl, setFirmUl] = useState("");
+
+    useEffect(() => {
+
+        service.getFileFirm((url:string)=>{
+            setFirmUl(url);
+        })
+
+    }, [])
 
     const [navegator] = useState(new HookUpdateManager())
     const [page, setPage, , pageBack] = navegator.useState("page", useState(0), true);
@@ -194,18 +215,18 @@ const ReviewA = (props: IPropsReviewA) => {
                             <div className="Solicitud__option">
                                 <form className="Solicitud__option__form" onSubmit={(e) => e.preventDefault()}>
                                     <label className="Solicitud__option__form__item">
-                                        <input name="razon" type="radio" />
-                                        <p>La información está incompleta</p>
+                                        <input ref={razon1} name="razon" type="radio" value={RAZON.INFORMATION_IMCOMPLETE} />
+                                        <p>{RAZON.INFORMATION_IMCOMPLETE}</p>
                                     </label>
 
                                     <label className="Solicitud__option__form__item">
-                                        <input name="razon" type="radio" />
-                                        <p>Hay un documento mal escaneado</p>
+                                        <input ref={razon2} name="razon" type="radio" value={RAZON.BAD_SCANNED_DOCUMENT} />
+                                        <p>{RAZON.BAD_SCANNED_DOCUMENT}</p>
                                     </label>
                                     <label className="Solicitud__option__form__item">
-                                        <input className="otro" name="razon" type="radio" />
-                                        <p>Otro</p>
-                                        <input className="otro__value" type="text" />
+                                        <input ref={razon3} className="otro" name="razon" type="radio" value={RAZON.OTHER} />
+                                        <p>{RAZON.OTHER}</p>
+                                        <textarea onChange={(e) => { setJustification(e.target.value) }} className="otro__value" />
                                     </label>
                                 </form>
 
@@ -219,11 +240,10 @@ const ReviewA = (props: IPropsReviewA) => {
         if (page === 3 || page === 4) {
             view = view = <section className="ReviewA__card">
                 <article className="ReviewA__card__container horizontal">
-
                     <section className="vertical">
                         <ItemViewReview
                             title="Uso del Servicio:"
-                            description={service ? "Residencial":""}
+                            description={service ? "Residencial" : ""}
                             icon={6} />
                         <ItemViewReview
                             title="Voltaje:"
@@ -243,11 +263,12 @@ const ReviewA = (props: IPropsReviewA) => {
 
                     </section>
 
-                    <section>
+                    <section id="firmaCase">
                         <ItemViewReview
                             title="Firma : "
                             description=""
                             icon={10} />
+                        <img id="firmaCase__firm" src={firmUrl} alt="Firma" />
 
                     </section>
 
@@ -290,6 +311,56 @@ const ReviewA = (props: IPropsReviewA) => {
         }
 
     }
+
+
+    const notificar = (accept: boolean, load: Function) => {
+        let razones: HTMLInputElement[] = document.getElementsByName("razon") as any;
+        var notification = new ONotification();
+
+        notification.setCaseUID(service.UID || "");
+
+        notification.setTo(service.userUID, () => {
+
+            if (accept) {
+                console.log("Accepto la peticion")
+                notification.setSubject(`Orden #${service.orden}`);
+                notification.setSubject__subtitle(`Completada`);
+                notification.setDescription("Los asesores de CELSIA encargados encargados de tu orden  han validado todos los pasos de tu proyecto.");
+            } else {
+
+                notification.setSubject(`Error en Paso ${service.steps.currentStep + 1}`);
+                notification.setSubject__subtitle(`Orden #${service.orden}`);
+
+                console.log("Nego la peticion", razones.length)
+
+                let razon = "";
+                console.log(razon1, razon2, razon3)
+                if (razon1.current && razon2.current && razon3.current) {
+                    razon = razon1.current.checked === true ? razon1.current.value : razon;
+                    razon = razon2.current.checked === true ? razon2.current.value : razon;
+                    razon = razon3.current.checked === true ? razon3.current.value : razon;
+                }
+
+                switch (razon) {
+                    case RAZON.INFORMATION_IMCOMPLETE:
+                        notification.setDescription(`La documentación suministrada en el Paso ${service.steps.currentStep + 1}: ${service.steps.getCurrentStep().information}, en donde la ${razon}. Por favor, verifique la infomación y vuelva a responder esta pregunta.`);
+                        break;
+                    case RAZON.BAD_SCANNED_DOCUMENT:
+                        notification.setDescription(`La documentación suministrada en el Paso ${service.steps.currentStep + 1}: ${service.steps.getCurrentStep().information}, en donde la ${razon}. Por favor, verifique la infomación y vuelva a responder esta pregunta.`);
+                        break;
+                    case RAZON.OTHER:
+                        notification.setDescription(`La documentación suministrada en el Paso ${service.steps.currentStep + 1}: ${service.steps.getCurrentStep().information}, en donde la ${justification}. Por favor, verifique la infomación y vuelva a responder esta pregunta.`);
+                        break;
+                }
+
+            }
+
+            notification.addToDatabase(() => {
+                load();
+            });
+
+        });
+    };
 
     const returnTitlePage = () => {
         var title = "";

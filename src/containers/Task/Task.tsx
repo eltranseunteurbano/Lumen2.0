@@ -38,8 +38,10 @@ export const Task = (props: ITask) => {
     const [fileCadastral, setFileCadastra] = useState();
     const [filePropertyCedula, setFilePropertyCedula] = useState();
 
-    const [firmaState] = useState<Firm>(new Firm());
+    const [firmaState] = useState<Firm>(new Firm(undefined, undefined, service));
     const refCanvasContainer = createRef<HTMLDivElement>();
+
+
 
     const erase = () => {
 
@@ -96,9 +98,15 @@ export const Task = (props: ITask) => {
                 break;
 
             case 6:
-                if (service.information.CADASTRAL_NUMBER !== "" && fileCadastral !== undefined) {
+
+                if (props.case) {
                     allowNext = true;
+                } else {
+                    if (service.information.CADASTRAL_NUMBER !== "" && fileCadastral !== undefined) {
+                        allowNext = true;
+                    }
                 }
+
                 break;
             case 7:
                 if (service.information.PROPERTY.ADDRESS !== "" && service.information.PROPERTY.MUNICIPALITY !== "" && service.information.PROPERTY.NEIGHBORHOOD !== "" && service.information.PROPERTY.NEIGHBOR_INVOICE !== "") {
@@ -106,9 +114,14 @@ export const Task = (props: ITask) => {
                 }
                 break;
             case 8:
-                if (filePropertyCedula !== null) {
+                if (props.case) {
                     allowNext = true;
+                } else {
+                    if (filePropertyCedula !== null) {
+                        allowNext = true;
+                    }
                 }
+
                 break;
             case 9:
                 if (service.information.FIRM.AUTHORIZED !== "") {
@@ -132,6 +145,12 @@ export const Task = (props: ITask) => {
 
     const crearProyecto = () => {
         if (props.case) {
+
+            service.updateInformation();
+            if(service.UID){
+                servicesManager.setCurrentServiceByUID(service.UID);
+            }
+            setPageG(CasesManager.CASE);
 
         } else {
             if (fileCadastral && filePropertyCedula) {

@@ -1,4 +1,5 @@
 import * as createjs from 'createjs-module';
+import Service from './Service/Service';
 
 class Firm {
 
@@ -6,8 +7,9 @@ class Firm {
     firmaShape: createjs.Shape;
     pressFirm: boolean;
     canvas: HTMLCanvasElement;
+    firmImg?: createjs.Bitmap;
 
-    constructor(width?: number, height?: number) {
+    constructor(width?: number, height?: number, service?: Service) {
         this.canvas = document.createElement("canvas");
         if (width) {
             this.canvas.width = width;
@@ -42,6 +44,23 @@ class Firm {
             }
 
         });
+
+
+        if (service) {
+            service.getFileFirm((url: string) => {
+
+                this.firmImg = new createjs.Bitmap(url);
+                this.state.addChild(this.firmImg);
+                let img = document.createElement("img");
+                img.src = url;
+
+                img.addEventListener("load", ()=>{
+                    this.update();
+                });
+               
+            });
+        }
+       
     }
 
     includeIn(element: HTMLElement) {
@@ -57,7 +76,11 @@ class Firm {
     clearCanvas() {
         this.firmaShape.graphics.clear();
         this.initStyleLine();
-  
+        if (this.firmImg) {
+            this.state.removeChild(this.firmImg)
+            this.update();
+        }
+
     }
 
     update() {

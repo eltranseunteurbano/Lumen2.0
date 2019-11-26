@@ -333,4 +333,15 @@
 
 
     }
+    .horizontal{
+        display: flex;
+    }
+}
+
+#firmaCase{
+    display: flex;
+    &__firm{
+
+        width: 100px;
+    }
 }
