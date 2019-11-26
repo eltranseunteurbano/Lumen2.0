@@ -10,15 +10,17 @@ import CasesManager from '../CasesManager/CasesManager';
 import "./Task.scss"
 
 
+interface ITask {
+    case?: Service;
+}
 
-
-export const Task = () => {
+export const Task = (props: ITask) => {
 
     const servicesManager = useContext(ServicesContext);
     const [, setPageG] = servicesManager.useState<number>("page");
 
     const [update, setUpdate] = useState(false);
-    const [service] = useState(new Service());
+    const [service] = useState(props.case || new Service());
     const [page, setPage] = useState(0);
 
     var step = page === 0 ? 1 :
@@ -129,14 +131,17 @@ export const Task = () => {
     }
 
     const crearProyecto = () => {
-        if (fileCadastral && filePropertyCedula) {
+        if (props.case) {
 
-            firmaState.getImage((image: Blob) => {
-                service.addToDatabase(fileCadastral, filePropertyCedula, image, () => {
-                    servicesManager.setCurrentService(service);
-                    setPageG(CasesManager.CASE);
-                });
-            })
+        } else {
+            if (fileCadastral && filePropertyCedula) {
+                firmaState.getImage((image: Blob) => {
+                    service.addToDatabase(fileCadastral, filePropertyCedula, image, () => {
+                        servicesManager.setCurrentService(service);
+                        setPageG(CasesManager.CASE);
+                    });
+                })
+            }
         }
     }
 

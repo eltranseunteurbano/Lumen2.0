@@ -61,6 +61,9 @@ export function CasesManager(props: IPropsCasesManager) {
             case CasesManager.TASK:
                 view = <Task />
                 break;
+            case CasesManager.TASK_CORRECTION:
+                view = <Task case={currentCase} />
+                break;
 
         }
 
@@ -91,4 +94,5 @@ CasesManager.REVIEW = 2;
 CasesManager.NOTIFICATIONS = 3;
 CasesManager.NOTIFICATION = 5;
 CasesManager.TASK = 4;
+CasesManager.TASK_CORRECTION = 6;
 

@@ -15,6 +15,7 @@ class ONotification implements IObjectDatabase {
     description: string;
     orden: number;
     date: ODate;
+    caseUID: string;
 
     constructor(notification?: ONotification) {
         this.UID = notification ? notification.UID : "";
@@ -28,10 +29,16 @@ class ONotification implements IObjectDatabase {
 
         this.to_type = notification ? notification.to_type : "";
         this.from_type = notification ? notification.from_type : "";
+
+        this.caseUID = notification ? notification.caseUID : "";
     }
 
     setDescription(description: string) {
-        this.description = description
+        this.description = description;
+    }
+
+    setCaseUID(caseUID: string) {
+        this.caseUID = caseUID;
     }
 
     setSubject(subject: string) {

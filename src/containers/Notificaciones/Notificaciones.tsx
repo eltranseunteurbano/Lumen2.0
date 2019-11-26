@@ -40,8 +40,8 @@ const Notificaciones = () => {
 
                 {/**Incio de notificationes */}
 
-                {notifications.map((notification) => {
-                    return <div onClick={()=>{
+                {notifications.map((notification, index) => {
+                    return <div key={index} onClick={()=>{
                         servicesManager.setCurrentNotification(notification)
                         setPage(CasesManager.NOTIFICATION)
                         }} className="Notificaciones__content__card">

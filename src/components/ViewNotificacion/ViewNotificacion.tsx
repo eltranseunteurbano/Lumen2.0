@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './ViewNotificacion.scss';
 import ONotification from '../../objects/Notification/Notification';
+import UserContext from '../../hooks/UserContext';
+import CasesManager from '../../containers/CasesManager/CasesManager';
+import ServicesContext from '../../hooks/ServicesContext';
 
 
 interface IViewNotification {
@@ -9,9 +12,17 @@ interface IViewNotification {
 
 const ViewNotificacion = (props: IViewNotification) => {
 
+    const serviceManager = useContext(ServicesContext);
+    const [, setPageG, , pageBackG] = serviceManager.useState("page");
+
     var notification = props.notification || new ONotification();
 
-    const chooseView = () =>{}
+    const chooseView = () => { }
+
+    const corregir = () => {
+        serviceManager.setCurrentServiceByUID(notification.caseUID);
+        setPageG(CasesManager.TASK_CORRECTION);
+    }
 
     return (
         <section className="ViewNotificaciones">
@@ -41,7 +52,7 @@ const ViewNotificacion = (props: IViewNotification) => {
             <article className="ViewNotificaciones__mensaje">
                 <h2 className="ViewNotificaciones__mensaje__title"> Envio de Retie </h2>
                 <p className="ViewNotificaciones__mensaje__text">{notification.description}</p>
-                <button type="button" className="ViewNotificaciones__mensaje__btn"> Corregir Información</button>
+                <button onClick={corregir} type="button" className="ViewNotificaciones__mensaje__btn"> Corregir Información</button>
             </article>
 
         </section>

@@ -149,6 +149,23 @@ export class ServicesManager extends HookUpdateManager {
         this.currentService = service;
     }
 
+    setCurrentServiceByUID(UID: string) {
+
+        var servicio:Servicio | undefined = undefined;
+
+        for (let index = 0; index < this.services.length; index++) {
+            let service = this.services[index];
+            if(service.UID === UID){
+                servicio = service;
+                index = this.services.length;
+            }
+        }
+        if(servicio){
+            this.setCurrentService(servicio);
+        }
+ 
+    }
+
 
     getCurrentNotification() {
         return this.currentNotificacion;
