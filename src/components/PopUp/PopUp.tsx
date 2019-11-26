@@ -7,17 +7,25 @@ interface IPropsPopUp {
     visible?: boolean;
     close?: boolean;
     parent?: boolean; // Se adapta al tamaño del parent container, es necesario agregar posicion relative al elemento padre
+    onClick?: Function;
 }
 
 export const PopUp = (props: IPropsPopUp) => {
 
     const [visible, setVisible] = useState(props.visible != null ? props.visible : true)
 
-    const close = () => { if (props.close) setVisible(false) };
+    const close = () => {
+        if (props.close) {
+            setVisible(false)
+        }
+        if (props.onClick) {
+            props.onClick();
+        }
+    };
 
     var view = <></>;
 
-    if (props.visible == true) {
+    if (visible == true) {
         view = <section className={`PopUp ${props.parent ? "PopUp__display" : ""}`}>
             <article className="PopUp__background" onClick={close}></article>
             <article className="PopUp__container">

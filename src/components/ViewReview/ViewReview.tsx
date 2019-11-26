@@ -16,7 +16,7 @@ function ViewReview(props: IPropsViewReview) {
 
     var service = props.service;
     var steps = service.steps;
-   
+
     var [review, setReview] = useState<ReviewManager>();
     const [update, setUpdate] = useState(false);
 
@@ -55,6 +55,15 @@ function ViewReview(props: IPropsViewReview) {
                 view = <ReviewA />
                 break;
             case 1:
+                view = <ReviewB />
+                break;
+            case 2:
+                view = <ReviewB />
+                break;
+            case 3:
+                view = <ReviewB />
+                break;
+            case 4:
                 view = <ReviewB />
                 break;
         }

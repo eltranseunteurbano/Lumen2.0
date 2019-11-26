@@ -3,6 +3,7 @@ import Service from '../../../objects/Service/Service';
 import Step from "../Step/Step";
 
 import "./Steps.scss"
+import PopUp from '../../PopUp/PopUp';
 
 
 interface IPropsSteps {
@@ -20,7 +21,7 @@ export function Steps(props: IPropsSteps) {
 
             })}
         </section>
-
+            <PopUp visible={(service.steps.complete === true)} close={true}>Completado</PopUp>
     </section>;
 }
 

@@ -10,12 +10,14 @@ export class StepManager {
     ROUTE?: string;
     service?: Service;
     currentStep: number;
+    complete: boolean;
     steps: ServiceStep[];
 
     constructor(service?: Service, stepManager?: StepManager) {
         this.service = service ? service : undefined;
         this.UID = stepManager ? "steps" : undefined;
         this.ROUTE = (stepManager && this.service) ? `${this.service.ROUTE}/${this.UID}` : undefined;
+        this.complete = stepManager ? stepManager.complete : false;
 
         this.currentStep = stepManager ? stepManager.currentStep : -1;
         this.steps = stepManager ? this.constructorSteps(stepManager) : generateDefaultStep();
@@ -41,12 +43,23 @@ export class StepManager {
         let step = this.getCurrentStep();
         if (step) {
             step.setStatus(Step.complete);
-            this.setCurrentStep(this.currentStep + 1);
-            step = this.getCurrentStep();
-            if (step) {
-                step.setStatus(Step.progress);
+            let index = this.currentStep + 1;
+            if (index < this.steps.length) {
+                this.setCurrentStep(index);
+                step = this.getCurrentStep();
+                if (step) {
+                    step.setStatus(Step.progress);
+                }
+            } else {
+                this.setComplete(true);
             }
         }
+    }
+
+    setComplete(value:boolean) {
+        this.complete = value;
+        let url = `${this.ROUTE}/complete`;
+        DataBase.writeDatabase(url, value)
     }
 
     refuseStep() {
