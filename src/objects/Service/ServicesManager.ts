@@ -78,7 +78,7 @@ export class ServicesManager extends HookUpdateManager {
 
                 if (User.type === NameUser.Adviser) {
 
-                    DataBase.readBrachDatabaseFilter(ruta, "to_type", NameUser.Client, (notifications: Notification[]) => {
+                    DataBase.readBrachDatabaseFilter(ruta, "to_type", NameUser.Adviser, (notifications: Notification[]) => {
                         let tempNotifications: Notification[] = [];
                         notifications.forEach((n) => {
                             tempNotifications.push(new Notification(n));

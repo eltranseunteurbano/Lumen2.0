@@ -26,6 +26,7 @@ import Service from '../../../objects/Service/Service';
 import CasesManager from '../../../containers/CasesManager/CasesManager';
 import { RAZON } from '../ReviewB/ReviewB';
 import ONotification from '../../../objects/Notification/Notification';
+import Case from '../../Cases/Case/Case';
 
 
 
@@ -50,7 +51,7 @@ const ReviewA = (props: IPropsReviewA) => {
 
     useEffect(() => {
 
-        service.getFileFirm((url:string)=>{
+        service.getFileFirm((url: string) => {
             setFirmUl(url);
         })
 
@@ -238,20 +239,44 @@ const ReviewA = (props: IPropsReviewA) => {
         }
 
         if (page === 3 || page === 4) {
+
+
+            let votaje = "";
+            let typeM = "";
+
+            if (service.information.HOME_APPLIANCES === Case.monofasica120) {
+                votaje = "1x120V";
+                typeM = "Monofásica";
+            } else if (service.information.HOME_APPLIANCES === Case.monofasica240) {
+                votaje = "2x120V";
+                typeM = "Monofásica";
+            } else if (service.information.HOME_APPLIANCES === Case.trifasica120) {
+                votaje = "1x120V";
+                typeM = "Trifásica";
+            } else if (service.information.HOME_APPLIANCES === Case.trifasica240) {
+                votaje = "2x120V";
+                typeM = "Trifásica";
+            }
+
+
+
+
             view = view = <section className="ReviewA__card">
+
+
                 <article className="ReviewA__card__container horizontal">
                     <section className="vertical">
                         <ItemViewReview
                             title="Uso del Servicio:"
-                            description={service ? "Residencial" : ""}
+                            description={service.information.TYPE}
                             icon={6} />
                         <ItemViewReview
                             title="Voltaje:"
-                            description="1x120V"
+                            description={`${votaje}`}
                             icon={7} />
                         <ItemViewReview
                             title="Red:"
-                            description="Monofásica"
+                            description={`${typeM}`}
                             icon={8} />
                     </section>
 
@@ -273,15 +298,17 @@ const ReviewA = (props: IPropsReviewA) => {
                     </section>
 
                 </article>
-                <PopUp visible={(page === 4)}>
-                    <div className="confirmation">
-                        <section className="confirmation__container">
-                            <h1>¿Seguro que has terminado la revisión?</h1>
-                            <div onClick={next} className="boton">Si</div>
-                            <div onClick={back} className="boton">No</div>
-                        </section>
-                    </div>
-                </PopUp>
+                {page === 4 ?
+                    <PopUp visible={true}>
+                        <div className="confirmation">
+                            <section className="confirmation__container">
+                                <h1>¿Seguro que has terminado la revisión?</h1>
+                                <div onClick={next} className="boton">Si</div>
+                                <div onClick={back} className="boton">No</div>
+                            </section>
+                        </div>
+                    </PopUp> : <></>}
+
             </section>;
         }
         return view;
@@ -299,13 +326,21 @@ const ReviewA = (props: IPropsReviewA) => {
         if (page === 5) {
             if (accept) {
                 service.steps.approvedStep();
-                setPageG(CasesManager.CASE);
+                if (service.steps.currentStep === (service.steps.steps.length - 1)) {
+                    notificar(true, () => {
+                        setPageG(CasesManager.CASE);
+                    });
+                } else {
+                    setPageG(CasesManager.CASE);
+                }
             } else {
                 setPage(page + 1);
             }
         } else if (page === 6) {
             service.steps.refuseStep();
-            setPageG(CasesManager.CASE);
+            notificar(false, () => {
+                setPageG(CasesManager.CASE);
+            });
         } else {
             setPage(page + 1);
         }

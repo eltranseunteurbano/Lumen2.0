@@ -43,9 +43,13 @@ const ReviewB = () => {
         if (page === 0) {
             if (accept) {
                 service.steps.approvedStep();
-                notificar(true, () => {
+                if(service.steps.currentStep === (service.steps.steps.length -1)){
+                    notificar(true, () => {
+                        setPageG(CasesManager.CASE);
+                    });
+                }else{
                     setPageG(CasesManager.CASE);
-                });
+                }
             } else {
                 setPage(page + 1);
             }

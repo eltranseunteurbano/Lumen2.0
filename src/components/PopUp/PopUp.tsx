@@ -25,7 +25,7 @@ export const PopUp = (props: IPropsPopUp) => {
 
     var view = <></>;
 
-    if (props.visible == true) {
+    if (visible == true) {
         view = <section className={`PopUp ${props.parent ? "PopUp__display" : ""}`}>
             <article className="PopUp__background" onClick={close}></article>
             <article className="PopUp__container">
