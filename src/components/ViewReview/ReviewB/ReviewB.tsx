@@ -6,6 +6,7 @@ import Service from '../../../objects/Service/Service';
 import HookUpdateManager from '../../../objects/HookUpdate';
 
 import "./ReviewB.scss";
+import CasesManager from '../../../containers/CasesManager/CasesManager';
 
 const ReviewB = () => {
 
@@ -17,6 +18,12 @@ const ReviewB = () => {
     const [page, setPage, , pageBack] = navegator.useState("page", useState(0), true);
     const [, setPageG, , pageBackG] = serviceManager.useState("page");
 
+    const [accept, setAccept] = useState(false);
+
+    const changeAccept = (value: boolean) => {
+        setAccept(value);
+    }
+
     const back = () => {
         if (page === 0) {
             setPageG(pageBackG());
@@ -26,7 +33,17 @@ const ReviewB = () => {
     }
 
     const next = () => {
-        if (page !== 6) {
+        if (page === 0) {
+            if (accept) {
+                service.steps.approvedStep();
+                setPageG(CasesManager.CASE);
+            } else {
+                setPage(page + 1);
+            }
+        } else if (page === 1) {
+            service.steps.refuseStep();
+            setPageG(CasesManager.CASE);
+        } else {
             setPage(page + 1);
         }
     }
@@ -41,12 +58,12 @@ const ReviewB = () => {
                         <section className="Solicitud">
                             <h2 className="Solicitud__title">Por favor selecciona una de las siguientes opciones para notificarle al cliente si su solicitud de energia ha sido</h2>
                             <div className="Solicitud__option vertical">
-                                <label className="Solicitud__option__label Solicitud__option__accepted">
+                                <label onClick={() => { changeAccept(true) }} className="Solicitud__option__label Solicitud__option__accepted">
                                     <img src="/img/icon/review/icon-aprobada.svg" alt="" />
                                     <input name="review" type="radio" />
                                 </label>
                                 <div className="Solicitud__option__bar"></div>
-                                <label className="Solicitud__option__label Solicitud__option__denegado">
+                                <label onClick={() => { changeAccept(false) }} className="Solicitud__option__label Solicitud__option__denegado">
                                     <img src="/img/icon/review/icon-denegada.svg" alt="" />
                                     <input name="review" type="radio" />
                                 </label>

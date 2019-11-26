@@ -32,19 +32,28 @@ export class StepManager {
 
             let step = this.getCurrentStep();
             if (step) {
-                step.setStatus(1);
+                step.setStatus(Step.progress);
             }
         }
     }
 
-    approvedStep(){
+    approvedStep() {
         let step = this.getCurrentStep();
-        if(step){
-
+        if (step) {
             step.setStatus(Step.complete);
             this.setCurrentStep(this.currentStep + 1);
+            step = this.getCurrentStep();
+            if (step) {
+                step.setStatus(Step.progress);
+            }
         }
-       
+    }
+
+    refuseStep() {
+        let step = this.getCurrentStep();
+        if (step) {
+            step.setStatus(Step.denegada);
+        }
     }
 
     setCurrentStep(value: number) {
@@ -55,13 +64,13 @@ export class StepManager {
 
     constructorSteps(stepManager: StepManager) {
         var resultStep: ServiceStep[] = [];
-   
+
         for (let i = 0; i < stepManager.steps.length; i++) {
             let step = stepManager.steps[i];
             let newStep = new ServiceStep(this, step, `steps/${i}`);
             resultStep.push(newStep);
         }
-       
+
         return resultStep;
     }
 }

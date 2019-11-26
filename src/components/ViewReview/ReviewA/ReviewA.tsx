@@ -275,19 +275,20 @@ const ReviewA = (props: IPropsReviewA) => {
     }
 
     const next = () => {
-        console.log("Lo que reviso", accept)
-        if (page !== 6) {
-            if (page === 5) {
-                if (accept) {
-                    service.steps.approvedStep();
-                    setPageG(CasesManager.CASE);
-                } else {
-                    setPage(page + 1);
-                }
+        if (page === 5) {
+            if (accept) {
+                service.steps.approvedStep();
+                setPageG(CasesManager.CASE);
             } else {
                 setPage(page + 1);
             }
+        } else if (page === 6) {
+            service.steps.refuseStep();
+            setPageG(CasesManager.CASE);
+        } else {
+            setPage(page + 1);
         }
+
     }
 
     const returnTitlePage = () => {

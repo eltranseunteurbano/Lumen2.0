@@ -29,11 +29,15 @@ export function Step(props: IPropsStep) {
     const [, setPage] = servicesManager.useState("page");
 
     const onClick = () => {
-        if (useUser.type === NameUser.Adviser) {
-            if (servicesManager.currentService) {
-                servicesManager.currentService.steps.setCurrentStep(props.order - 1);
+        let serviceCurrent = servicesManager.currentService;
+        if(serviceCurrent){
+          
+            if (useUser.type === NameUser.Adviser && serviceCurrent.steps.currentStep === (props.order -1)) {
+                if (servicesManager.currentService) {
+                    servicesManager.currentService.steps.setCurrentStep(props.order - 1);
+                }
+                setPage(CasesManager.REVIEW);
             }
-            setPage(CasesManager.REVIEW);
         }
     };
 
