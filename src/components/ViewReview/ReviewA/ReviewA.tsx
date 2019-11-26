@@ -195,11 +195,13 @@ const ReviewA = (props: IPropsReviewA) => {
                             <h2 className="Solicitud__title">Por favor selecciona una de las siguientes opciones para notificarle al cliente si su solicitud de energia ha sido</h2>
                             <div className="Solicitud__option vertical">
                                 <label className="Solicitud__option__label Solicitud__option__accepted">
+                                    <h1>Aprobada</h1>
                                     <img src="/img/icon/review/icon-aprobada.svg" alt="" />
                                     <input onClick={() => { changeAccept(true) }} name="review" type="radio" />
                                 </label>
                                 <div className="Solicitud__option__bar"></div>
                                 <label className="Solicitud__option__label Solicitud__option__denegado">
+                                    <h1>Denegada</h1>
                                     <img src="/img/icon/review/icon-denegada.svg" alt="" />
                                     <input onClick={() => { changeAccept(false) }} name="review" type="radio" />
                                 </label>
@@ -349,7 +351,7 @@ const ReviewA = (props: IPropsReviewA) => {
 
 
     const notificar = (accept: boolean, load: Function) => {
-        
+
         var notification = new ONotification();
 
         notification.setCaseUID(service.UID || "");
@@ -374,7 +376,7 @@ const ReviewA = (props: IPropsReviewA) => {
                     razon = razon3.current.checked === true ? razon3.current.value : razon;
                 }
 
-                console.log("Mi razon",razon)
+                console.log("Mi razon", razon)
 
                 switch (razon) {
                     case RAZON.INFORMATION_IMCOMPLETE:

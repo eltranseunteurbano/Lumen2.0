@@ -49,7 +49,7 @@ const ViewNotificacion = (props: IViewNotification) => {
                 </article>
 
                 <article className="ViewNotificaciones__mensaje">
-                    <h2 className="ViewNotificaciones__mensaje__title"> Envio de Retie </h2>
+                    <h2 className="ViewNotificaciones__mensaje__title"> Error de escaneo </h2>
                     <p className="ViewNotificaciones__mensaje__text">{notification.description}</p>
                     <button onClick={corregir} type="button" className="ViewNotificaciones__mensaje__btn"> Corregir Información</button>
                 </article>

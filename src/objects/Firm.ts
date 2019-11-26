@@ -22,6 +22,8 @@ class Firm {
         this.state.addChild(this.firmaShape);
         this.pressFirm = false;
 
+        createjs.Touch.enable(this.state);
+
         this.initStyleLine();
 
 

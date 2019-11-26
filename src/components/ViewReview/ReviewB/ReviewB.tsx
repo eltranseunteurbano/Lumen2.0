@@ -43,11 +43,11 @@ const ReviewB = () => {
         if (page === 0) {
             if (accept) {
                 service.steps.approvedStep();
-                if(service.steps.currentStep === (service.steps.steps.length -1)){
+                if (service.steps.currentStep === (service.steps.steps.length - 1)) {
                     notificar(true, () => {
                         setPageG(CasesManager.CASE);
                     });
-                }else{
+                } else {
                     setPageG(CasesManager.CASE);
                 }
             } else {
@@ -67,7 +67,7 @@ const ReviewB = () => {
 
 
     const notificar = (accept: boolean, load: Function) => {
-        let razones: HTMLInputElement[] = document.getElementsByName("razon") as any;
+
         var notification = new ONotification();
 
         notification.setCaseUID(service.UID || "");
@@ -84,8 +84,6 @@ const ReviewB = () => {
                 notification.setSubject(`Error en Paso ${service.steps.currentStep + 1}`);
                 notification.setSubject__subtitle(`Orden #${service.orden}`);
 
-                console.log("Nego la peticion", razones.length)
-
                 let razon = "";
                 console.log(razon1, razon2, razon3)
                 if (razon1.current && razon2.current && razon3.current) {
@@ -93,6 +91,8 @@ const ReviewB = () => {
                     razon = razon2.current.checked === true ? razon2.current.value : razon;
                     razon = razon3.current.checked === true ? razon3.current.value : razon;
                 }
+
+                console.log("Mi razon", razon)
 
                 switch (razon) {
                     case RAZON.INFORMATION_IMCOMPLETE:
@@ -126,11 +126,13 @@ const ReviewB = () => {
                             <h2 className="Solicitud__title">Por favor selecciona una de las siguientes opciones para notificarle al cliente si su solicitud de energia ha sido</h2>
                             <div className="Solicitud__option vertical">
                                 <label onClick={() => { changeAccept(true) }} className="Solicitud__option__label Solicitud__option__accepted">
+                                    <h1>Aprobado</h1>
                                     <img src="/img/icon/review/icon-aprobada.svg" alt="" />
                                     <input name="review" type="radio" />
                                 </label>
                                 <div className="Solicitud__option__bar"></div>
                                 <label onClick={() => { changeAccept(false) }} className="Solicitud__option__label Solicitud__option__denegado">
+                                    <h1>Denegado</h1>
                                     <img src="/img/icon/review/icon-denegada.svg" alt="" />
                                     <input name="review" type="radio" />
                                 </label>
