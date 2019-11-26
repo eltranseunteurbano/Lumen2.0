@@ -38,7 +38,7 @@ export const Task = (props: ITask) => {
     const [fileCadastral, setFileCadastra] = useState();
     const [filePropertyCedula, setFilePropertyCedula] = useState();
 
-    const [firmaState] = useState<Firm>(new Firm(undefined, undefined, service));
+    const [firmaState] = useState<Firm>(new Firm(undefined, undefined, props.case));
     const refCanvasContainer = createRef<HTMLDivElement>();
 
 

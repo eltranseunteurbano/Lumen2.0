@@ -43,9 +43,9 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
     const [showModal, setShowModal] = useState(false);
 
     const finalizar = () => {
-        if (password !== "" && password === repassword) {
+        if (password !== "" && password === repassword && useUser.user && useUser.user.email !== "") {
             if (showModal && useUser.user) {
-                useUser.user.email = `${useUser.user.cedula}@hotmail.com`;
+                //useUser.user.email = `${useUser.user.cedula}@hotmail.com`;
                 useUser.singUp(useUser.user.email, password, () => {
                     setRedirect(true);
                 });
@@ -73,6 +73,10 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
                     case 2:
                         if (client) {
                             if (client.clientType !== "" && client.legalName !== "" && client.NIT !== "") {
+                                allowNext = true;
+                            }
+
+                            if (client.clientType === REGISTER.TYPE_CLIENT_NATURAL) {
                                 allowNext = true;
                             }
                         }
@@ -266,6 +270,14 @@ const RegisterComponent = (props: IPropsRegisterComponent) => {
                     <p className="RegisterComponent_three__txt">
                         Con esta podrás acceder a Lumen y ver el progreso de tu proyecto.
                 </p>
+
+                    <div className="RegisterComponent_three__bottom">
+                        <label className="RegisterComponent_three__bottom__inputs__label">
+                            <p className="RegisterComponent_three__bottom__inputs__label__txt">Email:</p>
+                            <input onChange={(e) => changeInput(REGISTER.EMAIL, e)} type="email" name="contrasena"
+                                defaultValue={client ? client.email : ""} />
+                        </label>
+                    </div>
 
                     <div className="RegisterComponent_three__bottom">
                         <label className="RegisterComponent_three__bottom__inputs__label">

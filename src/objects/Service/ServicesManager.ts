@@ -61,6 +61,7 @@ export class ServicesManager extends HookUpdateManager {
                         if (load) {
                             load(this.services)
                         }
+                        
                     });
 
                 }
@@ -114,8 +115,10 @@ export class ServicesManager extends HookUpdateManager {
     }
 
     updateService() {
-        if (this.currentNotificacion) {
+        if (this.currentService) {
             console.log("Actualizando")
+        
+            console.log(this.services)
             this.services.forEach((service) => {
                 if (this.currentService) {
                     if (this.currentService.UID === service.UID) {
@@ -128,12 +131,12 @@ export class ServicesManager extends HookUpdateManager {
     }
 
     updateNotification() {
-        if (this.currentService) {
+        if (this.currentNotificacion) {
             console.log("Actualizando")
-            this.services.forEach((service) => {
-                if (this.currentService) {
-                    if (this.currentService.UID === service.UID) {
-                        this.setCurrentService(service);
+            this.notifications.forEach((notifica) => {
+                if (this.currentNotificacion) {
+                    if (this.currentNotificacion.UID === notifica.UID) {
+                        this.setCurrentNotification(notifica);
                         return;
                     }
                 }
