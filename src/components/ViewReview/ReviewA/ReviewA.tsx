@@ -349,7 +349,7 @@ const ReviewA = (props: IPropsReviewA) => {
 
 
     const notificar = (accept: boolean, load: Function) => {
-        let razones: HTMLInputElement[] = document.getElementsByName("razon") as any;
+        
         var notification = new ONotification();
 
         notification.setCaseUID(service.UID || "");
@@ -366,8 +366,6 @@ const ReviewA = (props: IPropsReviewA) => {
                 notification.setSubject(`Error en Paso ${service.steps.currentStep + 1}`);
                 notification.setSubject__subtitle(`Orden #${service.orden}`);
 
-                console.log("Nego la peticion", razones.length)
-
                 let razon = "";
                 console.log(razon1, razon2, razon3)
                 if (razon1.current && razon2.current && razon3.current) {
@@ -375,6 +373,8 @@ const ReviewA = (props: IPropsReviewA) => {
                     razon = razon2.current.checked === true ? razon2.current.value : razon;
                     razon = razon3.current.checked === true ? razon3.current.value : razon;
                 }
+
+                console.log("Mi razon",razon)
 
                 switch (razon) {
                     case RAZON.INFORMATION_IMCOMPLETE:

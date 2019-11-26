@@ -1,5 +1,8 @@
 import React, { useContext } from "react";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+
 import Service from "../../../objects/Service/Service";
 
 import ServicesContext from "../../../hooks/ServicesContext";
@@ -32,7 +35,7 @@ export function Step(props: IPropsStep) {
         let serviceCurrent = servicesManager.currentService;
         if(serviceCurrent){
           
-            if (useUser.type === NameUser.Adviser && serviceCurrent.steps.currentStep === (props.order -1)) {
+            if (useUser.type === NameUser.Adviser && (props.order -1) <= serviceCurrent.steps.currentStep) {
                 if (servicesManager.currentService) {
                     servicesManager.currentService.steps.setCurrentStep(props.order - 1);
                 }
@@ -70,7 +73,7 @@ export function Step(props: IPropsStep) {
                 view = <div style={{ color: "black" }}>DES</div>
                 break;
             case Step.progress:
-                view = <div style={{ color: "black" }}>PROG</div>
+                view = <FontAwesomeIcon icon={faSpinner} className='Step__container__check__progress__iconProgress' />
                 break;
             case Step.complete:
                 view = <IconLike />

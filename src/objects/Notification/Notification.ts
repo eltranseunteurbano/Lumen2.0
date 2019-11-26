@@ -49,6 +49,10 @@ class ONotification implements IObjectDatabase {
         this.subject__subtitle = subject;
     }
 
+    setTo_Type(type: string) {
+        this.to_type = type;
+    }
+
     setTo(UID: string, load: Function) {
         this.to = UID;
         DataBase.readBrachOnlyDatabaseObjectType(`${BRANCHES.USERS}/${this.to}/type`, (val: string) => {

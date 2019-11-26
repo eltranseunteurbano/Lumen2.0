@@ -10,12 +10,15 @@ import Notificaciones from '../Notificaciones/Notificaciones';
 
 import "./CasesManager.scss";
 import ViewNotificacion from '../../components/ViewNotificacion/ViewNotificacion';
+import UserContext from '../../hooks/UserContext';
+import { NameUser } from '../../hooks/UserContext';
 
 interface IPropsCasesManager { }
 
 export function CasesManager(props: IPropsCasesManager) {
 
     var servicesManager = useContext(ServicesContext);
+    var useUser = useContext(UserContext);
 
     const [page, setPage, pageVal] = servicesManager.useState<number>("page", useState(0), true);
     const [, setUpdate, updateValue] = servicesManager.useState<boolean>("updateServices", useState(false));
@@ -26,7 +29,7 @@ export function CasesManager(props: IPropsCasesManager) {
     useEffect(() => {
 
         servicesManager.getAllServices(() => {
-            if (servicesManager.services.length <= 0) {
+            if (useUser.user && useUser.user.type === NameUser.Client && servicesManager.services.length <= 0) {
                 setPage(CasesManager.TASK);
             }
             setUpdate(!updateValue());
