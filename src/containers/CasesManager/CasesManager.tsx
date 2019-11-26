@@ -30,6 +30,10 @@ export function CasesManager(props: IPropsCasesManager) {
             setUpdate(!updateValue());
         });
 
+        servicesManager.getAllNotifications(() => {
+            setUpdate(!updateValue());
+        });
+
     }, []);
 
     const choosePage = (numero: number) => {
@@ -47,7 +51,7 @@ export function CasesManager(props: IPropsCasesManager) {
                     view = <ViewReview service={currentCase} />;
                 break;
             case CasesManager.NOTIFICATIONS:
-                    view = <Notificaciones />
+                view = <Notificaciones />
                 break;
             case CasesManager.TASK:
                 view = <Task />
