@@ -8,8 +8,8 @@ import { ServiceStep } from '../../../objects/Service/StepManager';
 import "./Step.scss";
 import IconLike from '../../../icons/Notifications/Like';
 import UserContext from "../../../hooks/UserContext";
-import { NameUser } from '../../../hooks/UserContext';
 import CasesManager from '../../../containers/CasesManager/CasesManager';
+import { NameUser } from '../../../hooks/UserContext';
 
 interface IPropsStep {
     progress?: number;

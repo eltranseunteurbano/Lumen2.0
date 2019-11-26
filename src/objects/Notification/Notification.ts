@@ -3,7 +3,7 @@ import BRANCHES from '../../constants/Branches';
 import { ODate } from '../UserHistory';
 
 
-class Notification implements IObjectDatabase {
+class ONotification implements IObjectDatabase {
 
     UID: string;
     to: string;
@@ -16,7 +16,7 @@ class Notification implements IObjectDatabase {
     orden: number;
     date: ODate;
 
-    constructor(notification?: Notification) {
+    constructor(notification?: ONotification) {
         this.UID = notification ? notification.UID : "";
         this.subject__subtitle = notification ? notification.subject__subtitle : "";
         this.to = notification ? notification.to : "";
@@ -74,4 +74,4 @@ class Notification implements IObjectDatabase {
 
 }
 
-export default Notification;
+export default ONotification;

@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import './Notificaciones.scss';
 import UserContext from '../../hooks/UserContext';
 import ServicesContext from '../../hooks/ServicesContext';
+import CasesManager from '../CasesManager/CasesManager';
 
 const Notificaciones = () => {
 
@@ -40,7 +41,10 @@ const Notificaciones = () => {
                 {/**Incio de notificationes */}
 
                 {notifications.map((notification) => {
-                    return <div className="Notificaciones__content__card">
+                    return <div onClick={()=>{
+                        servicesManager.setCurrentNotification(notification)
+                        setPage(CasesManager.NOTIFICATION)
+                        }} className="Notificaciones__content__card">
                         <div className="Notificaciones__content__card__header">
                             <h1>{notification.subject}</h1>
                             <svg className="Notificaciones__content__card__header__img" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
